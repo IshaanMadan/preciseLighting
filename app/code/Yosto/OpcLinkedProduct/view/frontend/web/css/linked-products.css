@@ -1,0 +1,57 @@
+@media screen and (min-width: 1024px) {
+    /*.yosto-opc-col-2 .opc-sidebar
+    {
+        width: 57%;
+        float: right;
+    }
+
+    .yosto-opc-col-2.collage .opc-sidebar {
+        width: 66%;
+    }*/
+}
+.opc-sidebar-sticky {
+    z-index: 11;
+}
+#yosto-checkout-linked-product {
+    margin-top: 20px;
+}
+#yosto-checkout-linked-product .block-title.title {
+    text-align: center;
+
+    padding-top: 10px;
+}
+#yosto-checkout-linked-product .block-title.title strong {
+    font-weight: 600;
+}
+
+#yosto-checkout-linked-product .product-item-actions {
+    display: block;
+}
+#yosto-checkout-linked-product  .action.tocart.primary {
+    position: absolute;
+    top: -30px;
+    left: 10px;
+    opacity: 0.7;
+    padding: 5px;
+    font-size: 1.6rem;
+}
+#yosto-checkout-linked-product .slick-next {
+    right: 10px;
+}
+#yosto-checkout-linked-product .block.related {
+    margin-bottom: 0;
+}
+#yosto-checkout-linked-product .block.related .products {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+#yosto-checkout-linked-product .block.related .related-available .product-item-name {
+    margin-left: 0;
+}
+.yosto_related_product .product-item-info {
+    width: 100%;
+    text-align:center;
+}
+.main.column .yosto_related_product .product-item {
+    padding-left: 5px;
+}

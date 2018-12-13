@@ -1,0 +1,100 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_orders = $block->getOrders(); ?>
+<?= $block->getChildHtml('info') ?>
+<?php if ($_orders && count($_orders)): ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?= /* @escapeNotVerified */ __('Orders') ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col id"><?= /* @escapeNotVerified */ __('Order #') ?></th>
+                    <th scope="col" class="col date"><?= /* @escapeNotVerified */ __('Date') ?></th>
+                    <?= /* @noEscape */ $block->getChildHtml('extra.column.header') ?>
+                    <th scope="col" class="col shipping"><?= /* @escapeNotVerified */ __('Ship To') ?></th>
+                    <th scope="col" class="col total"><?= /* @escapeNotVerified */ __('Order Total') ?></th>
+                    <th scope="col" class="col status"><?= /* @escapeNotVerified */ __('Status') ?></th>
+                    <!--<th scope="col" class="col actions"><?= /* @escapeNotVerified */ __('Action') ?></th>-->
+                </tr>
+            </thead>
+            <tbody>
+                <?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                foreach ($_orders as $_order): ?>
+                    <tr>
+                        <td data-th="<?= $block->escapeHtml(__('Order #')) ?>" class="col id"><?= /* @escapeNotVerified */ $_order->getRealOrderId() ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Date')) ?>" class="col date"><?= /* @escapeNotVerified */ $block->formatDate($_order->getCreatedAt()) ?></td>
+                        <?php $extra = $block->getChildBlock('extra.container'); ?>
+                        <?php if ($extra): ?>
+                            <?php $extra->setOrder($_order); ?>
+                            <?= /* @noEscape */ $extra->getChildHtml() ?>
+                        <?php endif; ?>
+                        <td data-th="<?= $block->escapeHtml(__('Ship To')) ?>" class="col shipping"><?= $_order->getShippingAddress() ? $block->escapeHtml($_order->getShippingAddress()->getName()) : '&nbsp;' ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Order Total')) ?>" class="col total"><?= /* @escapeNotVerified */ $_order->formatPrice($_order->getGrandTotal()) ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Status')) ?>" class="col status"><?= /* @escapeNotVerified */ $_order->getStatusLabel() ?></td>
+<!--                        <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                            <a href="<?= /* @escapeNotVerified */ $block->getViewUrl($_order) ?>" class="action view">
+                                <span><?= /* @escapeNotVerified */ __('View Order') ?></span>
+                            </a>
+                            <?php if ($this->helper('Magento\Sales\Helper\Reorder')->canReorder($_order->getEntityId())) : ?>
+                                <a href="#" data-post='<?php /* @escapeNotVerified */ echo
+                                $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
+                                    ->getPostData($block->getReorderUrl($_order))
+                                ?>' class="action order">
+                                    <span><?= /* @escapeNotVerified */ __('Reorder') ?></span>
+                                </a>
+                            <?php endif ?>
+                        </td>-->
+                    </tr>
+                    <tr>
+                        <td colspan="3"><?php
+                            foreach($_order->getAllItems() as $item){
+                                $_productId = $item->getProductId();
+                                $_product = $objectManager->create('Magento\Catalog\Model\Product')->load($_productId);
+                                $prdoduct = $objectManager->get('Magento\Catalog\Model\Product')->load($_productId);
+                                $store = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+                                $priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data');
+
+            $productImageUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $prdoduct->getImage();
+                                ?> <div class="order-product"><div class="image"><image src="<?php echo $productImageUrl; ?>"></div> 
+                                <div class="content">
+                                    <h3> <?php echo $_product->getName(); ?> </h3>
+                                    <span> Product Code: <?php echo $_product->getSku(); ?> </span>
+                                    <span> <?php echo $priceHelper->currency($_product->getFinalPrice(), true, false); ?> </span>
+                                    <a href="<?php echo $_product->getProductUrl();?>" class="button action continue primary">Buy it again</a>
+                                </div> </div><?php
+                            } ?>
+                        </td>
+                        <td colspan="2">
+                            <div class="order-buttons">
+                            <a href="<?php echo $this->getUrl();?>" class="button action continue primary review">Write product review</a>
+                            <a href="<?php echo $this->getUrl();?>" class="button action continue primary return">Return items</a>
+                            <a href="<?php echo $this->getUrl();?>" class="button action continue primary track">Track Orders</a>                               </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div>
+            <?php
+            
+            foreach ($_orders as $_order){ 
+                
+                ?>
+            <?php } ?>
+        </div>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty"><span><?= /* @escapeNotVerified */ __('You have placed no orders.') ?></span></div>
+<?php endif ?>
+    
+    <a href="<?php echo $this->getUrl();?>" class="button action continue primary">Shop Now</a>

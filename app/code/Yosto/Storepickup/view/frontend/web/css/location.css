@@ -1,0 +1,21 @@
+#stores-pickup-popup .find-stores .select-box {
+    width: 25%;
+    float: left;
+    margin-right: 20px;
+}
+#stores-pickup-popup .find-stores .select-box select {
+
+    margin-top: 5px;
+}
+#stores-pickup-popup .find-stores {
+    width: 100%;
+    overflow-y: auto;
+}
+
+#stores-pickup-popup #locations-gmap-div {
+    margin-top: 10px;
+}
+#stores-pickup-popup #locations-map-canvas {
+    width: 100%;
+    height: 495px;
+}

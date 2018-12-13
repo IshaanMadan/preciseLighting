@@ -34,8 +34,25 @@
 /media/xmlconnect/system/*
 !/media/xmlconnect/system/ok.gif
 
+/app===/*
 /var/*
 !/var/.htaccess
+/bin/*
+/cgi-bin/*
+/dev/*
+/generated/*
+/generated__/*
+/home/*
+improved_layered_navigation_for_magento_2_user_guide.pdf
+installing_Amasty_extensions_via_composer.pdf
+/lib/*
+/phpserver/*
+/pma2/*
+/update/*
+/upload/*
+/vendor/*
+/pub/*
+/setup/*
 
 !/var/package
 /var/package/*

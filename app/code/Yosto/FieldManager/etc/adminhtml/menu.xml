@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Backend/etc/menu.xsd">
+    <menu>
+        <add id="Yosto_FieldManager::field_manager"
+             title="Field Manager"
+             module="Yosto_FieldManager"
+             sortOrder="20"
+             parent="Yosto_Opc::opc_menu"
+             resource="Yosto_Opc::field_manager" />
+        <add id="Yosto_FieldManager::address_attributes"
+             title="Fields"
+             module="Yosto_FieldManager"
+             sortOrder="10"
+             parent="Yosto_FieldManager::field_manager"
+             action="yosto_opc_fm/attribute/index"
+             resource="Yosto_Opc::field_manager" />
+    </menu>
+</config>

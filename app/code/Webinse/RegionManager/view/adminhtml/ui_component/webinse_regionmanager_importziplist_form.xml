@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Main config of module
+ *
+ * @category    Webinse
+ * @package     Webinse_RegionManager
+ * @author      Webinse Team <info@webinse.com>
+ * @copyright   2018 Webinse Ltd. (https://www.webinse.com)
+ * @license     http://opensource.org/licenses/OSL-3.0 The Open Software License 3.0
+ */
+-->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">webinse_regionmanager_importziplist_form.webinse_regionmanager_importziplist_form_data_source</item>
+            <item name="deps" xsi:type="string">webinse_regionmanager_importziplist_form.webinse_regionmanager_importziplist_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Import Postal Code List</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">webinse_regionmanager_importziplist_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Webinse\RegionManager\Block\Adminhtml\System\Config\Buttons\BackButton</item>
+            <item name="import" xsi:type="string">Webinse\RegionManager\Block\Adminhtml\System\Config\Buttons\ImportZipListButton</item>
+        </item>
+    </argument>
+    <dataSource name="webinse_regionmanager_zip_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Webinse\RegionManager\Model\Zip\DataProvider</argument>
+            <argument name="name" xsi:type="string">webinse_regionmanager_importziplist_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="webinse_regionmanager/importZipList/import"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="import_ziplist">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Import Postal Code List from CSV file</item>
+            </item>
+        </argument>
+        <field name="csv_uploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">CSV datasheet with postal code list</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="componentType" xsi:type="string">fileUploader</item>
+                    <item name="notice" xsi:type="string" translate="true">Allowed file type: csv</item>
+                    <item name="maxFileSize" xsi:type="number">2097152</item>
+                    <item name="allowedExtensions" xsi:type="string">csv</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="webinse_regionmanager/importZipList/upload"/>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

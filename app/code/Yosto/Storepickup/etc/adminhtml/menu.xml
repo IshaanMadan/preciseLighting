@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Backend/etc/menu.xsd">
+    <menu>
+        <add id="Yosto_Storepickup::storepickup"
+             title="Store Pickup"
+             module="Yosto_Storepickup"
+             parent="Yosto_Opc::opc_menu"
+             sortOrder="30"
+             resource="Yosto_Opc::storepickup"/>
+        <add id="Yosto_Storepickup::location_list"
+             title="Locations" module="Yosto_Storepickup"
+             sortOrder="10" action="yosto_storepickup/location"
+             resource="Yosto_Opc::storepickup"
+             parent="Yosto_Storepickup::storepickup"/>
+        <add id="Yosto_Storepickup::import" title="Import"
+             module="Yosto_Storepickup"
+             sortOrder="20"
+             parent="Yosto_Storepickup::storepickup"
+             action="yosto_storepickup/import"
+             resource="Yosto_Opc::storepickup"/>
+        <add id="Yosto_Storepickup::configuration" title="Store Pickup"
+             module="Yosto_Storepickup" sortOrder="50"
+             parent="Yosto_Opc::configuration"
+             action="adminhtml/system_config/edit/section/carriers"
+             resource="Yosto_Opc::config_opc"/>
+
+    </menu>
+</config>

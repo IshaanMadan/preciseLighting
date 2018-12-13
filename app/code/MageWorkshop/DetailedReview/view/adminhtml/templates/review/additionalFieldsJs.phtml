@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \MageWorkshop\DetailedReview\Block\Adminhtml\Review\AdditionalFieldsJs $this */
+?>
+<script type="text/x-magento-init">
+    {
+        "#select_stores": {
+            "mageWorkshop_detailedReview_reviewAdditionalFields": {
+                "url": "<?php /* @escapeNotVerified */ echo $this->getAjaxUrl(); ?>",
+                "productId": "<?php /* @escapeNotVerified */ echo $this->getProductId(); ?>"
+            }
+        },
+
+        "#edit_form": {
+            "mageWorkshop_detailedReview_newReviewRatingValidation": {}
+        }
+    }
+</script>

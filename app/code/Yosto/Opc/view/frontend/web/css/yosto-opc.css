@@ -1,0 +1,339 @@
+@media screen and (min-width: 1024px) {
+    .yosto-opc-col-3 .checkout-container {
+
+    }
+
+    .yosto-opc-col-3 .opc-wrapper {
+        padding-right: 0;
+    }
+    .yosto-opc-col-3 .opc .checkout-shipping-address {
+        width: 45%;
+        float: left;
+        margin-right: 2%;
+    }
+    .yosto-opc-col-2.collage .opc .checkout-shipping-address .shipping-address-item {
+        width: 50%;
+    }
+    .yosto-opc-col-3 .opc #opc-shipping_method{
+        width: 50%;
+        float: left;
+        overflow: hidden;
+    }
+
+    .yosto-opc-col-3 .opc-wrapper .shipping-address-item {
+        width: 50%;
+    }
+    .yosto-opc-col-3 .opc .checkout-payment-method {
+        margin-top: 20px;
+        width: 50%;
+        float: left;
+    }
+    .yosto-opc-col-3 .opc-sidebar {
+        margin-top: 0;
+    }
+    /**=== FOR 2 COLUMNS ==**/
+
+    .yosto-opc-col-2 .opc-wrapper {
+        width: auto;
+        padding: 0;
+        float: none;
+    }
+    .yosto-opc-col-2 .opc .checkout-shipping-address {
+        width: 40%;
+        float:left;
+    }
+    .yosto-opc-col-2 .opc #opc-shipping_method,
+    .yosto-opc-col-2 .opc .checkout-payment-method,
+    .yosto-opc-col-2 .opc-sidebar
+    {
+        width: 57%;
+        float: right;
+    }
+    .yosto-opc-col-2 .opc .checkout-payment-method, .yosto-opc-col-2 .opc-sidebar {
+        margin-top: 20px;
+    }
+    /** COLLAGE LAYOUT ==**/
+    .yosto-opc-col-2.collage .opc  #opc-shipping_method,
+    .yosto-opc-col-2.collage .opc .checkout-shipping-address,
+    .yosto-opc-col-2.collage .opc .checkout-payment-method
+    {
+        width: 32%;
+        margin-top: 0;
+    }
+    .yosto-opc-col-2.collage .opc .checkout-shipping-address .shipping-address-item {
+        width: 50%;
+    }
+    .yosto-opc-col-2.collage .opc #opc-shipping_method,
+    .yosto-opc-col-2.collage .opc .checkout-payment-method
+    {
+        margin-left: 2%;
+        float: left;
+    }
+    .yosto-opc-col-2.collage .opc-sidebar {
+        width: 66%;
+    }
+    /**== ONE COLUMN ==**/
+    .yosto-opc-col-1 .opc  #opc-shipping_method,
+    .yosto-opc-col-1 .opc .checkout-payment-method {
+        margin-top: 20px;
+    }
+    .yosto-opc-col-1 .opc-sidebar {
+        margin-top: 0;
+        position: relative;
+    }
+}
+@media screen and (min-width: 768px) {
+    .yosto-opc-newsletter {
+        text-align: left;
+        padding-top: 20px;
+    }
+    .opc-wrapper .form-login {
+        margin-bottom: 0;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .yosto-opc .opc  #opc-shipping_method,
+    .yosto-opc .opc .checkout-payment-method {
+        margin-top: 20px;
+    }
+    .yosto-opc .opc-sidebar
+    {
+        margin-top: 0;
+        position: relative;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    .yosto-opc .opc-wrapper .form-login,
+    .yosto-opc .opc-wrapper .form-shipping-address,
+    .yosto-opc .opc-wrapper .methods-shipping
+    {
+        background: none;
+    }
+    .yosto-opc .opc  #opc-shipping_method,
+    .yosto-opc .opc .checkout-payment-method {
+        margin-top: 20px;
+    }
+    .yosto-opc .opc .checkout-payment-method .payment-methods,
+    .yosto-opc .opc .checkout-payment-method .payment-option
+    {
+        margin: 0;
+    }
+    .yosto-opc .opc-payment .actions-toolbar .primary.action.checkout
+    {
+        display: none;
+    }
+    .yosto-opc .checkout-payment-method .place-order .actions-toolbar .primary.action.checkout {
+        display: block !important;
+        line-height: 2.2rem;
+        padding: 15px 17px;
+        font-size: 1.8rem;
+    }
+}
+@media all {
+    .yosto-opc .opc > li {
+        padding: 12px;
+        box-sizing: border-box;
+    }
+    .yosto-opc .checkout-payment-method {
+        visibility: visible;
+    }
+    .yosto-opc .checkout-payment-method .place-order .actions-toolbar .primary.action.checkout {
+        display: none;
+    }
+    .yosto-opc.equal-billing-shipping .billing-address-details {
+        display: none;
+    }
+    .yosto-opc .opc-wrapper .form-shipping-address,
+    .yosto-opc .opc-wrapper .form-login
+    {
+        max-width: 100%;
+    }
+    .yosto-opc .opc-payment .actions-toolbar .primary {
+        margin: 15px 0 0 0;
+    }
+    .yosto-opc .opc-payment .actions-toolbar .primary.action.checkout
+    {
+        display:none
+    }
+    .yosto-opc #opc-shipping_method .actions-toolbar
+    {
+        display: none;
+    }
+    .yosto-opc .form-discount .actions-toolbar {
+
+    }
+    .yosto-opc .opc > li, .yosto-opc .opc-sidebar {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+    .yosto-opc .opc > li:hover, .yosto-opc .opc-sidebar:hover {
+        box-shadow: 0 6px 20px 0 rgba(0,0,0,0.19), 0 8px 17px 0 rgba(0,0,0,0.2);
+        transition: all .2s ease-in-out;
+    }
+    .yosto-opc .opc > li  .step-title {
+        font-size: 1.7rem;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+
+    .yosto-opc .opc .checkout-shipping-method .table-checkout-shipping-method {
+        width: 100%;
+        min-width: inherit;
+    }
+
+    .yosto-opc .opc > li .step-title:before, .yosto-opc .opc-block-summary .title:before {
+        background-color: #88B04B;
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        vertical-align: middle;
+        text-align: center;
+        line-height: 35px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        margin-right: 10px;
+        /*margin-left: 17px;*/
+    }
+    .yosto-opc .opc .checkout-shipping-address .step-title:before {
+        content: '\2302';
+        font-size: 25px;
+        line-height: 30px;
+    }
+    .yosto-opc .opc #opc-shipping_method .step-title:before {
+        content: '\26DF';
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .yosto-opc .opc .checkout-payment-method .step-title:before {
+        content: '\$';
+        font-size: 20px;
+        line-height: 35px;
+    }
+    .yosto-opc .opc .checkout-payment-method .billing-address-details {
+        /* display: none; */
+    }
+    .yosto-opc .checkout-payment-method .fieldset > .legend + br {
+        display: none;
+    }
+    /**== OPC-SIDEBAR ===**/
+    .yosto-opc .opc-sidebar {
+        margin-bottom: 0;
+    }
+
+    .yosto-opc .opc-block-summary {
+        padding: 12px 12px 22px;
+        margin-bottom: 0;
+    }
+
+    .yosto-opc .opc-block-summary > .title {
+        font-size: 1.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .yosto-opc .opc-block-summary > .title:before,
+    .yosto-opc .opc-block-summary .items-in-cart > .title:before
+    {
+        content: '\2713';
+
+    }
+    .yosto-opc .opc-block-summary .actions-toolbar .primary {
+        width: 100%;
+        border-radius: 0;
+        box-sizing: border-box;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 12px 0;
+    }
+    .yosto-opc .block.items-in-cart {
+        margin-bottom: 15px;
+    }
+
+    .yosto-opc-add {
+        background:url(../images/add-icon.png) no-repeat;
+        height: 14px;
+        width: 17px;
+        cursor: pointer;
+    }
+    .yosto-opc-minus {
+        background:url(../images/minus-icon.png) no-repeat;
+        height: 14px;
+        width: 17px;
+        cursor: pointer;
+    }
+    .yosto-opc-delete {
+        background:url(../images/delete-icon.png) no-repeat;
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+        float:left;
+        margin-right: 6px;
+        line-height: 20px;
+    }
+
+    .yosto-opc .product-item-details .details-qty .qty,
+    .yosto-opc .product-item-details .details-qty .control-qty
+    {
+        float:left;
+    }
+    .yosto-opc .product-item-details .details-qty .qty
+    {
+        width: 55px;
+        margin-left: 6px;
+        height: 28px;
+    }
+
+    /**== SHIPPING METHOD EXTRA FIELDS ==**/
+    #onepage-checkout-shipping-method-additional-load .field {
+        margin: 0 0 20px;
+    }
+    #onepage-checkout-shipping-method-additional-load .field > .label {
+        margin: 0 0 8px;
+        display: inline-block;
+    }
+
+    .yostohiddenfield {
+        display: none;
+    }
+    /** for virtual product checkout **/
+    .yosto-opc.yosto-opc-quote-virtual .opc-sidebar {
+        margin-top: 0;
+    }
+
+    /** For billing method extra field **/
+    .yosto-opc .gift-item-block .content {
+        padding: 0 0 20px;
+    }
+    .yosto-opc .gift-options-content .label {
+        display: none;
+    }
+    .yosto-opc .gift-message {
+        padding-left: 20px;
+    }
+
+    .yosto-opc .gift-summary {
+        padding-left: 20px;
+    }
+    .yosto-opc .gift-summary .actions-toolbar {
+        margin-left: 0;
+        float: right;
+    }
+    .yosto-opc .gift-summary .actions-toolbar .action-delete {
+        margin-right: 0;
+    }
+    .yosto-opc-giftwrap.checkbox-group {
+        border-top: 1px solid #cccccc;
+        padding: 20px 20px 20px;
+    }
+
+    .yosto-opc-order-comment {
+
+       /* padding: 20px;
+        padding-bottom: 0;*/
+    }
+
+}

@@ -1,0 +1,13 @@
+<div id="store-container-main" class="field _required" data-bind="visible: visible">
+    <label class="label" for="location_id"><span data-bind="i18n: 'Select store'"></span></label>
+    <div class="control">
+        <select name="location_id" id="location_id" tabindex="1">
+            <!-- ko foreach: {data: stores, as: 'store'} -->
+            <option data-bind="value: store.location_id, text: store.store_title, attr: {'data-coordinate': store.coordinate}">
+
+            </option>
+            <!-- /ko -->
+        </select>
+    </div>
+    <a href="javascript:void(0);" id="view-stores" data-bind="click: openPopup, i18n:'View Store Locations'"></a>
+</div>

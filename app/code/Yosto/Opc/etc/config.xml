@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <yosto_opc_checkout>
+            <general>
+                <enabled>0</enabled>
+                <layout>yosto-opc-col-3</layout>
+                <show_order_comment>0</show_order_comment>
+                <show_newsletter>0</show_newsletter>
+                <newsletter_default_checked>0</newsletter_default_checked>
+            </general>
+            <giftwrap>
+                <enable_giftwrap>0</enable_giftwrap>
+            </giftwrap>
+            <giftmessage>
+                <enable_giftmessage>0</enable_giftmessage>
+            </giftmessage>
+        </yosto_opc_checkout>
+    </default>
+</config>

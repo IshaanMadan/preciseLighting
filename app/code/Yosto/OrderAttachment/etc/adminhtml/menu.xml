@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Backend/etc/menu.xsd">
+    <menu>
+        <add id="Yosto_OrderAttachment::order_attachment"
+             title="Order Attachment"
+             module="Yosto_OrderAttachment"
+             sortOrder="100"
+             parent="Yosto_Opc::configuration"
+             action="adminhtml/system_config/edit/section/yosto_order_attachment"
+             resource="Yosto_Opc::opc_menu"/>
+    </menu>
+</config>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Yosto_OpcLinkedProduct::css/slick.css"/>
+        <css src="Yosto_OpcLinkedProduct::css/slick-theme.css"/>
+        <css src="Yosto_OpcLinkedProduct::css/linked-products.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block  ifconfig="yosto_opc_linked_product/general/enable"
+                    class="Yosto\OpcLinkedProduct\Block\LinkedProducts"
+                    template="Yosto_OpcLinkedProduct::product/list/items.phtml"
+                    after="-"/>
+        </referenceContainer>
+
+
+    </body>
+</page>

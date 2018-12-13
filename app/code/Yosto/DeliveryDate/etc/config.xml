@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <yosto_opc_deliverydate>
+            <general>
+                <active>0</active>
+                <format>yy-mm-dd</format>
+                <disabled>-1</disabled>
+                <hourMin>8</hourMin>
+                <hourMax>22</hourMax>
+            </general>
+            <!--<email>-->
+                <!--<enable_invoice_email>1</enable_invoice_email>-->
+                <!--<enable_shipment_email>1</enable_shipment_email>-->
+                <!--<enable_order_email>1</enable_order_email>-->
+                <!--<order>yosto_opc_deliverydate_email_order</order>-->
+                <!--<invoice>yosto_opc_deliverydate_email_invoice</invoice>-->
+                <!--<shipment>yosto_opc_deliverydate_email_shipment</shipment>-->
+                <!--<order_guest>yosto_opc_deliverydate_email_order_guest</order_guest>-->
+                <!--<invoice_guest>yosto_opc_deliverydate_email_invoice_guest</invoice_guest>-->
+                <!--<shipment_guest>yosto_opc_deliverydate_email_shipment_guest</shipment_guest>-->
+            <!--</email>-->
+            <!--<pdf>-->
+                <!--<enable_invoice_pdf>1</enable_invoice_pdf>-->
+                <!--<enable_shipment_pdf>1</enable_shipment_pdf>-->
+            <!--</pdf>-->
+            <grid>
+                <enable_order_grid>1</enable_order_grid>
+                <!--<enable_invoice_grid>1</enable_invoice_grid>-->
+                <!--<enable_shipment_grid>1</enable_shipment_grid>-->
+                <enable_order_view_page>1</enable_order_view_page>
+            </grid>
+        </yosto_opc_deliverydate>
+    </default>
+</config>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mageworkshop_core>
+            <general>
+                <enabled>1</enabled>
+                <!--<loader_enabled>1</loader_enabled>-->
+                <!--<notifications_enabled>1</notifications_enabled>-->
+                <!--<auto_hide_delay>5000</auto_hide_delay>-->
+            </general>
+        </mageworkshop_core>
+    </default>
+</config>

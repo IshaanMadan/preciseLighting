@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Yosto_Opc::css/yosto-opc.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block name="yosto.opc.gift.options.config"
+               class="Magento\Framework\View\Element\Template"
+               template="Yosto_Opc::gift-options.phtml" before="-"/>
+        </referenceContainer>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="yosto-opc-suite" xsi:type="array">
+                            <item name="component" xsi:type="string">Yosto_Opc/js/opc</item>
+                        </item>
+                        <item name="sticky-summary" xsi:type="array">
+                            <item name="component" xsi:type="string">Yosto_Opc/js/view/sticky-sidebar</item>
+                        </item>
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="progressBar" xsi:type="array">
+                                    <item name="componentDisabled" xsi:type="boolean">true</item>
+                                </item>
+                                <item name="sidebar" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="summary" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="totals" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="gift-wrap" xsi:type="array">
+                                                            <item name="component"  xsi:type="string">Yosto_Opc/js/view/summary/gift-wrap</item>
+                                                            <item name="sortOrder" xsi:type="string">20</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="title" xsi:type="string" translate="true">Gift wrap</item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="itemsAfter" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="place-order" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Yosto_Opc/js/view/place-order</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                        <item name="shipping-information" xsi:type="array">
+                                            <item name="componentDisabled" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Yosto_Opc/js/view/shipping</item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="before-form" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="sign-up-newsletter" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Yosto_Opc/js/view/sign-up-newsletter</item>
+                                                                    <item name="displayArea" xsi:type="string">sign-up-newsletter</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="sortOrder" xsi:type="string">3</item>
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="payments-list" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+
+                                                            </item>
+                                                        </item>
+                                                        <item name="afterMethods" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="place-order" xsi:type="array">
+                                                                    <item name="sortOrder" xsi:type="string">0</item>
+                                                                    <item name="component" xsi:type="string">Yosto_Opc/js/view/place-order</item>
+                                                                </item>
+                                                                <item name="giftOptionsCart" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Yosto_Opc/js/view/gift-message</item>
+                                                                    <item name="displayArea" xsi:type="string">gift-message</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">Yosto_Opc/gift-message</item>
+                                                                        <item name="formTemplate" xsi:type="string">Yosto_Opc/gift-message-form</item>
+                                                                    </item>
+                                                                </item>
+                                                                <item name="gift-wrap" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Yosto_Opc/js/view/gift-wrap</item>
+                                                                    <item name="displayArea" xsi:type="string">gift-wrap</item>
+                                                                </item>
+                                                                <item name="order-comment" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Yosto_Opc/js/view/order-comment</item>
+                                                                    <item name="displayArea" xsi:type="string">order-comment</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+
+                                            </item>
+                                        </item>
+
+                                    </item>
+                                </item>
+
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

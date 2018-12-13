@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Yosto\FieldManager\Block\Adminhtml\Attribute\Edit\Tabs"
+                   name="yosto.field.manager.attribute.edit.tabs">
+                <container label="Main" name="main">
+                    <block class="Yosto\FieldManager\Block\Adminhtml\Attribute\Edit\Tab\Main" as="base"/>
+                </container>
+                <block class="Yosto\FieldManager\Block\Adminhtml\Attribute\Edit\Options\Labels" as="labels"/>
+                <block class="Yosto\FieldManager\Block\Adminhtml\Attribute\Edit\Tab\Front" as="front"/>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Yosto\FieldManager\Block\Adminhtml\Attribute\Edit"
+                   name="yosto.field.manager.attribute.edit"/>
+        </referenceContainer>
+        <!--<referenceContainer name="js">-->
+            <!--<block class="Magento\Backend\Block\Template" name="attribute_edit_js" template="Yosto_FieldManager::customer/attribute/js.phtml"/>-->
+        <!--</referenceContainer>-->
+    </body>
+</page>

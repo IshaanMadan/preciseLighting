@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--/**
+ * Doyenhub_StreetAddress extension
+ * NOTICE OF LICENSE
+ * This source file is subject to the Doyenhub License
+ * that is bundled with this package in the file LICENSE.txt.
+ * @category  Doyenhub_Extensions
+ * @package   Doyenhub_StreetAddress
+ * @copyright Copyright (c) 2017
+ * @author Doyenhub Developer <support@doyenhub.com>
+ */-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Doyenhub_StreetAddress" setup_version="1.0.0">
+        <sequence>
+            <module name="Magento_Checkout" />
+        </sequence>
+    </module>
+</config>

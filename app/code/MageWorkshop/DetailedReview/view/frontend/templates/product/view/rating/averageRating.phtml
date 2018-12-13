@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+/** @var \MageWorkshop\DetailedReview\Block\Review\Product\View\Rating\AverageRating $block */
+?>
+<?php $averageRatings = $block->getAverageRating(); ?>
+<div class="review-average-rating">
+    <div class="rating-block-content">
+        <?php foreach ($averageRatings as $key => $value): ?>
+        <div class="rating-row">
+            <div class="rating-title">
+                <span class="title"><?php /* @escapeNotVerified */ echo $key; ?></span>
+                <span class="average"><?php echo $value['value']; ?></span>
+            </div>
+            <div class="rating-summary">
+                <div class="rating-result" title="<?php /* @escapeNotVerified */ echo $value['percent']; ?>">
+                    <span style="width:<?php echo $value['percent']; ?>%">
+                        <span><span itemprop="ratingValue"><?php /* @escapeNotVerified */ echo $value['percent']; ?></span>% of <span itemprop="bestRating">100</span></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>

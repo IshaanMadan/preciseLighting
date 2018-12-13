@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Main config of module
+ *
+ * @category    Webinse
+ * @package     Webinse_RegionManager
+ * @author      Webinse Team <info@webinse.com>
+ * @copyright   2018 Webinse Ltd. (https://www.webinse.com)
+ * @license     http://opensource.org/licenses/OSL-3.0 The Open Software License 3.0
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webinse_RegionManager::settings" title="Region Manager" translate="title" module="Webinse_RegionManager"
+             sortOrder="0" parent="Webinse_Core::core" resource="Webinse_RegionManager::settings" />
+
+        <add id="Webinse_RegionManager::states" title="States" module="Webinse_RegionManager"
+             translate="title" sortOrder="10" resource="Webinse_RegionManager::states"
+             action="webinse_regionmanager/states" parent="Webinse_RegionManager::settings" />
+
+        <add id="Webinse_RegionManager::cities" title="Cities" module="Webinse_RegionManager"
+             translate="title" sortOrder="10" resource="Webinse_RegionManager::cities"
+             action="webinse_regionmanager/cities" parent="Webinse_RegionManager::settings" />
+
+        <add id="Webinse_RegionManager::zip" title="ZIP Code" module="Webinse_RegionManager"
+             translate="title" sortOrder="10" resource="Webinse_RegionManager::zip"
+             action="webinse_regionmanager/zip" parent="Webinse_RegionManager::settings" />
+
+        <add id="Webinse_RegionManager::regionmanager_configuration" title="Configuration" module="Webinse_RegionManager"
+             sortOrder="20" parent="Webinse_RegionManager::settings" action="adminhtml/system_config/edit/section/region_manager_config"
+             resource="Webinse_RegionManager::regionmanager_configuration"/>
+    </menu>
+
+</config>

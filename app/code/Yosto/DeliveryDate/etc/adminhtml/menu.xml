@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Backend/etc/menu.xsd">
+    <menu>
+        <add id="Yosto_DeliveryDate::configuration" title="Delivery Date"
+             module="Yosto_DeliveryDate" sortOrder="40"
+             parent="Yosto_Opc::configuration"
+             action="adminhtml/system_config/edit/section/yosto_opc_deliverydate"
+             resource="Yosto_Opc::config_opc"/>
+    </menu>
+</config>

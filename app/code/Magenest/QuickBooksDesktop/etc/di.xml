@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Magenest. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * Magenest_QuickBooksDesktop extension
+ * NOTICE OF LICENSE
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magenest\QuickBooksDesktop\Model\ResourceModel\User\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_qbd_user</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\QuickBooksDesktop\Model\ResourceModel\User</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magenest\QuickBooksDesktop\Model\ResourceModel\Queue\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_qbd_queue</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\QuickBooksDesktop\Model\ResourceModel\Queue</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magenest\QuickBooksDesktop\Model\ResourceModel\Ticket\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_qbd_ticket</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\QuickBooksDesktop\Model\ResourceModel\Ticket</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="quickbooksdesktop_user_listing_data_source" xsi:type="string">Magenest\QuickBooksDesktop\Model\ResourceModel\User\Grid\Collection</item>
+                <item name="quickbooksdesktop_queue_listing_data_source" xsi:type="string">Magenest\QuickBooksDesktop\Model\ResourceModel\Queue\Grid\Collection</item>
+                <item name="quickbooksdesktop_ticket_listing_data_source" xsi:type="string">Magenest\QuickBooksDesktop\Model\ResourceModel\Ticket\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Tax\Model\Calculation\Rate" type="Magenest\QuickBooksDesktop\Model\Calculation\Rate" />
+</config>

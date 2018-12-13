@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Backend/etc/menu.xsd">
+    <menu>
+        <!--<add id="Yosto_AddressAutocomplete::address_autocomplete" title="Address Autocomplete"-->
+             <!--module="Yosto_AddressAutocomplete" sortOrder="10"-->
+             <!--parent="Yosto_Opc::opc_menu"-->
+             <!--resource="Yosto_Opc::address_autocomplete" />-->
+        <add id="Yosto_AddressAutocomplete::configuration" title="Address Autocomplete"
+             module="Yosto_AddressAutocomplete" sortOrder="20"
+             parent="Yosto_Opc::configuration"
+             action="adminhtml/system_config/edit/section/yosto_opc_autocomplete"
+             resource="Yosto_Opc::config_opc"/>
+    </menu>
+</config>

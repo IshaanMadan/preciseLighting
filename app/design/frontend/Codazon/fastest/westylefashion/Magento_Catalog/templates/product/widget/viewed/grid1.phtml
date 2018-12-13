@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * @var $block \Magento\Ui\Block\Wrapper
+ */
+?>
+
+<?php /* @escapeNotVerified */ $block->renderApp([
+    'widget_columns' => [
+        'displayMode' => 'grid'
+    ],
+    'image' => [
+        'imageCode' => 'recently_viewed_products_grid_content_widget'
+    ]
+]);
+?>
+<script type="text/javascript">
+require(['jquery','owlSlider'],function($){
+	$(document).ready(function(){
+			setTimeout(function(){ 
+				$('.block-viewed-products-grid .product-items').addClass('owl-carousel');
+				$('.block-viewed-products-grid .product-items').owlCarousel({
+					margin:10,
+				    nav:true,
+				    items:6,
+				    responsive:{
+				        0:{
+				            items:3
+				        },
+				        600:{
+				            items:2
+				        },
+				        1000:{
+				            items:6
+				        }
+				    }
+				});
+			}, 3000);	
+		});
+})
+</script>

@@ -1,0 +1,13 @@
+<?php /** @var \MageWorkshop\DetailedReview\Block\Review\Product\View\Filters\Sort $block */ ?>
+<label class="review-sort-direction-label" for="review-sort-direction">
+    <?php /* @escapeNotVerified */ echo __('Sort by:') ?>
+</label>
+<select id="review-sort-direction" name="<?php echo $block->getSortParamName(); ?>">
+    <?php foreach ($block->getParamsSortOptions() as $value => $label) :?>
+        <option value="<?php /* @escapeNotVerified */ echo $value; ?>"
+            <?php if ($block->isSelected($value)) : ?>selected="selected"<?php endif; ?>
+        >
+            <?php /* @escapeNotVerified */ echo __($label); ?>
+        </option>
+    <?php endforeach; ?>
+</select>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="reviews.list.item.after">
+            <block  class="MageWorkshop\ImageLoader\Block\Review\ImageUploader"
+                    before="-"
+                    name="review_image_loader"
+                    ifconfig="mageworkshop_detailedreview/imageloader/enabled"
+                    template="MageWorkshop_ImageLoader::review/imageLoader.phtml"
+            />
+        </referenceBlock>
+    </body>
+</page>

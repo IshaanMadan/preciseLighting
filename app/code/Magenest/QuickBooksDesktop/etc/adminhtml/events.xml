@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Magenest. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * Magenest_QuickBooksDesktop extension
+ * NOTICE OF LICENSE
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="adminhtml_customer_save_after">
+        <observer name="qbdesktop_updateCustomer" instance="Magenest\QuickBooksDesktop\Observer\Adminhtml\Customer\Update"/>
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="qbdesktop_syncItem" instance="Magenest\QuickBooksDesktop\Observer\Adminhtml\Item\Update"/>
+    </event>
+    <event name="tax_rate_save_after">
+        <observer name="qbdesktop_updateTaxRate" instance="Magenest\QuickBooksDesktop\Observer\Adminhtml\Tax\Rate\Create"/>
+    </event>
+</config>

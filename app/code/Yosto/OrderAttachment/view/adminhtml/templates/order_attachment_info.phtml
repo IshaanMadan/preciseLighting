@@ -1,0 +1,88 @@
+<?php
+/**
+ * Copyright © 2018 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+?>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block  */
+/** @var \Magento\Framework\Data\Form\FormKey $formKeyObj */
+$formKeyObj = \Magento\Framework\App\ObjectManager::getInstance()->create(
+    \Magento\Framework\Data\Form\FormKey::class
+);
+/** @var \Yosto\OrderAttachment\Helper\Data $helper */
+$helper = \Magento\Framework\App\ObjectManager::getInstance()->create(\Yosto\OrderAttachment\Helper\Data::class);
+$fileExtensions  = $helper->getFileExtensions();
+$limitedSize = $helper->getLimitedFileSize();
+$isRequire = $helper->getIsRequired();
+$formKey = $formKeyObj->getFormKey();
+$requestUrl = $block->getUrl('yosto_order_attachment/attachment/upload');
+$quoteId = $block->getQuoteId();
+$orderId = $block->getOrderId();
+$fileName = '';
+if ($block->getYostoOrderAttachment()) {
+    $path = $block->getYostoOrderAttachment();
+    $fileName = substr($path, strripos($path,"/") + 1);
+}
+?>
+<section class="admin__page-section order-addresses">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo __('Order Attachment');?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-for">
+            <div class="admin__page-section-item-content">
+                <?php
+                $_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+                $storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface');
+                $currentStore = $storeManager->getStore();
+                $mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+                ?>
+                <?php echo __('Download File: ');?>
+                <a id="yosto-order-attachment-file" href="<?php echo $mediaUrl . $block->getYostoOrderAttachment();?>"><?php echo $fileName;?> </a>
+                <?php if ($fileName == ''): ?>
+                    <span><i><?php echo __('No uploaded file') ?></i></span>
+                <?php endif; ?>
+                <br/>
+                <form id="yosto-order-attachment"  method="post" enctype="multipart/form-data">
+                    <input name="form_key" type="hidden" value="<?php echo $formKey ?>"/>
+                    <input type="hidden" name="yosto_attachment_quote_id" value="<?php echo $quoteId?>">
+                    <input type="hidden" name="yosto_attachment_order_id" value="<?php echo $orderId ?>"/>
+                    <label class="label"><?php echo __('Update File') ?></label>
+                    <div class="field <?php echo $isRequire == 1? '_required': '' ?>" data-bind="visible: true">
+                        <div class="control">
+                            <input type="file"
+                                   data-size="<?=$limitedSize?>"
+                                   accept="<?php echo $fileExtensions ?>"
+                                   name="yosto_order_attachment"
+                                   id="yosto_order_attachment"/>
+                            <button class="action secondary"
+                                    id="order-attachment-upload-btn"
+                                    disabled="disabled"
+                                    type="submit"
+                                    name="Upload">
+                                <?php echo __('Submit') ?>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="order-attachment-file-extensions">
+                        <span><?=__("Accept")?></span>: <?=$fileExtensions?>, <span><?=__("Limited Size")?></span>: <?=$limitedSize?>MB
+                    </p>
+                    <div class="order-attachment-validate-message"></div>
+                    <div class="order-attachment-loading"></div>
+                    <div class="order-attachment-upload-result"></div>
+                </form>
+                <script type="text/x-magento-init">
+                    {
+                        "#yosto-order-attachment": {
+                            "Yosto_OrderAttachment/js/view/order-attachment": {
+                                "requestUrl": "<?php echo $requestUrl?>",
+                                "mediaUrl": "<?php echo $mediaUrl ?>"
+                            }
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,56 @@
+/*
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+& when (@media-common = true) {
+
+    .review-vote-wrapper {
+        display: inline-block;
+
+        .voting-wrapper {
+            display: inline-block;
+
+            &:first-child {
+                margin-right: 15px;
+            }
+
+            a,
+            span {
+                display: inline-block;
+                vertical-align: top;
+                line-height: 33px;
+                color: initial;
+            }
+
+            a {
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: none;
+                }
+
+                &:before {
+                    display: inline-block;
+                    vertical-align: top;
+                    content: '';
+                    height: 30px;
+                    width: 30px;
+
+                }
+            }
+
+            .vote-helpful {
+                &:before {
+                    background-image: url(../MageWorkshop_Voting/images/helpful-rwd.png);
+                }
+            }
+
+            .vote-unhelpful {
+                &:before {
+                    background-image: url(../MageWorkshop_Voting//images/unhelpful-rwd.png);
+                }
+            }
+        }
+    }
+}

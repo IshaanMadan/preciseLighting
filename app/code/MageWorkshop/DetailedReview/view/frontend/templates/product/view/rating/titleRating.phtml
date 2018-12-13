@@ -1,0 +1,14 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+/** @var \MageWorkshop\DetailedReview\Block\Review\Product\View\Rating\ReviewRating $block */
+if ($ratingExist = $block->getAverageRating()): ?>
+    <span class="rating-block-label"><?php /* @escapeNotVerified */ echo __('RATING & REVIEWS'); ?></span>
+    <hr>
+<?php endif;?>

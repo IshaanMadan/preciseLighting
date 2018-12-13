@@ -1,0 +1,151 @@
+#!/bin/bash
+
+# @FCMPT N~JN2818 v2
+# @VCMPT OC1018-SSS
+# @version: 2.5.20181010
+#
+# INSTRUCTIONS:
+# Put this script in your Magento 2 installation directory and rename it as "deploy_reindex".
+# Make this script executable; Run this command:- chmod +x deploy_reindex
+#
+# Command structure "./deploy_reindex -{option} {language1 language2 ...}"
+# Options are: -c or -f (flush cache) -i (reindex), -d (deploy), -id or -di (for reindex and deploy) -v (for version)
+# e.g. "./deploy_reindex -id es_ES"
+# Language option works with -d and -id or -di options.
+# If you don't have any additional language pack installed, skip the language option.
+#
+## Put your installed additional language packs here (space seperated) if you have none leave it blank.
+#LANGUAGES="fr_FR en_GB"
+LANGUAGES=""
+##
+## If you have only default language and it is not "en_US" then put it here (e.g. DL="en_GB") unless leave it blank.
+DL=""
+##
+## This will take the value of your languages by concatenation of the "LANGUAGES" and the "DL" variables while running
+## commands and you don't need to put your installed languages in command line.
+## If you put your installed languages in command line, these values will be ignored during running the command
+## and the values given by you in command line will be preferred.
+##
+## And run the command as "./deploy_reindex" to know what languages you have installed in your store everytime when you
+## forget. The languages will be shown as the very first line of the o/p.
+##
+## If you are getting "memory_limit" errors, this section may help. You can increase "memory_limit" value from here-
+## Note:- This extends "memory_limit" till the command ends.
+ML="-d memory_limit=2048M"
+#ML=""
+##
+## Change the "PHP" variable's value with your supported php binary file if simple 'php' command does not work.
+#PHP=php70
+PHP=/usr/local/bin/ea-php70
+#PHP=/opt/cpanel/ea-php72/root/usr/bin/php
+#PHP=/opt/plesk/php/7.1/bin/php
+#PHP=/opt/alt/php72/usr/bin/php
+#PHP=php
+
+defineLanguage () {
+   if [[ -n "$2" ]]
+   then
+      LANGUAGES=""
+      while [ -n "$2" ]
+      do
+         LANGUAGES="$LANGUAGES $2"
+         shift
+      done
+   else
+      LANGUAGES="$DL $LANGUAGES"
+   fi
+}
+
+if [[ "$1" = "-id" ]] || [[ "$1" = "-di" ]]
+then
+   defineLanguage "$@"
+   echo "";echo "----------Process- Deploy and Reindex: Starts---------";echo ""
+   $PHP $ML bin/magento setup:upgrade
+   if [ -d "generated" ]
+   then
+      $PHP $ML bin/magento setup:static-content:deploy $LANGUAGES -f
+   else
+      $PHP $ML bin/magento setup:static-content:deploy $LANGUAGES
+   fi
+   $PHP $ML bin/magento indexer:reindex
+   $PHP bin/magento cache:clean
+   $PHP bin/magento cache:flush
+###############################################################################
+## EDITABLE SECTION
+###############################################################################
+#   if [ -d "generated" ]
+#   then
+#      chmod 777 -R var/ pub/static/ generated/
+#   else
+#      chmod 777 -R var/ pub/static/
+#   fi
+###############################################################################
+   echo "";echo "----------Process- Deploy and Reindex: Done----------";echo ""
+elif [ "$1" = "-i" ]
+then
+   echo "";echo "----------Process- Reindex: Starts---------";echo ""
+   $PHP $ML bin/magento indexer:reindex
+   $PHP bin/magento cache:clean
+   $PHP bin/magento cache:flush
+###############################################################################
+## EDITABLE SECTION
+###############################################################################
+#   chmod 777 -R var/
+###############################################################################
+   echo "";echo "----------Process- Reindex: Done---------";echo ""
+elif [ "$1" = "-d" ]
+then
+   defineLanguage "$@"
+   echo "";echo "----------Process- Deploy: Starts---------";echo ""
+   $PHP $ML bin/magento setup:upgrade
+   if [ -d "generated" ]
+   then
+      $PHP $ML bin/magento setup:static-content:deploy $LANGUAGES -f
+   else
+      $PHP $ML bin/magento setup:static-content:deploy $LANGUAGES
+   fi
+   $PHP bin/magento cache:clean
+   $PHP bin/magento cache:flush
+###############################################################################
+## EDITABLE SECTION
+###############################################################################
+#   if [ -d "generated" ]
+#   then
+#      chmod 777 -R var/ pub/static/ generated/
+#   else
+#      chmod 777 -R var/ pub/static/
+#   fi
+###############################################################################
+   echo "";echo "----------Process- Deploy: Done---------";echo ""
+elif [[ "$1" = "-c" ]] || [[ "$1" = "-f" ]]
+then
+   echo "";echo "----------Process- Flush Cache: Starts---------";echo ""
+   $PHP bin/magento cache:clean
+   $PHP bin/magento cache:flush
+###############################################################################
+## EDITABLE SECTION
+###############################################################################
+#   chmod 777 -R var/
+###############################################################################
+   echo "";echo "----------Process- Flush Cache: Done---------";echo ""
+elif [[ "$1" = "-v" ]] || [[ "$1" = "--version" ]]
+then
+   echo "version: 2.5.20181010"
+else
+   echo "";echo "   Language/s: $DL $LANGUAGES";echo ""
+   echo "";echo "   Unrecognized option '$1'" >&2
+   echo "   Use one of them" >&2
+   echo "   -c or -f : flush cache" >&2
+   echo "   -i : reindex" >&2
+   echo "   -d : deploy" >&2
+   echo "   -v or --version : version check" >&2
+   echo "   e.g. run the command for indexing and deployment of static contents with Espanol and German language:" >&2
+   echo "   ~$ ./deploy_reindex -di es_ES de_DE" >&2
+   echo "" >&2
+   echo "   If you don't have any language pack installed, skip the language option." >&2
+   echo "" >&2
+fi
+
+## Written by Faheem Jafri, Server Administrator, Ambient Infotech, Jaipur, Rajasthan, India
+## sayedfaheemahmed@gmail.com
+

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="prepare_review_collection_for_review_list">
+        <observer name="mageworkshop_detailedreview_review_filter"
+                  instance="MageWorkshop\DetailedReview\Observer\Review\PrepareFilterCollection"
+        />
+        <observer name="mageworkshop_detailedreview_review_sort"
+                  instance="MageWorkshop\DetailedReview\Observer\Review\PrepareSortCollection"
+        />
+        <observer name="mageworkshop_detailedreview_review_search"
+                  instance="MageWorkshop\DetailedReview\Observer\Review\PrepareSearchCollection"
+        />
+    </event>
+</config>

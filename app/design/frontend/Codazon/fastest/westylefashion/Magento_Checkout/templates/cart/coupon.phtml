@@ -1,0 +1,104 @@
+<?php
+
+/**
+
+ * Copyright © Magento, Inc. All rights reserved.
+
+ * See COPYING.txt for license details.
+
+ */
+
+
+
+// @codingStandardsIgnoreFile
+
+
+
+?>
+
+<div class="block discount" id="block-discount" data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
+
+    <div class="content" data-role="content" aria-labelledby="block-discount-heading">
+
+        <form id="discount-coupon-form"
+
+              action="<?= /* @escapeNotVerified */ $block->getUrl('checkout/cart/couponPost') ?>"
+
+              method="post"
+
+              data-mage-init='{"discountCode":{"couponCodeSelector": "#coupon_code",
+
+                                               "removeCouponSelector": "#remove-coupon",
+
+                                               "applyButton": "button.action.apply",
+
+                                               "cancelButton": "button.action.cancel"}}'>
+
+            <div class="fieldset coupon<?= strlen($block->getCouponCode()) ? ' applied' : '' ?>">
+
+                <input type="hidden" name="remove" id="remove-coupon" value="0" />
+
+                <div class="field">
+
+                    <div class="control">
+
+                        <input type="text" class="input-text" id="coupon_code" name="coupon_code" value="<?php echo $block->getCouponCode(); ?>" placeholder="<?= $block->escapeHtml(__('Enter discount code')) ?>" <?php if (strlen($block->getCouponCode())): ?> disabled="disabled" <?php endif; ?> />
+						
+                    </div>
+                </div>
+
+                <div class="actions-toolbar">
+
+                    <?php if (!strlen($block->getCouponCode())): ?>
+
+                    <div class="primary">
+
+                        <button id="redeem_button" class="action apply primary" type="button" value="<?= /* @escapeNotVerified */ __('Redeem') ?>">
+
+                            <span><?= /* @escapeNotVerified */ __('Redeem') ?></span>
+
+                        </button>
+
+                    </div>
+
+                    <?php else: ?>
+
+                        <div class="primary">
+
+                            <button  type="button" id="cancel_coupon_code" style="" class="action cancel primary" value="<?= /* @escapeNotVerified */ __('Cancel Coupon') ?>"><span><?= /* @escapeNotVerified */ __('Cancel Coupon') ?></span></button>
+
+                        </div>
+						<style>
+						#cancel_coupon_code{ padding: 3px !important;border: 1px solid #124c62 !important;background: #124c62 !important;font-size: 12px;}
+						</style>
+                    <?php endif; ?>
+
+                </div>
+				
+				<?php if (!strlen($block->getCouponCode())): ?>
+					<div  data-bind="scope: 'messages'">
+						<!-- ko if: cookieMessages && cookieMessages.length > 0 -->
+					<div  class="fieldset" id="couponcode_error_message_show">
+					
+								<div role="alert" data-bind="foreach: { data: cookieMessages, as: 'message' }" class="messages">
+									<div>
+										<div class="coupon-message message-error" data-bind="html: message.text"></div>
+									</div>
+								</div>
+					</div>
+					<!-- /ko -->
+					<style>
+						.page.messages{display:none;}
+						#couponcode_error_message_show{clear: both;margin: 0 0 0px !important;}
+						#couponcode_error_message_show .coupon-message{color: #e02b27;}
+						
+					</style>
+				 </div>	
+				<?php endif; ?>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

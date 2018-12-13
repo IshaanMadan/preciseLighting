@@ -1,0 +1,269 @@
+<link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
+
+<?php $order = $block->getOrder($block->getOrderId()); ?>
+<?php $helper = $this->helper('Navin\OrderDetails\Helper\Data'); ?>
+<?= $block->getAdditionalInfoHtml() ?>
+
+<?php 
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+
+//print_r($order->getBillingAddress()->getData());
+
+$email = $order->getCustomerEmail();
+$fname = $order->getBillingAddress()->getFirstName();
+$lname = $order->getBillingAddress()->getLastname();
+
+$orderId=$order->getId();
+
+$createAccountUrl=$this->getUrl().'preciselighting/index/createaccount/';
+
+if($customerSession->isLoggedIn()) { 
+    $logincustomer='logincustomer';
+}
+else{
+    $logincustomer='';
+}
+?>
+<ul class="opc-progress-bar">
+    <li class="opc-progress-bar-item _complete">
+        <span>Delivery</span>
+    </li>
+    <li class="opc-progress-bar-item _complete">
+        <span>Payment</span>
+    </li>
+    <li class="opc-progress-bar-item _active">
+        <span>Order Complete</span>
+    </li>
+</ul>
+<!-- <div class="stepwizard">
+    <div class="stepwizard-row">
+        <div class="stepwizard-step one">
+            <button type="button" class="btn btn-danger btn-circle">1</button>
+            <p><?php //echo __('Delivery'); ?></p>
+        </div>
+        <div class="stepwizard-step second">
+            <button type="button" class="btn btn-circle">2</button>
+            <p><?php //echo __('Payment'); ?></p>
+        </div>
+        <div class="stepwizard-step">
+            <button type="button" class="btn btn-success btn-circle" disabled="disabled">3</button>
+            <p class='success'><?php //echo __('Order Complete'); ?></p>
+        </div> 
+    </div>
+</div> -->
+
+<div class="checkout-success">
+    <h2 class='title'><?php echo __('Order Complete'); ?></h2>
+    <p class='txt-msg'>
+        <?php echo __('Thank you for completeting your order with on preciselighting.com.ng'); ?>
+    </p>
+    <p class='txt-msg'>
+        <?php echo __('Your order information has been sent to '.$email); ?>
+    </p>
+    <p class='txt-msg'>
+        <?php echo __('Please see the details below to confirm all information are accurate. If there is any discrepancy. please give us a call on 0903 794 4292 or email us at info@preciselighting.com.ng to ammend your order before it is shipped.'); ?>
+    </p>
+</div>
+
+
+
+<div class='container checkout-success-page'>
+    <!-- order detail div -->
+    <div class="order-details <?php echo $logincustomer; ?>">
+        <div class='title-div'>
+            <h2 class='title'><?php echo __('Order Summary'); ?>
+                <span class="cnt"><?php echo __('( ') .count($order->getAllVisibleItems()). __(' items )'); ?></span>
+            </h2>
+        </div>
+
+        <div class='total-div'>
+            <div class='subtotal'>
+                <span class='title'><?php echo __('Sub Total'); ?></span>
+                <span class='value'><?php echo $helper->getFormatedPrice($order->getSubtotal()); ?></span>
+            </div>
+            <div class='delivery-charges'>
+                <span class='title'><?php echo __('Delivery charges'); ?></span>
+                <span class='value'><?php echo $order->getShippingDescription(); ?></span>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class='product-detail'>
+            <div class='total-div'>
+                <div class='subtotal'>
+                    <span class='title'><?php echo __('Total'); ?></span>
+                    <span class='value'><?php echo $helper->getFormatedPrice($order->getSubtotal()); ?></span>
+                </div>
+            </div>
+
+            <div class='product-detail-inner'>
+             <?php
+             $i=0;
+                    foreach ($order->getAllVisibleItems() as $item) {
+                        $product = $helper->getProductById($item->getProductId());
+                        $options = $item->getProductOptions();
+                        $imageBlock = $block->getLayout()->createBlock('Magento\Catalog\Block\Product\ListProduct');
+                        $productImage = $imageBlock->getImage($product, 'category_page_list');
+                        ?>
+                        <div class="data-item <?php if($i%2 != 0){ echo 'even'; } ?>" >
+
+                            <div class="product-image">
+                                <a href="<?php echo $product->getProductUrl(); ?>"><?php echo $productImage->toHtml(); ?></a>
+                            </div>
+                            <div class="product-info">
+                               <span class="product-name"><?php echo '#'.$item->getSku().' '.$item->getName(); ?></span>
+                                <span class='order-qty'>
+                                    <?php echo __('Bracket') ?>
+                                    <span class='cross'>
+                                        <?php echo __('x'); ?>
+                                    </span>
+                                    <span class="qty">
+                                        <?php echo intval($item->getQtyOrdered()); ?>
+                                    </span>
+                                </span>
+
+                                <span class='price'>
+                                    <?php echo $helper->getFormatedPrice($item->getBaseRowTotal()); ?>
+                                </span>
+
+                                <?php
+                                if (!empty($options['attributes_info'])) {
+                                    foreach ($options['attributes_info'] as $option) {
+                                        ?>
+                                        <dl class="product-option">
+                                            <dt class="option-label"><?php echo $option['label'].' : '; ?></dt>
+                                            <dd class="option-value"><?php echo $option['value']; ?></dd>
+                                        </dl>
+                                        <?php
+                                    }
+                                }
+
+                                 $options = $item->getData('product_options');
+                                 
+                                 if(!empty($options['options'])){
+                                    $customOptions = $options['options'];
+                                    if (!empty($customOptions)) {
+                                    foreach ($customOptions as $option) { ?>
+
+                                         <dl class="product-option">
+                                            <dt class="option-label"><?php echo $option['label'].' : '; ?></dt>
+                                            <dd class="option-value"><?php echo $option['value']; ?></dd>
+                                        </dl>
+
+                                    <?php }
+                                    }
+                                 }
+                                 
+
+                                ?>
+
+                                <a class='addtocart' href="<?php echo $product->getProductUrl(); ?>">
+                                    <span class="shopping-cart-txt">
+                                        <?php echo __('Purchase again'); ?>
+                                    </span>
+                                </a>
+
+                            </div>                            
+                        </div>
+                        <?php
+                        $i++;
+                    }
+            ?>
+            </div>
+            <hr>
+
+            <div class='delivery-address'>
+                <span class='title'><?php echo __('Delivery Address'); ?></span>
+                <span class='value'>
+<?php echo strip_tags($block->getFormatedAddress($order->getShippingAddress()),'<br />'); ?></span>
+            </div>
+            <?php 
+                if($order->getData('delivery_date') != ""){ 
+            ?>
+             <hr>
+             <div class='expected-delievry-date'>
+                <span class='title'><?php echo __('Expected delievry Date'); ?></span>
+                <span class='value'><?php 
+                    $date=$order->getData('delivery_date');
+                    $date=date_create($date);
+                    echo date_format($date,"M d,Y H:i:s A");
+                ?></span>
+            </div>
+            <?php 
+                }
+            ?>
+        </div>
+
+    </div>
+
+    
+    <!-- customer account form -->
+    <div class='customer-detail'>
+
+        <?php if(!$customerSession->isLoggedIn()) { ?>
+        <div class='title-div'>
+            <h2 class='title'><?php echo __('Optional'); ?></h2>
+        </div>
+
+        <div class='content-msg'>
+           <p class='txt-msg'>
+               <?php echo __('Creating a password allows you to track your order, manage addresses and payment methods.'); ?>
+           </p>
+
+            <form method="post" id="form-validate" class="account-create" data-mage-init='{"validation":{}}' action="<?php echo $createAccountUrl; ?>">
+            <fieldset class="fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+                <div class="field password required" data-mage-init='{"passwordStrengthIndicator": {}}'>
+                    <div class="form-group">
+                        <input type="hidden" name="email" value="<?php echo $email; ?>" />
+
+                        <input type="hidden" name="orderid" value="<?php echo $orderId; ?>" />
+
+                        <input placeholder="<?= $block->escapeHtml(__('New Password')) ?>" type="password" class="input-text" name="password" id="password"
+                               data-password-min-length="<?= $block->escapeHtmlAttr($block->getMinimumPasswordLength()) ?>"
+                               data-password-min-character-sets="<?= $block->escapeHtmlAttr($block->getRequiredCharacterClassesNumber()) ?>"
+                               data-validate="{required:true, 'validate-customer-password':true}"
+                               autocomplete="off" >
+                        <?php /* <div id="password-strength-meter-container" data-role="password-strength-meter" aria-live="polite">
+                            <div id="password-strength-meter" class="password-strength-meter">
+                                <?= $block->escapeHtml(__('Password Strength')) ?>:
+                                <span id="password-strength-meter-label" data-role="password-strength-meter-label">
+                                    <?= $block->escapeHtml(__('No Password')) ?>
+                                </span>
+                            </div>
+                        </div> */ ?>
+                    </div>
+                </div>
+                <div class="field confirmation required form-group">
+                    <div class="control">
+                        <input type="password" class="input-text" name="password_confirmation" id="password-confirmation" data-validate="{required:true,equalTo:'#password'}" autocomplete="off" placeholder="<?= $block->escapeHtml(__('Confirm New Password')) ?>">
+                    </div>
+                </div>
+            </fieldset>
+            <button type="submit" class="btn btn-default">Submit</button>
+            <div class="btn-continue">
+                    <a class="continue" href="<?php /* @escapeNotVerified */ echo $block->getUrl() ?>">
+                        <span><?php echo /* @escapeNotVerified */ __('Continue Shopping'); ?></span>
+                    </a>
+            </div>
+        </form>
+
+
+        </div>
+        <?php }
+        else{ ?>
+
+        <div class="btn-continue">
+                    <a class="continue" href="<?php /* @escapeNotVerified */ echo $block->getUrl() ?>">
+                        <span><?php echo /* @escapeNotVerified */ __('Continue Shopping'); ?></span>
+                    </a>
+        </div>
+
+        <?php } ?>
+    </div>
+    <!-- end customer account form -->
+    
+
+</div>

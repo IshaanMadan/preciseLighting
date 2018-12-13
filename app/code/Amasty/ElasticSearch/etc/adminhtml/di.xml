@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_ElasticSearch
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Backend\Model\Menu\Item">
+        <plugin name="Amasty_ElasticSearch:correct-configuration-url"
+                type="Amasty\ElasticSearch\Plugin\Backend\Model\Menu\Item" />
+    </type>
+    <type name="Amasty\ElasticSearch\Block\Adminhtml\Form\Field\QuerySettings">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="fulltext_attributes" xsi:type="object">Amasty\ElasticSearch\Model\Source\FulltextAttributes</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

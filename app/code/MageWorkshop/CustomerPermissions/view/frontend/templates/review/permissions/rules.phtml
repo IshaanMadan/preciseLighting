@@ -1,0 +1,19 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var MageWorkshop\CustomerPermissions\Block\Check\Rules $block */
+$layout = $block->getLayout();
+$name = $block->getNameInLayout();
+$childBlocks = $layout->getChildNames($name);
+
+foreach ($childBlocks as $childBlock) {
+    if ($html = $block->getChildHtml($childBlock)) {
+        echo $html;
+        break;
+    }
+}
+
+

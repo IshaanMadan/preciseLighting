@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Login\Info $block */
+?>
+<?php if ($block->getRegistration()->isAllowed()): ?>
+<div class="block block-new-customer col-sm-12">
+	<div class="customer-login-block">
+    <div class="block-title">
+        <strong id="block-new-customer-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('New to our Site?')) ?></strong>
+    </div>
+    <div class="block-content" aria-labelledby="block-new-customer-heading" id="account-create-form-top">
+        <p><?php echo $block->escapeHtml(__('Creating an account allows you to track and amend your order. You will also be able to place an order faster next time and save addresses.')) ?></p>
+        <div class="actions-toolbar">
+            <div class="primary">
+                
+                
+                <button type="submit" onClick="jQuery('#account-create-form-top').hide(); jQuery('#account-create-form').show();" class="action create primary" name="create" id="create"><span><?php echo $block->escapeHtml(__('Create an Account')) ?></span></button>
+                
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<?php endif; ?>

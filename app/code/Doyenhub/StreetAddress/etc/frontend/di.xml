@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Doyenhub_StreetAddress extension
+ * NOTICE OF LICENSE
+ * This source file is subject to the Doyenhub License
+ * that is bundled with this package in the file LICENSE.txt.
+ * @category  Doyenhub_Extensions
+ * @package   Doyenhub_StreetAddress
+ * @copyright Copyright (c) 2017
+ * @author Doyenhub Developer <support@doyenhub.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Block\Checkout\AttributeMerger">
+        <plugin name="shippingAddress" type="Doyenhub\StreetAddress\Plugin\Checkout\Block\Checkout\AttributeMerger" />
+    </type>
+</config>

@@ -1,0 +1,78 @@
+@charset "utf-8";
+/* CSS Document */
+
+.customer-account-index .block.block-dashboard-addresses,
+.customer-account-index .block.block-dashboard-info,
+.customer-account-index .sidebar.sidebar-main,
+.customer-account-index .sidebar.sidebar-additional{display:none;}
+
+body.account .sidebar.sidebar-additional{display:none}
+
+.customer-account-index .column.main{width:100% !important}
+
+
+.account-dashboard{}
+.account-dashboard .welcome-title{
+    font-size:  24px;
+    font-weight: bold;
+    color: #242728;
+    margin-bottom: 20px;
+}
+.account-dashboard .dashboard-content{}
+.account-dashboard .dashboard-content .dashboard-block{}
+.account-dashboard .dashboard-content .dashboard-block a{
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #b9c6cb;
+    color: #444444;
+    min-height: 240px;
+    text-decoration: none;
+}
+
+.account-dashboard .dashboard-content .dashboard-block a:hover{color:#00bbdf; border:1px solid #00bbdf}
+
+
+.account-dashboard .dashboard-content .dashboard-block .icon{
+    display: block;
+    font-size: 35px;
+    padding-bottom: 20px;
+}
+.account-dashboard .dashboard-content .dashboard-block .title{
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+.account-dashboard .dashboard-content .dashboard-block .desc{
+    font-size: 14px;
+}
+
+.customer-account-index .page-title-wrapper{    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #d3e0e6}
+.customer-account-index .page-title-wrappe h1.page-title{    font-size: 30px;
+    color: #242728;
+    font-weight: bold;
+    margin-right: 0px;
+    text-transform: none;}
+	
+.customer-account-edit .field.gender .label{vertical-align: middle;
+    margin-top: 10px;
+    float: left;
+    margin-right: 10px;}
+	
+.customer-account-edit .field.gender .gender-select-block{vertical-align: middle;}	
+
+#cdz-login-form-dropdown .link {
+    color: #2f657a;
+    text-align: left;
+    padding-bottom: 10px;
+    display: inline-block;
+    text-transform: none;
+    display: block;
+    font-size: 14px;
+}
+
+.minicart-items-wrapper{height:auto !important; max-height:none !important}

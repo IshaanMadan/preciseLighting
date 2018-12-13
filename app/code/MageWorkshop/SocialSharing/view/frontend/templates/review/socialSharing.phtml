@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * SocialSharing block for review items
+ * @var \MageWorkshop\SocialSharing\Block\Review\SocialSharing $block
+ */
+$currentProductUrl = $block->getProduct()->getProductUrl();
+?>
+<div class="review-social-sharing-wrapper"
+     id="review-<?php /* @escapeNotVerified */ echo $block->getReviewId(); ?>"
+     data-review-id="<?php /* @escapeNotVerified */ echo $block->getReviewId(); ?>"
+>
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/sharer.php?u=<?php /* @escapeNotVerified */ echo $currentProductUrl; ?>#review-<?php /* @escapeNotVerified */ echo $block->getReviewId(); ?>" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+    </a>
+
+    <!-- Twitter -->
+    <a href="https://twitter.com/share?url=<?php /* @escapeNotVerified */ echo $currentProductUrl; ?>#review-<?php /* @escapeNotVerified */ echo $block->getReviewId(); ?>"
+       target="_blank"
+       data-url="<?php /* @escapeNotVerified */ echo $currentProductUrl; ?>#review-<?php /* @escapeNotVerified */ echo $block->getReviewId(); ?>"
+    >
+        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+    </a>
+</div>

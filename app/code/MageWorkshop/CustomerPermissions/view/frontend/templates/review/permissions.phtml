@@ -1,0 +1,24 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var $block MageWorkshop\CustomerPermissions\Block\Check\Rules
+ */
+?>
+<div id="permissions-block"></div>
+<script type="text/x-magento-init">
+    {
+        "#permissions-block": {
+            "checkAllRules": {
+                "url": "<?php /* @escapeNotVerified */ echo $block->getPermissionsCheckUrl() ?>",
+                "addReviewButton": ".review-average-info a.add,.product-reviews-summary a.add",
+                "reviewFormId": "#review-form",
+                "reviewFormFieldset": ".review-fieldset",
+                "reviewFormActions": ".review-form-actions"
+            }
+        }
+    }
+</script>

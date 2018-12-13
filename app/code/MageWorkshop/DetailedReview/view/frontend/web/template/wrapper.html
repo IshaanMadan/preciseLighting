@@ -1,0 +1,10 @@
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div data-bind="foreach: {data: window.fieldsConfig, as: 'item' }">
+    <!-- ko foreach: $parent.getRegion($parent.getItemRenderer(item.frontend_input)) -->
+        <!-- ko template: {name: getTemplate(), data: item} --><!-- /ko -->
+    <!-- /ko -->
+</div>

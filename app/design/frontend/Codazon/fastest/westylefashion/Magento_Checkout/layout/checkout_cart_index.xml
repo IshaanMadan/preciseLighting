@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+
+<!--
+
+/**
+
+ * Copyright © 2015 Magento. All rights reserved.
+
+ * See COPYING.txt for license details.
+
+ */
+
+-->
+
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+
+        <!-- <referenceContainer name="checkout.cart.container">
+
+            <container name="cart.discount" label="Cart Discount Container" htmlTag="div" htmlClass="cart-discount" after="-" />
+
+        </referenceContainer>
+
+        <move element="checkout.cart.crosssell" destination="checkout.cart.container" after="-" />
+
+        <move element="checkout.cart.coupon" destination="cart.discount" />
+
+        <move element="checkout.cart.shortcut.buttons" destination="checkout.cart.methods" after="checkout.cart.methods.onepage.bottom"/>
+
+        <move element="checkout.cart.items" destination="content" before="-"/> -->
+
+        <referenceContainer name="checkout.cart.items">
+
+          <container name="checkout.cart.newcontainer" htmlTag="div" htmlClass="checkout_container"/>
+
+          <container name="checkout.cart.crosssell.newcontainer" htmlTag="div" htmlClass="crosssell_container"/>
+
+
+
+
+
+        </referenceContainer>
+
+
+
+        <block class="Magento\Framework\View\Element\Template" name="checkout.cart_btm_left" template="Magento_Checkout::cart_btm_left.phtml"/>
+
+        <block class="Magento\Framework\View\Element\Template" name="checkout.wishlist" template="Magento_Checkout::wishlist.phtml"/>
+
+        <move element="checkout.cart.coupon" destination="cart.summary" after="-"/>
+
+        <move element="checkout.cart.methods.bottom" destination="cart.summary" after="checkout.cart.coupon"/>
+
+
+        <move element="checkout.cart.crosssell" destination="checkout.cart.crosssell.newcontainer" before="-"/>
+
+        <move element="cart.summary" destination="checkout.cart.newcontainer" before="-"/>
+
+        <move element="checkout.cart_btm_left" destination="checkout.cart.newcontainer" after="cart.summary"/>
+
+        <move element="customer.wishlist.items" destination="checkout.cart.newcontainer" after="checkout.cart_btm_left"/>
+
+        <referenceBlock name="checkout.cart.summary.title" remove="true"/>
+
+
+
+        <move element="checkout.cart.crosssell.newcontainer" destination="page.wrapper" after="main.content" />
+		
+		
+		
+		<block class="Magento\Wishlist\Block\Customer\Wishlist" name="customer.wishlist" template="Magento_Wishlist::view.phtml" cacheable="false">
+                <block class="Magento\Wishlist\Block\Rss\Link" name="wishlist.rss.link" template="Magento_Wishlist::rss/wishlist.phtml"/>
+                <block class="Magento\Wishlist\Block\Customer\Wishlist\Items" name="customer.wishlist.items" as="items" template="Magento_Wishlist::item/list-cart.phtml" cacheable="false">
+                    <block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Image" name="customer.wishlist.item.image" template="Magento_Wishlist::item/column/image.phtml" cacheable="false"/>
+					
+                    <block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Info" name="customer.wishlist.item.name" template="Magento_Wishlist::item/column/name.phtml" cacheable="false"/>
+                    <block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Cart" name="customer.wishlist.item.price" template="Magento_Wishlist::item/column/price.phtml" cacheable="false">
+                        <block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Options" name="customer.wishlist.item.options" cacheable="false"/>
+						
+						<block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Cart" name="customer.wishlist.item.cart" template="Magento_Wishlist::item/column/cart-cart.phtml" cacheable="false" before="product.price.render.wishlist">
+                            <arguments>
+                                <argument name="title" translate="true" xsi:type="string">Add to Cart</argument>
+                            </arguments>
+                        </block>
+						
+						<block class="Magento\Catalog\Pricing\Render" name="product.price.render.wishlist">
+                            <arguments>
+                                <argument name="price_render" xsi:type="string">product.price.render.default</argument>
+                                <argument name="price_type_code" xsi:type="string">wishlist_configured_price</argument>
+                                <argument name="price_label" xsi:type="boolean">false</argument>
+                                <argument name="zone" xsi:type="string">item_list</argument>
+                            </arguments>
+                        </block>
+                        
+                    </block>
+                    <block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Actions" name="customer.wishlist.item.inner" template="Magento_Wishlist::item/column/actions.phtml" cacheable="false">
+                        <arguments>
+                            <argument name="css_class" xsi:type="string">product-item-inner</argument>
+                        </arguments>
+                        <!--<block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Comment" name="customer.wishlist.item.comment" template="Magento_Wishlist::item/column/comment.phtml" cacheable="false">
+                            <arguments>
+                                <argument name="title" translate="true" xsi:type="string">Product Details and Comment</argument>
+                            </arguments>
+                        </block>-->
+                        
+
+                        <block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Actions" name="customer.wishlist.item.actions" template="Magento_Wishlist::item/column/actions.phtml" cacheable="false">
+                            <arguments>
+                                <argument name="css_class" xsi:type="string">product-item-actions</argument>
+                            </arguments>
+                            <!--<block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Edit" name="customer.wishlist.item.edit" template="Magento_Wishlist::item/column/edit.phtml" before="-" cacheable="false"/>-->
+                            <block class="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Remove" name="customer.wishlist.item.remove" template="Magento_Wishlist::item/column/remove-cart.phtml" cacheable="false"/>
+                        </block>
+                    </block>
+                </block>
+                <container name="customer.wishlist.buttons" as="control_buttons" label="Wishlist Control Buttons">
+                    <block class="Magento\Wishlist\Block\Customer\Wishlist\Button" name="customer.wishlist.button.update" template="Magento_Wishlist::button/update.phtml" cacheable="false"/>
+                    <block class="Magento\Wishlist\Block\Customer\Wishlist\Button" name="customer.wishlist.button.share" template="Magento_Wishlist::button/share.phtml" cacheable="false"/>
+                    <block class="Magento\Wishlist\Block\Customer\Wishlist\Button" name="customer.wishlist.button.toCart" template="Magento_Wishlist::button/tocart.phtml" cacheable="false"/>
+                </container>
+            </block>
+
+    </body>
+
+</page>
+

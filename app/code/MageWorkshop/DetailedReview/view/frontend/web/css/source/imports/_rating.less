@@ -1,0 +1,310 @@
+/*
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+& when (@media-common = true) {
+    // For compatibility with the Black theme and themes based on it
+    .review-average-info .product-reviews-summary {
+        display: block;
+
+        .rating-summary {
+            display: block;
+            text-align: right;
+        }
+    }
+
+    .rating-summary {
+        display: table-row;
+
+        .rating-result {
+            &:before {
+                text-align: left;
+            }
+
+            span:before {
+                text-align: left;
+            }
+        }
+    }
+
+    .review-ratings .rating-label,
+    .customer-review .review-details .customer-review-rating .rating-label {
+        display: table-cell;
+    }
+
+    .review-field-ratings #product-review-table .review-field-rating {
+        display: block;
+
+        .field-error,
+        div.mage-error[generated] {
+            margin-top: 0;
+        }
+    }
+
+    .review-average-info .product-reviews-summary .reviews-actions {
+        display: inline-block;
+    }
+    // end compatibility-important changed
+
+    .container-review-rating {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .review-average-info {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 1%;
+    }
+
+    .review-customer-rating {
+        vertical-align: top;
+        display: inline-block;
+        margin: 0 1%;
+    }
+    .review-average-rating {
+        vertical-align: top;
+        display: inline-block;
+        margin: 0 1%;
+    }
+    .review-customer-rating .review-customer-rating-result {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+
+        .star {
+            display: inline-block;
+            width: 15%;
+        }
+
+        .scroll-box {
+            background: url(../MageWorkshop_DetailedReview/images/scroll_bar_off.jpg) repeat-x;
+            height: 10px;
+            display: inline-block;
+            width: 70%;
+            margin-right: 4px;
+            margin-top: 7px;
+
+            .scroll-rating {
+                background: url(../MageWorkshop_DetailedReview/images/scroll_bar_on.jpg) repeat-x 0 0 transparent;
+                height: 10px;
+                width: 60%;
+            }
+        }
+
+        .rating-count {
+            display: inline-block;
+            width: 10%;
+        }
+    }
+
+    .rating-block-label {
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+        color: #3399CC;
+    }
+
+    .rating-block-content {
+        display: block;
+        width: 100%;
+        text-align: end;
+    }
+    .rating-block-content .rating-row {
+        margin: auto;
+        border-bottom: 1px solid #CCCCCC;
+    }
+
+    .review-average-rating .rating-title {
+        width: 45%;
+        display: inline-block;
+        text-align: left;
+    }
+    .review-average-rating .rating-title span.title {
+        width: 55%;
+        display: inline-block;
+    }
+
+    .review-average-rating .rating-title span.average {
+        width: 35%;
+        display: inline-block;
+    }
+    .review-average-rating .rating-summary {
+        width: 45%;
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+    .review-average-info p.reviews-average-rating-label {
+        text-align: center;
+        color: #3399CC;
+    }
+
+    .review-average-info .reviews-average-rating {
+        font-family: "Open Sans";
+        font-size: 64px;
+        font-weight: bold;
+        line-height: 120%;
+        color: #3399CC;
+        text-align: center;
+    }
+
+    .review-average-info .rating-summary {
+        display: inline-block;
+        width: 50%;
+        float: left;
+        text-align: right;
+    }
+    .review-average-info .reviews-actions {
+        display: inline-block;
+        width: 49%;
+    }
+    .review-average-info .reviews-actions a.view {
+        margin: 0;
+        float: left;
+        width: 100%;
+        text-align: left;
+        color: #3399CC;
+        pointer-events: none;
+    }
+    .review-average-info .reviews-actions a.add {
+        margin-left: -60%;
+        background: #3399CC;
+        display: inline-block;
+        padding: 5px 15px;
+        border: 1px solid #3399CC;
+        color: @color-white;
+        font-size: 15px;
+        margin-top: 15px;
+        font-weight: normal;
+        font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+        line-height: 24px;
+        text-transform: uppercase;
+        vertical-align: middle;
+        white-space: nowrap;
+        cursor: pointer;
+        text-decoration: initial;
+    }
+
+    /* styles for "Be the first to review this product" button */
+    .review-average-info .empty .reviews-actions a.add {
+        margin-left: 0;
+    }
+
+    .review-average-info .no-rating .reviews-actions {
+        width: 100%;
+    }
+
+    .review-average-info .no-rating .reviews-actions a.view {
+        display: inline;
+        text-align: center;
+    }
+
+    .review-average-info .no-rating .reviews-actions a.add {
+        margin-left: 25%;
+    }
+
+    .review-average-info {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .review-average-info .reviews-actions a.add {
+        margin-left: -50%;
+    }
+    .review-customer-rating {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .review-average-rating {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .review-average-rating .rating-title {
+        width: 50%;
+    }
+    .review-average-rating .rating-summary {
+        margin-right: 5px;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+    .review-average-info {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .review-average-info .reviews-actions a.add {
+        margin-left: -30%;
+    }
+    .review-customer-rating {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .review-average-rating {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .review-average-rating .rating-title {
+        width: 50%;
+    }
+    .review-average-rating .rating-summary {
+        margin-right: 5px;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+    .review-average-info {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .review-average-info .reviews-actions a.add {
+        margin-left: -28%;
+    }
+    .review-customer-rating {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .review-average-rating {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .review-average-rating .rating-title {
+        width: 50%;
+    }
+    .review-average-rating .rating-summary {
+        margin-right: 5px;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .review-average-info {
+        width: 47%;
+    }
+    .review-average-info .reviews-actions a.add {
+        margin-left: -50%;
+    }
+    .review-customer-rating {
+        width: 47%;
+    }
+    .review-average-rating {
+        width: 50%;
+        display: table;
+        margin: auto;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .review-average-info {
+        width: 30%;
+    }
+    .review-average-info .reviews-actions a.add {
+        //margin-left: -50%;
+    }
+    .review-customer-rating {
+        width: 30%;
+    }
+    .review-average-rating {
+        width: 30%;
+        display: inherit;
+    }
+}

@@ -1,0 +1,72 @@
+/*
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+& when (@media-common = true) {
+
+    #reviews {
+        //display: none;
+    }
+
+    #review-form {
+        display: block;
+        max-width: 80%;
+
+        .review-form-actions {
+            display: inline-block;
+            width: 100%;
+            margin-top: 20px;
+            margin-left: 0;
+
+            .primary.actions-primary {
+                width: 100%;
+
+                button {
+                    background: #3399CC;
+                    border: 1px solid #3399CC;
+                    color: @color-white;
+                }
+
+                button.button-back {
+                    box-shadow: none;
+                    float: left;
+                    background: @color-white;
+                    color: #3399CC;
+                }
+
+                button.submit.primary {
+                    float: right;
+                    width: auto;
+                }
+            }
+        }
+
+        .review-field-ratings {
+            .label {
+                text-align: left;
+                float: none;
+            }
+        }
+
+        .tell-us {
+            color: #3399CC;
+            text-transform: uppercase;
+        }
+        .your-review {
+            font-weight: 600;
+        }
+        .moreFieldInLine {
+            margin-right: 1%;
+        }
+
+        .moreFieldInLine,
+        .lastFieldInline {
+            float: left;
+        }
+
+        .lastFieldInline + hr + div {
+            clear: left;
+        }
+    }
+}

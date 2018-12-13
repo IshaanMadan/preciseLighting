@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mageworkshop_detailedreview>
+            <general>
+                <enabled>1</enabled>
+            </general>
+        </mageworkshop_detailedreview>
+        <captcha>
+            <frontend>
+                <areas>
+                    <product_review>
+                        <label>Review form</label>
+                    </product_review>
+                </areas>
+            </frontend>
+        </captcha>
+        <customer>
+            <captcha>
+                <always_for>
+                    <product_review>1</product_review>
+                </always_for>
+            </captcha>
+        </customer>
+    </default>
+</config>

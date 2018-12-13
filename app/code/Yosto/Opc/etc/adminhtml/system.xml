@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="yosto_opc_suite" sortOrder="295">
+            <label>One Step Checkout</label>
+        </tab>
+        <section id="yosto_opc_checkout" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Checkout</label>
+            <tab>yosto_opc_suite</tab>
+            <resource>Yosto_Opc::config_opc</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="layout" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Layout</label>
+                    <source_model>Yosto\Opc\Model\Config\Source\Layout</source_model>
+                </field>
+                <field id="google_api_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google Api Key</label>
+                </field>
+                <field id="show_order_comment" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Order Comment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_newsletter" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Newsletter</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="newsletter_default_checked" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Newsletter checkbox checked by default</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="show_newsletter">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="giftwrap" translate="label comment" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Gift Wrap Configuration</label>
+                <field id="enable_giftwrap" translate="label" sortOrder="14" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable gift wrap</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="giftwrap_type" translate="label" sortOrder="15" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Gift wrap type</label>
+                    <source_model>Yosto\Opc\Model\Config\Source\GiftWrap</source_model>
+                    <depends>
+                        <field id="enable_giftwrap">1</field>
+                    </depends>
+                    <comment>To calculate gift wrap fee based on item or order.</comment>
+                </field>
+                <field id="giftwrap_amount" translate="label" sortOrder="16" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Gift wrap fee</label>
+                    <depends>
+                        <field id="enable_giftwrap">1</field>
+                    </depends>
+                    <comment>Enter the amount of gift wrap fee.</comment>
+                </field>
+            </group>
+            <group id="giftmessage" translate="label comment" sortOrder="30" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Gift Message Configuration</label>
+                <field id="enable_giftmessage" translate="label" sortOrder="13" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable gift message</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

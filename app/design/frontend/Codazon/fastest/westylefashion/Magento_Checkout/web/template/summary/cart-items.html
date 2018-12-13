@@ -1,0 +1,96 @@
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!-- ko ifnot: isItemsBlockExpanded() -->
+<div class="block items-in-cart" data-bind="mageInit: {'collapsible':{'openedState': 'active', 'active': 1}}">
+    <div class="title" data-role="title">
+        <strong role="heading"><span data-bind="text: getItemsQty()" id="checkout_items_count"></span>
+            <!-- ko if: getItemsQty() == 1 -->
+            <!-- ko i18n: 'Item in Cart' --><!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: getItemsQty() > 1 -->
+            <!-- ko i18n: 'Items in Cart' --><!-- /ko -->
+            <!-- /ko -->
+        </strong>
+    </div>
+    <div class="content minicart-items" data-role="content">
+        <div class="minicart-items-wrapper overflowed">
+            <div class="minicart-items-box">
+                <ol class="minicart-items">
+                    <!-- ko foreach: getItems() -->
+                    <li class="product-item">
+                        <div class="product">
+                            <!-- ko foreach: $parent.elems() -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                    </li>
+                    <!-- /ko -->
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<div class="checkout-cart-summery-block">
+	<div class="summery-title"><span data-bind="i18n: 'Order Summary'" class="title">Order Summary</span></div>
+	<div class="summery-title">
+			(
+			<!-- ko if: getItemsQty() == 1 -->
+				<!-- ko i18n: 'Item' --><!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: getItemsQty() > 1 -->
+				<!-- ko i18n: 'Items' --><!-- /ko -->
+            <!-- /ko -->
+			)
+	</div>
+</div>
+<!-- ko if: isItemsBlockExpanded() -->
+
+<div class="checkout-cart-summery-block">
+	<div class="summery-title"><span data-bind="i18n: 'Order Summary'" class="title">Order Summary</span></div>
+	<div class="summery-title">
+			(
+			<!-- ko if: getItemsQty() == 1 -->
+				<!-- ko i18n: 'Item' --><!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: getItemsQty() > 1 -->
+				<!-- ko i18n: 'Items' --><!-- /ko -->
+            <!-- /ko -->
+			)
+	</div>
+</div>
+
+<div class="block items-in-cart" data-bind="mageInit: {'collapsible':{'openedState': 'active', 'active': 1}}">
+    <div class="title" data-role="title">
+        <strong role="heading"><span data-bind="text: getItemsQty()" id="checkout_items_count"></span>
+            <!-- ko if: getItemsQty() == 1 -->
+            <!-- ko i18n: 'Item in Cart' --><!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: getItemsQty() > 1 -->
+            <!-- ko i18n: 'Items in Cart' --><!-- /ko -->
+            <!-- /ko -->
+        </strong>
+    </div>
+    <div class="content minicart-items" data-role="content">
+        <div class="minicart-items-wrapper overflowed">
+            <div class="minicart-items-box">
+                <ol class="minicart-items">
+                    <!-- ko foreach: getItems() -->
+                    <li class="product-item">
+                        <div class="product">
+                            <!-- ko foreach: $parent.elems() -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                    </li>
+                    <!-- /ko -->
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

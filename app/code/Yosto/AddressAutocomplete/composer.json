@@ -1,0 +1,21 @@
+{
+    "name": "yosto/module-address-auto-complete",
+    "description": "Address auto complete",
+    "keywords": [
+
+    ],
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+    },
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Yosto\\AddressAutocomplete\\": ""
+        }
+    }
+}

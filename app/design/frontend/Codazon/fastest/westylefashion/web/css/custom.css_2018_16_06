@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600');
+
+html body{ font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size:14px; color:#444444;}
+html body input[type="text"], html body input[type="password"], html body input[type="url"], html body input[type="tel"], html body input[type="search"], html body input[type="number"], html body input[type="datetime"], html body input[type="email"]{font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-size:14px;}
+
+
+body h1, body .h1, body .h2, body h2, body .h3, body h3, body .h4, body h4, body .h5, body h5, body .h6, body h6{ font-family: 'Montserrat'; font-style: normal;}
+.page-header .minicart-wrapper a.action.showcart:before{background-image: url('../images/cart.png'); top:25%;}
+.top-contact-info i.fa.fa-phone:before {content: '';}
+.top-contact-info i.fa.fa-phone {    background-image: url(../images/cell-icon.png); width: 20px; height: 20px; float: left; background-repeat: no-repeat;     margin-top: 2px;
+    margin-right: 19px; }
+.header-wrapper-left {padding: 5% 0 0 0;}
+.top-contact-info {width: 100%;    font-size: 18px; color:#242728; font-weight: 600;}
+.page-header .header.links li div#authorization-trigger:before,.page-header .header.links li div#authorization-trigger:after{content:'';}
+div#authorization-trigger{background-image: url('../images/usericon.png');width: 21px; height: 20px;}
+.header-wrapper-right{width: 100%;margin-top: 5%;}
+.header-wrapper-right div.search-wrapper{float: left; width: 70%}
+.block-search button.action.search:before{content:'';}
+.block-search button.action.search{background-image: url('../images/searchicon.png');width: 20px; height: 20px; top: 30%; margin-right: 10px;}
+.header.content .header.links { float:left; margin-top:11px;}
+.header.content .header.links li.authorization-link{display: inline-block; margin:0 0 0 19px;}
+.page-header .header.links{ float:left;}
+.page-header .logo, .page-header .logo-center strong.logo{display: inline;}
+.page-header div.minicart-wrapper a.action.showcart span.counter.qty{    background: #00BBDF;border-radius: 10px; top:20%; left: 28%;}
+.cdz-horizontal-menu .groupmenu li.item.level0.new-menu.level-top a.menu-link, .cdz-horizontal-menu .groupmenu li.item.level0.sale-menu.level-top a.menu-link {color: #00BBDF;}
+.cdz-horizontal-menu .groupmenu li.item.level0.level-top a.menu-link, li.item.level0.level-top a.menu-link {    color: #9A9A9A;
+font-weight: 600; text-transform: capitalize; padding:0px; margin:0px; font-family: 'Montserrat'; font-style: normal;}
+.cdz-horizontal-menu .groupmenu li.item.level0.level-top{ margin:16px 15px;}
+
+.control .block-search input[type="text"]{font-style: normal; font-size: 17px;}
+.cdz-slideshow-description {background: #00bbdf;padding: 15px 0;text-align: center;color: #fff;font-size: 15px;font-weight: 600;text-transform: capitalize;}
+.page-layout-1column.cms-index-index .columns div.column.main{padding-top: 0px;}
+.page-header .header-wrapper-bottom{    border-top: 1px solid #EBEBEB;}
+.page-header .search-wrapper .block-search input[type="text"]{ border-bottom:1px solid #124c63; box-shadow: none; padding: 0 40px 0 15px; font-style:normal; color:#b3b3b3; font-size:18px; text-transform: capitalize;     font-weight: 500;}
+.page-header .search-wrapper .block-search input[type="text"]:focus{ outline:none; box-shadow:none;}
+form.minisearch.loading .control input[type="text"]{ animation:unset;}
+.header-wrapper-right .minicart-wrapper .action.showcart:before{ padding:0px; width:20px; min-height:20px; background:url("../images/icon.png") no-repeat top center; margin-top: 4px;}
+.footer.content .footer-top-ads.cls-style02 .ftop-newsletter{ margin:10px 0; paddding:0px;}
+.footer.content .footer-top-ads.cls-style02 .block.newsletter input{ border:1px solid #b9c6cb; border-radius:0px; font-weight:500; color:#b3b3b3; padding-left: 13px;}
+.footer.content .footer-top-ads.cls-style02 .block.newsletter .field{ margin:0px;} 
+.footer.content .footer-top-ads{ float:right; width:65%;}
+.footer.content .footer-top-ads .block.newsletter .action.primary{ padding:8px 10px; min-width:30px;} 
+.ftop-newsletter .block.newsletter .field .control:before{ display:none;}
+.footer-top-ads .ftop-newsletter{ padding-bottom:30px; padding-right: 35px; border-right:1px solid #d3e0e6;}
+footer.page-footer .footer-content-top{ paddding:0px;}
+footer.page-footer .footer-social p.h5{ display:inline-block; text-transform:capitalize; margin:10px 20px 0 20px;}
+footer.page-footer .footer-social p.social{ display:inline-block; vertical-align: top;}
+footer.page-footer .footer-social a{ border:none; margin:0 20px 0 0;}
+.footer.content .widget.block{ border-top:1px solid #d3e0e6; padding-top:50px;}
+footer.page-footer #topfooter.top-footer-wrapper{ border:none;} 
+footer.page-footer #topfooter.top-footer-wrapper .footer.content{ border-top:1px solid #d3e0e6; padding: 0;} 
+.footer.content .widget.block .footer-box .page-footer p.h5{ margin-bottom:0px; text-transform:capitalize;}
+.footer.content .widget.block .col-sm-6{ width:18%;} 
+.footer.content .widget.block .col-sm-6 .footer-box p.h5{ margin-bottom:15px; text-transform:capitalize;}
+footer.page-footer .footer-link li a{ padding:0px; font-weight:500;} 
+footer.page-footer .footer-link li{ margin-bottom:15px;}
+footer.page-footer .footer-link { margin:0px;}
+footer.page-footer #footer-content-3 li p{  font-weight:500;}
+
+
+
+
+
+
+
+
+
+/* 16-06-2018  Start*/ 
+.cdz-slideshow .owl-carousel.owl-theme div.owl-dots{top: 100%;}
+.cdz-slideshow .owl-carousel.owl-theme .owl-dots .owl-dot.active span:before{ content:'\f111'}
+.cdz-slideshow .owl-carousel.owl-theme .owl-dots div.owl-dot.active span, .cdz-slideshow .owl-carousel.owl-theme .owl-dots div.owl-dot:hover span{color: #00bbdf;}
+.cdz-slideshow .owl-carousel.owl-theme .owl-dots div.owl-dot span:before{content:'\f10c'}
+.cdz-slideshow .owl-carousel.owl-theme div.owl-nav [class*='owl-']{ border:none;background:transparent;color:#fff}
+.bottom-footer-wrapper .footer.content {text-align: center;}
+.copyright{width: 100%;}
+/* 16-06-2018  End*/ 

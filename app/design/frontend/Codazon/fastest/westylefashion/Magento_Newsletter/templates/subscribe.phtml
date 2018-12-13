@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Newsletter\Block\Subscribe $block */
+
+?>
+<div class="block newsletter">
+    <div class="content">
+     <label class="newsletter_label" for="newsletter"><span><?= $block->escapeHtml(__('Our Newsletter')) ?>, Join and Get ₦5,000 OFF</span></label>
+        <form class="form subscribe"
+            novalidate
+            action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
+            method="post"
+            data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+            id="newsletter-validate-detail">
+            
+            <div class="field newsletter">
+               
+                <div class="control">
+                    <input name="email" type="email" id="newsletter"
+                                placeholder="<?= $block->escapeHtmlAttr(__('Enter email')) ?>"
+                                data-validate="{required:true, 'validate-email':true}"/>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="action subscribe primary" title="<?= $block->escapeHtmlAttr(__('Go')) ?>" type="submit">
+                    <span><?= $block->escapeHtml(__('Go')) ?></span>
+                </button>
+            </div>
+        </form>
+        
+         <div class="newsletter-form-desc">We will email you a voucher worth ₦5,000 off your first order over ₦50,000. By subscribing you agree to our <a href="/terms-conditions" style="text-decoration: underline;" target="_blank">Terms &amp; Conditions</a> and <a href="/privacy-policy-cookie-restriction-mode" style="text-decoration: underline;" target="_blank">Privacy &amp; Cookie Policy</a></div>
+        
+    </div>
+</div>

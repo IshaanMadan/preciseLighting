@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <yosto_order_attachment>
+            <general>
+                <enable>0</enable>
+                <title>Attachment</title>
+                <path_to_upload>order_attachment</path_to_upload>
+                <is_required>0</is_required>
+                <file_extensions>.pdf,.docx,.doc,.csv,.xsl</file_extensions>
+                <file_size>1</file_size>
+                <allow_customer_edit>1</allow_customer_edit>
+            </general>
+        </yosto_order_attachment>
+    </default>
+</config>

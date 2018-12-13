@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Navin_OrderDetails::css/orderdetails.css" />
+        <css src="Navin_OrderDetails::css/success.css" />
+    </head>
+    <body>
+        <referenceBlock name="checkout.success" template="Navin_OrderDetails::checkout/success.phtml"/>
+
+         <referenceBlock name="checkout.registration" remove="true"/>
+    </body>
+</page>

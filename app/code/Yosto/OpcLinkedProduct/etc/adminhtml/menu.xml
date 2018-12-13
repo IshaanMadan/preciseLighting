@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Backend/etc/menu.xsd">
+    <menu>
+        <add id="Yosto_OpcLinkedProduct::linked_product"
+             title="Linked Products"
+             module="Yosto_OpcLinkedProduct"
+             sortOrder="120"
+             parent="Yosto_Opc::configuration"
+             action="adminhtml/system_config/edit/section/yosto_opc_linked_product"
+             resource="Yosto_Opc::opc_menu"/>
+        <!--<add id="Yosto_OpcLinkedProduct::linked_product"
+             title="Linked Products"
+             module="Yosto_OpcLinkedProduct"
+             sortOrder="120"
+             parent="Magento_Catalog::catalog"
+             action="adminhtml/system_config/edit/section/yosto_opc_linked_product"
+             resource="Magento_Catalog::catalog"/>-->
+    </menu>
+</config>

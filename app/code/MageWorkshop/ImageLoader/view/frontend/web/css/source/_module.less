@@ -1,0 +1,96 @@
+/*
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+& when (@media-common = true) {
+
+    #reviews .block-content .review-form #mageworkshop .media-image {
+        padding: 5px 15px;
+        position: relative;
+        border-radius: 2px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 1.9rem;
+        line-height: 1.6rem;
+        max-width: 80vw;
+        &::before {
+            content: attr(data-before);
+            color: #3399CC;
+            display: inline-block;
+            background: -webkit-linear-gradient(top, #ffffff, #ffffff);
+            background: -moz-linear-gradient(top, #ffffff, #ffffff);
+            border: 1px solid #3399CC;
+            border-radius: 3px;
+            padding: 5px 8px;
+            outline: none;
+            white-space: nowrap;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            cursor: pointer;
+            text-shadow: 1px 1px #fff;
+            font-weight: 700;
+            font-size: 10pt;
+        }
+        &::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+        &:hover {
+            &::before {
+                border-color: black;
+            }
+        }
+    }
+
+    .review-items .review-content .review-image-attribute-label {
+        width: 100%;
+        float: left;
+        color: #3399CC;
+    }
+
+    .review-items .review-content .owl-carousel {
+        width: 100%;
+        display: inline-block;
+        margin-top: 15px;
+        img {
+            margin-right: 0;
+        }
+        .owl-stage-outer {
+            padding-left: 72px;
+        }
+        .owl-item {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .review-items .review-content .owl-carousel .owl-nav .owl-prev {
+        float: left;
+        background: url('../MageWorkshop_ImageLoader/images/126492.svg') no-repeat;
+        color: transparent;
+        width: 30px;
+        height: 30px;
+        background-size: contain;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        position: relative;
+        bottom: 60px;
+        right: 7px;
+    }
+
+    .review-items .review-content .owl-carousel .owl-nav .owl-next {
+        float: right;
+        background: url('../MageWorkshop_ImageLoader/images/126490.svg') no-repeat;
+        color: transparent;
+        width: 30px;
+        height: 30px;
+        background-size: contain;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        position: relative;
+        bottom: 60px;
+        left: 8px;
+    }
+}

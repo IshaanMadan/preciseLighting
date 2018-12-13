@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   ifconfig="mageworkshop_detailedreview/mageworkshop_seo/enabled"
+                   name="product.info.review_seo" as="review_seo"
+                   template="MageWorkshop_Seo::product/view/list.phtml"
+            >
+                <block class="Magento\Review\Block\Product\View\ListView"
+                       name="product.info.product_additional_data"
+                       as="product_additional_data"
+                       template="Magento_Review::product/view/list.phtml"
+                >
+                    <!--@TODO: reviews toolbar is not rendered!-->
+                    <block class="Magento\Theme\Block\Html\Pager" name="product_review_list.toolbar"/>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

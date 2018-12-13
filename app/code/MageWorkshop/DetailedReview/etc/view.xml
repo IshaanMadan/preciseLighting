@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <media>
+        <!--Real module name can not be used because we cat an error while validating th DOM document:-->
+        <!--Element 'images': This element is not expected.-->
+        <images module="Magento_Catalog">
+            <image id="review_attribute_swatch_thumbnail" type="swatch_thumb">
+                <!--Max width and height-->
+                <width>150</width>
+                <height>150</height>
+            </image>
+        </images>
+    </media>
+</view>

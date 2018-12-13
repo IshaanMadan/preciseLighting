@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="review_load_after">
+        <observer name="mageworkshop_adminresponse"
+                  instance="MageWorkshop\AdminResponse\Observer\Review\LoadAfter"
+        />
+    </event>
+    <event name="review_save_after">
+        <observer name="mageworkshop_adminresponse"
+                  instance="MageWorkshop\AdminResponse\Observer\Review\SaveAfter"
+        />
+    </event>
+    <event name="mageworkshop_import_start">
+        <observer name="mageworkshop_adminresponse"
+                  instance="MageWorkshop\AdminResponse\Observer\Review\SaveAfter"
+        />
+    </event>
+    <event name="mageworkshop_import_completed">
+        <observer name="mageworkshop_adminresponse"
+                  instance="MageWorkshop\AdminResponse\Observer\Review\SaveAfter"
+        />
+    </event>
+</config>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="yosto_opc_deliverydate_email_order"
+              label="Order with delivery date"
+              file="order_new.html" type="html"
+              module="Yosto_DeliveryDate" area="frontend"/>
+    <template id="yosto_opc_deliverydate_email_order_guest"
+              label="Order with delivery date for guest"
+              file="order_new_guest.html" type="html"
+              module="Yosto_DeliveryDate" area="frontend"/>
+    <template id="yosto_opc_deliverydate_email_invoice"
+              label="Invoice with delivery date"
+              file="invoice_new.html" type="html"
+              module="Yosto_DeliveryDate" area="frontend"/>
+    <template id="yosto_opc_deliverydate_email_invoice_guest"
+              label="Invoice with delivery date for guest"
+              file="invoice_new_guest.html" type="html"
+              module="Yosto_DeliveryDate" area="frontend"/>
+    <template id="yosto_opc_deliverydate_email_shipment"
+              label="Shipment with delivery date"
+              file="shipment_new.html" type="html"
+              module="Yosto_DeliveryDate" area="frontend"/>
+    <template id="yosto_opc_deliverydate_email_shipment_guest"
+              label="Shipment with delivery date for guest"
+              file="shipment_new_guest.html" type="html"
+              module="Yosto_DeliveryDate" area="frontend"/>
+</config>

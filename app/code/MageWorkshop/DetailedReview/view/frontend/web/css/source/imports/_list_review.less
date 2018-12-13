@@ -1,0 +1,123 @@
+/*
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+& when (@media-common = true) {
+    .review-list {
+        padding: 0;
+        margin: 0;
+    }
+
+    .review-item {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-flow: row wrap;
+
+        .review-details {
+            order: 1;
+            width: 50%;
+            word-break: normal;
+            .review-author {
+                margin-bottom: 10px;
+                display: inline-block;
+                color: #3399CC;
+            }
+        }
+        .review-content {
+            padding-right: 1%;
+            order: 999;
+            display: inline-block;
+            word-break: normal;
+            word-wrap: break-word;
+            .review-title-block {
+                display: inline-block;
+                width: 80%;
+                .review-title {
+                    width: 100%;
+                    margin: 0 0 10px 0;
+                    color: #3399CC;
+                    font-weight: 400;
+                }
+                .review-author {
+                    color: #3399CC;
+                }
+            }
+            #verified-buyer {
+                display: block;
+                width: 32px;
+                height: 47px;
+                float: right;
+                background: url(../MageWorkshop_DetailedReview/images/verified_buyer.png) no-repeat;
+                margin-right: 20px;
+            }
+            .completeDescription {
+                display: none;
+            }
+
+            .moreLink {
+                color: #3399CC;
+                cursor: pointer;
+            }
+            .additional-review-attributes {
+                div.attribute-value {
+                    word-break: break-all;
+                    display: inline-block;
+                }
+
+                ul.items li label {
+                    color: #3399CC;
+                }
+            }
+        }
+        .review-ratings {
+            order: 3;
+            width: 49%;
+            display: inline-block;
+        }
+    }
+
+    #search-message {
+        .notice-msg {
+            color: black;
+            border-left: 5px solid #e26703;
+            background-color: #f9ebe6;
+            height: 20px;
+            padding-left: 15px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .review-item {
+        .review-details {
+            flex-shrink: 1;
+            width: 22%;
+        }
+        .review-content {
+            order: 2;
+            padding: 0 1%;
+            width: 51%;
+        }
+        .review-ratings {
+            flex-shrink: 1;
+            width: 24%;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .review-item {
+        .review-details {
+            flex-shrink: 1;
+            width: 23%;
+        }
+        .review-content {
+            width: 56%;
+        }
+        .review-ratings {
+            flex-shrink: 8;
+            width: 18%;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<!-- ko if: isGiftWrap() -->
+<div class="yosto-opc-giftwrap checkbox-group">
+    <input class="yosto_opc_giftwrap_checkbox checkbox osc-additional-data" type="checkbox"
+           name="yosto_opc_giftwrap_checkbox" id="yosto_opc_giftwrap_checkbox"
+           data-bind="event: {click : addGiftWrap}, checked: isChecked" />
+    <label class="label--checkbox" for="yosto_opc_giftwrap_checkbox"><!-- ko text: $t('Gift wrap') --><!-- /ko -->
+        <span class="check"></span>
+        <span class="box-check"></span>
+        <strong><span class="price" data-bind="text: giftWrapAmountPrice()"></span></strong>
+    </label>
+</div>
+<!-- /ko -->

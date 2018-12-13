@@ -1,0 +1,87 @@
+<?php
+
+/**
+
+* Copyright © Magento, Inc. All rights reserved.
+
+* See COPYING.txt for license details.
+
+*/
+
+
+
+// @codingStandardsIgnoreFile
+
+
+
+/* @var \Magento\Wishlist\Block\Share\Email\Items $block */
+
+?>
+
+<?php $l = $block->getWishlistItemsCount() ?>
+
+<?php echo $l;?>
+
+<div class="cart_btm_left_container">
+	<?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('precise_cart_return_payment')->toHtml();?>
+	<div class="clear_both"></div>
+	<?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('precise_trust_pilot_secure')->toHtml();?>
+	<!-- 14 return policy -->
+
+	<!--  <div class="cart_btm_left return_policy">
+
+	<h4 class="cart_btm_title">7 Days Returns</h4>
+
+	<p>If you change your mind</p>
+
+	<img src="<?php echo $this->getViewFileUrl('images/icon_percent.png'); ?>" class="img-responsive" alt="14 days returns" />
+
+	<img src="<?php echo $this->getViewFileUrl('images/trust_pilot.png'); ?>" class="img-responsive" alt="trust pilot" />
+
+	</div>-->
+
+	<!-- 14 return policy -->
+
+	<!-- secure payment -->
+
+	<!-- <div class="cart_btm_left secure_payment">
+
+	<h4 class="cart_btm_title">Secure Payments</h4>
+
+	<p>Personal details are protected</p>
+
+	<img src="<?php echo $this->getViewFileUrl('images/icon_payment.png'); ?>" class="img-responsive" alt="14 days returns" />
+
+	<img src="<?php echo $this->getViewFileUrl('images/icon_secure.png'); ?>" class="img-responsive" alt="trust pilot" />
+
+	</div>-->
+
+</div>
+
+<div class="clear_both"></div>
+<input type="hidden" value="1" id="checkdivexits"/>
+<script>
+	require([
+			'jquery',
+			'domReady!'
+		], function ($) {
+			
+			
+			setInterval(function() {
+				var exits = $('#checkdivexits').val();
+					if(parseInt(exits) > 0)
+					{
+						if($('#cart-totals').length){
+							
+							$('.cart-summary').prepend('<p class="delivery_option">Delivery Option</p><dl class="items methods"> <dd class="item-options"><div class="field choice item"><input type="radio" class="radio" value="storepickup_storepickup" id="static_s_method_storepickup_storepickup" name="ko_unique"><label class="label"  for="s_method_storepickup_storepickup"> Home Delivery	</label></div></dd><dd class="item-options"><div class="field choice item"><input type="radio" class="radio"  value="tablerate_bestway" id="static_s_method_tablerate_bestway" name="ko_unique"><label class="label"  for="s_method_tablerate_bestway">Store Collection</label></div></dd></dl>');
+			$('#cart-totals .table-wrapper table tbody tr:nth-child(1)').closest('tr').after('<tr class="totals sub"><th class="mark" scope="row">Delivery Charge</th><td class="amount"><span class="price" data-th="Subtotal">FREE</span></td></tr>');
+			$('#checkdivexits').val('0');
+							clearInterval();
+							
+						}
+					}
+				},3000);
+			
+		});
+</script>
+

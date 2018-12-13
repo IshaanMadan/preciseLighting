@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Vote block for review items
+ * @var \MageWorkshop\Voting\Block\Review\Vote $block
+ */
+?>
+<?php $helpfulLabel = $block->getHelpfulLabel();?>
+<?php $unhelpfulLabel = $block->getUnhelpfulLabel();?>
+<div class="review-vote-wrapper"
+     id="review-vote-<?php echo $block->getReviewId(); ?>"
+     data-review-id="<?php echo $block->getReviewId(); ?>"
+     data-current-customer-vote="<?php echo (int) $block->getCurrentCustomerVote(); ?>"
+     data-mage-init='{"mageWorkshop_voting_voting": {"submitUrl":"<?php echo $block->getAjaxUrl(); ?>", "alert": {"title": "<?php echo $block->getAlertTitle(); ?>", "timeout": "<?php echo $block->getAlertTimeout(); ?>"}}}'
+>
+    <?php if ($votingMessage = $block->getVotingMessage()): ?>
+        <p class="voting-message"><?php echo $votingMessage; ?></p>
+    <?php endif; ?>
+    <div class="voting-wrapper">
+        <a class="review-vote vote-helpful" title="<?php echo $helpfulLabel ?: __('Helpful'); ?>" data-vote-value="1">
+            <?php echo $helpfulLabel; ?>
+            <span class="helpful-qty"><?php echo (int) $block->getPositiveVotesCount(); ?></span>
+        </a>
+    </div>
+    <div class="voting-wrapper">
+        <a class="review-vote vote-unhelpful" title="<?php echo $unhelpfulLabel ?: __('Unhelpful'); ?>" data-vote-value="-1">
+            <?php echo $unhelpfulLabel; ?>
+            <span class="unhelpful-qty"><?php echo (int) $block->getNegativeVotesCount(); ?></span>
+        </a>
+    </div>
+</div>
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function($) {
+        $("#review-vote-<?php echo $block->getReviewId(); ?>").trigger('contentUpdated');
+    });
+</script>

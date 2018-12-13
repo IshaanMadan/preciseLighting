@@ -1,0 +1,297 @@
+<?php
+/** @var  $block Yosto\Storepickup\Block\Stores */
+
+$isEnable = $block->isEnableModule();
+$zoomLevel = $block->getZoomLevel();
+$currentStoreBaseUrl = $block->getCurrentStoreBaseUrl();
+if (!isset($zoomLevel)) {
+    $zoomLevel = 15;
+}
+$markerImageUrl = $block->getMarkerImageUrl();
+$markersData = $block->getMarkersData();
+?>
+
+
+<div id="stores-pickup-popup" style="display: none;">
+    <?php if (!$markersData) : ?>
+        <?php /* @escapeNotVerified */
+        echo __('There are no stores.') ?>
+    <?php else : ?>
+        <?php
+        $markers = $markersData['markers'];
+        $NewMarkers = $markersData['newMarkers'];
+        $NewMarkerData = $markersData['newMarkerData'];
+        $jsonCountryArray = $markersData['jsonCountryArray'];
+        $jsonArray = $markersData['jsonArray'];
+        ?>
+
+
+        <div class="find-stores">
+            <?php
+            $_stores = $block->getStores()->getData();
+            $_cities = $block->getCities()->getData();
+            $_countries = $block->getCountries()->getData();
+            ?>
+            <div class="select-box">
+                <label><?php /* @escapeNotVerified */
+                    echo __('Country'); ?></label>
+                <?php if (count($_countries)) : ?>
+                    <select name="countries_select" id="countries_select" tabindex="1">
+                        <?php foreach ($_countries as $_name) : ?>
+                            <option value="<?php /* @escapeNotVerified */
+                            echo $_name['country']; ?>">
+                                <?php /* @escapeNotVerified */
+                                echo $_name['country']; ?></option>
+                        <?php endforeach ?>
+                    </select>
+                <?php endif ?>
+            </div>
+
+            <div class="select-box" id="city">
+                <label><?php /* @escapeNotVerified */
+                    echo __('City'); ?></label>
+                <?php if (count($_cities)) : ?>
+                    <select name="city_select" id="city_select" tabindex="1">
+                        <?php foreach ($_cities as $_name) : ?>
+                            <option value="<?php /* @escapeNotVerified */
+                            echo $_name['city']; ?>">
+                                <?php /* @escapeNotVerified */
+                                echo $_name['city']; ?></option>
+                        <?php endforeach ?>
+                    </select>
+                <?php endif ?>
+            </div>
+            <div class="select-box" id="store">
+                <label><?php /* @escapeNotVerified */
+                    echo __('Store'); ?></label>
+                <?php if (count($_stores)) : ?>
+                    <select name="store_select" id="store_select" tabindex="1">
+                        <?php foreach ($_stores as $_name) : ?>
+                            <option value="<?php /* @escapeNotVerified */
+                            echo $_name['store_title']; ?>">
+                                <?php /* @escapeNotVerified */
+                                echo $_name['store_title']; ?></option>
+                        <?php endforeach ?>
+                    </select>
+                <?php endif ?>
+            </div>
+        </div>
+
+        <div id="locations-gmap-div" width="100%" height="495">
+            <div id="locations-map-canvas">&nbsp;</div>
+        </div>
+        <script>
+            var markers = [
+                <?php foreach ($markers as $marker) : ?>
+                ['<?php /* @escapeNotVerified */ echo addslashes($marker['store_title']); ?>',
+                    <?php /* @escapeNotVerified */ echo $marker['lat']; ?>,
+                    <?php /* @escapeNotVerified */ echo $marker['long']; ?>],
+                <?php endforeach ?>
+            ];
+        </script>
+        <script>
+            require([
+                    'jquery',
+                    'Yosto_Opc/js/google_maps_loader'
+                ],
+                function ($, GoogleMapsLoader) {
+
+                    GoogleMapsLoader.done(function () {
+
+                        var form = $("#addressSearch");
+                        var content = <?php /* @escapeNotVerified */ echo $jsonCountryArray?>;
+                        var store = "";
+                        var cities = "";
+                        var newMarkers = [];
+                        var storesDetails;
+                        var zoomLevel = <?php /* @escapeNotVerified */ echo $zoomLevel; ?>;
+                        var markerimage = "<?php /* @escapeNotVerified */ echo $markerImageUrl;?>";
+                        var cityLabelTitle = "<?php /* @escapeNotVerified */ echo __('City');?>";
+                        var storeLabelTitle = "<?php /* @escapeNotVerified */ echo __('Store');?>";
+
+
+                        cities += "<label>" + cityLabelTitle + "</label>";
+                        cities += "<select name=city_select id=city_select tabindex=1>";
+                        $.each(content, function (key, value) {
+                            //if(jq("#countries_select").val()==key){
+                            $.each(value, function (keys, values) {
+                                var city = keys;
+                                cities += "<option value='" + city + "'>" + city;
+                                cities += "</option>";
+                            });
+                            //}
+                        });
+                        cities += "</select>";
+                        $("div#city").html(cities);
+
+                        store += "<label>" + storeLabelTitle + "</label>";
+                        store += "<select name=store_select id=store_select tabindex=1>";
+                        $.each(content, function (key, value) {
+                            //if(jq("#countries_select").val()==key){
+                            $.each(value, function (keys, values) {
+                                $.each(values, function (storekeys, stores) {
+                                    $.each(stores, function (storkeys, stored) {
+                                        storesDetails = stored.split(',#');
+                                        var newString = storesDetails[0].replace(/ /g, "/") + ',' + storesDetails[1].replace(/ /g, "/") + ','
+                                            + storesDetails[2].replace(/ /g, "/") + ',' + storesDetails[3].replace(/ /g, "/") + ',' + storesDetails[4];
+                                        store += "<option data=" + newString + " value=" + storkeys + ">" + storesDetails[0];
+                                        var coordinate = storkeys.split(',');
+                                        stored = stored.replace(/\#/g, "");
+                                        newMarkers.push([stored, parseFloat(coordinate[0]), parseFloat(coordinate[1])]);
+                                        store += "</option>";
+                                    });
+                                });
+                            });
+                            //}
+                        });
+                        store += "</select>";
+                        $("div#store").html(store);
+
+                        var googleMapDivId = 'locations-map-canvas';
+                        google.maps.event.addDomListener(window, 'load', initialize_store(markers, zoomLevel, markerimage));
+
+                        $("#store_select").change(function () {
+                            changeStore();
+                        });
+
+                        $("#countries_select").on("change", function () {
+                            var country = this.value;
+                            if (country == null || country == "") {
+                                var Markers = [];
+                                var marker = <?php /* @escapeNotVerified */ echo $NewMarkerData?>;
+                                <?php if (is_array($NewMarkers)) :?>
+                                $.each(marker, function (key, values) {
+                                    var coordinate = key.split(",");
+                                    var text = values;
+                                    Markers.push([text, parseFloat(coordinate[0]), parseFloat(coordinate[1])]);
+                                });
+                                google.maps.event.addDomListener(window, 'load', initialize_store(Markers, zoomLevel, markerimage));
+                                <?php endif; ?>
+                            } else {
+                                var form = $("#addressSearch");
+                                var content = <?php /* @escapeNotVerified */ echo $jsonCountryArray?>;
+                                var store = "";
+                                var cities = "";
+                                var newMarkers = [];
+                                var storesDetails;
+
+                                cities += "<label>" + cityLabelTitle + "</label>";
+                                cities += "<select name=city_select id=city_select tabindex=1>";
+                                $.each(content, function (key, value) {
+                                    if (country == key) {
+                                        $.each(value, function (keys, values) {
+                                            var city = keys;
+                                            cities += "<option value='" + city + "'>" + city;
+                                            cities += "</option>";
+                                        });
+                                    }
+                                });
+                                cities += "</select>";
+                                $("div#city").html(cities);
+
+
+                                store += "<label>" + storeLabelTitle + "</label>";
+                                store += "<select name=store_select id=store_select tabindex=1>";
+                                $.each(content, function (key, value) {
+                                    if ($("#countries_select").val() == key) {
+                                        $.each(value, function (keys, values) {
+                                            //var city = keys;
+                                            $.each(values, function (storekeys, stores) {
+                                                $.each(stores, function (storkeys, stored) {
+                                                    storesDetails = stored.split(',#');
+                                                    var newString = storesDetails[0].replace(/ /g, "/") + ','
+                                                        + storesDetails[1].replace(/ /g, "/") + ',' + storesDetails[2].replace(/ /g, "/") + ','
+                                                        + storesDetails[3].replace(/ /g, "/") + ',' + storesDetails[4];
+                                                    store += "<option data=" + newString + " value=" + storkeys + ">" + storesDetails[0];
+                                                    var coordinate = storkeys.split(',');
+                                                    stored = stored.replace(/\#/g, "");
+                                                    newMarkers.push([stored, parseFloat(coordinate[0]), parseFloat(coordinate[1])]);
+                                                    store += "</option>";
+                                                });
+                                            });
+                                        });
+                                    }
+                                });
+                                store += "</select>";
+                                $("div#store").html(store);
+                                google.maps.event.addDomListener(window, 'load', initialize_store(newMarkers, zoomLevel, markerimage));
+
+                                $("#store_select").change(function () {
+                                    changeStore();
+                                });
+                            }
+
+                            $("#city_select").on("change", function () {
+                                changeCity($("#city_select"));
+                            });
+                        });
+
+                        $("#city_select").on("change", function () {
+                            changeCity($("#city_select"));
+                        });
+
+
+                        function changeCity(cityVal) {
+                            var city = cityVal.val();
+                            if (city == null || city == "") {
+                                var Markers = [];
+                                var marker = <?php /* @escapeNotVerified */ echo $NewMarkerData?>;
+                                <?php if (is_array($NewMarkers)) :?>
+                                $.each(marker, function (key, values) {
+                                    var coordinate = key.split(",");
+                                    var text = values;
+                                    Markers.push([text, parseFloat(coordinate[0]), parseFloat(coordinate[1])]);
+                                });
+                                google.maps.event.addDomListener(window, 'load', initialize_store(Markers, zoomLevel, markerimage));
+                                <?php endif; ?>
+                            } else {
+                                var form = $("#addressSearch");
+                                var content = <?php /* @escapeNotVerified */ echo $jsonArray?>;
+                                var store = "";
+                                var newMarkers = [];
+                                var storesDetails;
+                                var storeLabelTitle = "<?php /* @escapeNotVerified */ echo __('Store');?>";
+
+                                store += "<label>" + storeLabelTitle + "</label>";
+                                store += "<select name=store_select id=store_select tabindex=1>";
+                                $.each(content, function (key, value) {
+                                    if (city == key) {
+                                        $.each(value, function (key, values) {
+                                            $.each(values, function (keys, stores) {
+                                                storesDetails = stores.split(',#');
+                                                var newString = storesDetails[0].replace(/ /g, "/") + ','
+                                                    + storesDetails[1].replace(/ /g, "/") + ',' + storesDetails[2].replace(/ /g, "/") + ','
+                                                    + storesDetails[3].replace(/ /g, "/") + ',' + storesDetails[4];
+                                                store += "<option data=" + newString + " value=" + keys + ">" + storesDetails[0];
+                                                var coordinate = keys.split(',');
+                                                stores = stores.replace(/\#/g, "");
+                                                newMarkers.push([stores, parseFloat(coordinate[0]), parseFloat(coordinate[1])]);
+                                                store += "</option>";
+                                            });
+                                        });
+                                    }
+                                });
+                                google.maps.event.addDomListener(window, 'load', initialize_store(newMarkers, zoomLevel, markerimage));
+                                store += "</select>";
+                                $("div#store").html(store);
+                                $("#store_select").change(function () {
+                                    changeStore();
+                                });
+                            }
+                        }
+
+                        function changeStore() {
+                            var text = $("#store_select option:selected").text();
+                            var data = $("#store_select option:selected").attr('data');
+                            var googleMapDivId = 'locations-map-canvas';
+                            var selectedOptionValue = $("#store_select option:selected").val();
+                            var coordinate = selectedOptionValue.split(',');
+                            google.maps.event.addDomListener(window, 'load', initialize(coordinate, data, zoomLevel, markerimage));
+                            $('#location_id option[data-coordinate="' + selectedOptionValue + '"]').attr('selected', 'selected');
+                        }
+                    });
+                });
+
+        </script>
+    <?php endif; ?>
+</div>

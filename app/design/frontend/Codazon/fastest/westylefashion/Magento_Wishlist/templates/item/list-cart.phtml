@@ -1,0 +1,57 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Items $block */
+$columns = $block->getColumns();
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+$customerSession = $objectManager->get('Magento\Customer\Model\Session');
+if($customerSession->isLoggedIn()) {
+	
+$customer_id = $customerSession->getCustomer()->getId();
+
+
+$wishlist = $objectManager->get('\Magento\Wishlist\Model\Wishlist');
+$block = $wishlist->loadByCustomerId($customer_id, true)->getItemCollection();
+?>
+
+
+<div class="save-for-later-cart">
+<div class="products-grid wishlist">
+    <?php $iterator = 1; ?>
+    <?php if (count($block->getItems())): ?>
+
+	<div class="title"><h1>Saved for Later  (<?php if(count($block->getItems()) == 1){ echo '1 Item'; }else{ echo count($block->getItems()).' Items'; }  ?>)</h1></div>
+
+    <ol class="product-items">
+        <?php foreach ($block->getItems() as $item): ?>
+        <?= /* @noEscape */ ($iterator++ == 1) ? '<li data-row="product-item" class="product-item" id="item_' . $item->getId() . '">' : '</li><li class="product-item" id="item_' . $item->getId() . '">' ?>
+            <div class="product-item-info" data-container="product-grid">
+                <?php foreach ($columns as $column): ?>
+                    <?php $column->setItem($item); echo $column->toHtml($item);?>
+                <?php endforeach; ?>
+            </div>
+        <?= ($iterator == count($block->getItems())+1) ? '</li>' : '' ?>
+        <?php endforeach; ?>
+    </ol>
+    <?php else: ?>
+        <div class="message info empty">
+            <span><?= 'This Wish List has no Items' ?></span>
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php foreach ($columns as $column): ?>
+    <?= $column->getAdditionalHtml() ?>
+<?php endforeach; ?>
+</div>
+
+<?php }?>

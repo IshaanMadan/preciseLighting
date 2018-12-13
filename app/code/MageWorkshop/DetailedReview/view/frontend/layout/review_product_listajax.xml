@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <container name="root">
+        <block class="MageWorkshop\DetailedReview\Block\Review\Product\View\ListView"
+               name="product.info.product_additional_data"
+               as="product_additional_data"
+               template="MageWorkshop_DetailedReview::product/view/list.phtml"
+        >
+            <block class="Magento\Framework\View\Element\Text\ListText" name="reviews.list.item.after" />
+        </block>
+        <block class="Magento\Theme\Block\Html\Pager"
+               name="product_review_list.toolbar"
+               ifconfig="mageworkshop_detailedreview/general/enabled"
+        >
+            <arguments>
+                <argument name="show_per_page" xsi:type="boolean">false</argument>
+                <argument name="show_amounts" xsi:type="boolean">false</argument>
+            </arguments>
+        </block>
+    </container>
+</layout>

@@ -1,0 +1,89 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="sidebar-summary-discount payment-option opc-payment-additional discount-code">
+    <div class="payment-option-content" data-role="content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <form class="form form-discount" id="discount-form">
+           
+		   <div id="coupon_code_part1" class="payment-option-inner">
+                <div class="field">
+                    <label class="label" for="discount-code">
+                        <span data-bind="i18n: 'Enter discount code'">Enter discount code</span>
+                    </label>
+                    <div class="control">
+                        <input class="input-text"
+                               type="text"
+                               id="discount-code"
+                               name="discount_code"
+                               data-validate="{'required-entry':true}"
+                               data-bind="value: couponCode, attr:{disabled:isApplied() , placeholder: $t('Enter discount code')} " />
+                    </div>
+                </div>
+				<div id="coupon_code_button" class="actions-toolbar">
+					<div class="primary">
+						<!-- ko ifnot: isApplied() -->
+							<button id="redeem_button" class="action action-apply" type="submit" data-bind="'value': $t('Redeem'), click: apply">
+								<span><!-- ko i18n: 'Redeem'--><!-- /ko --></span>
+							</button>
+							<style>
+								.page.messages{display:none;}
+								#couponcode_error_message_show{clear: both;margin: 0 0 0px !important;}
+								#couponcode_error_message_show .coupon-message{color: #e02b27;}
+								
+							</style>
+						<!-- /ko -->
+						<!-- ko if: isApplied() -->
+							<button class="action action-cancel" id="cancel_coupon_code" type="submit" data-bind="'value': $t('Cancel'), click: cancel">
+								<span><!-- ko i18n: 'Cancel coupon'--><!-- /ko --></span>
+							</button>
+							<style>
+							#cancel_coupon_code{ padding: 3px !important;border: 1px solid #124c62 !important;background: #124c62 !important;font-size: 12px;}
+							</style>
+						<!-- /ko -->
+					</div>
+				</div>
+            </div>
+            
+			<div id="coupon_code_part2">
+					<div  data-bind="scope: 'messages'">
+						<!-- ko if: cookieMessages && cookieMessages.length > 0 -->
+							<!-- ko ifnot: isApplied() -->
+								<div  class="fieldset" id="couponcode_error_message_show">
+								
+											<div role="alert" data-bind="foreach: { data: cookieMessages, as: 'message' }" class="messages">
+												<div>
+													<div class="coupon-message message-error" data-bind="html: message.text"></div>
+												</div>
+											</div>
+								</div>
+							<!-- /ko -->	
+					</div>	
+				<!-- /ko -->	
+			</div>
+			
+			
+        </form>
+    </div>
+</div>
+<script>
+	require([
+			'jquery',
+			'domReady!'
+		], function ($) {
+			
+			$('#discount-code').focus(function() {
+					$('#redeem_button').attr('style','border: 1px solid #124c62 !important;background: #124c62 !important;');
+				});
+				$('#discount-code').focusout(function(){
+					var coupon_code = $('#discount-code').val();
+					if(coupon_code == ""){ $('#redeem_button').attr('style',''); }
+				});
+				
+	});
+</script>

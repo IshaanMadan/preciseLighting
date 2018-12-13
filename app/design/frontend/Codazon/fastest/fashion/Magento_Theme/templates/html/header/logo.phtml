@@ -1,0 +1,177 @@
+<?php
+/**
+* Copyright © 2015 Magento. All rights reserved.
+* See COPYING.txt for license details.
+*/
+
+// @codingStandardsIgnoreFile
+
+/**
+* @var \Magento\Theme\Block\Html\Header\Logo $block
+*/
+$objectManager    = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$requestInterface = $objectManager->get('Magento\Framework\App\RequestInterface');
+$actionName       = $requestInterface->getFullActionName();
+$BaseUrl = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+$_themeHelper     = $this->helper('Codazon\ThemeOptions\Helper\Data');
+$_mobileHelper    = $this->helper('Codazon\ThemeOptions\Helper\Mobile');
+$storeName        = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt();
+if($actionName == 'checkout_index_index'){
+
+	?>
+	<div class="row">
+		<div class="col-sm-8 col-md-9">
+			<div class="header-wrapper-left">
+				<div class="top-contact-info">
+					<i class="fa fa-phone">
+					</i>
+					<div>
+						0903 794 4292
+						<p class="hours_timing">Opening hours: Mon - Sat (9am-6pm)</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-8 col-md-6">
+			<div class="header-wrapper-center text-center">
+				<div class="logo-center">
+
+
+					<a class="logo" href="<?php echo $block->getUrl(''); ?>" title="<?php /* @escapeNotVerified */ echo $storeName ?>">
+
+						<img class="main-logo" src="<?php /* @escapeNotVerified */ echo $block->getLogoSrc() ?>"
+						alt="<?php /* @escapeNotVerified */ echo $block->getLogoAlt() ?>"
+						<?php echo $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+						<?php echo $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+						/>
+						<?php
+						$mobileLogo = $_themeHelper->getMediaUrl() .'codazon/themeoptions/background/'.$_themeHelper->getConfig('general_section/header/mobile_logo');
+						$mobileLogo = (strlen($_themeHelper->getConfig('general_section/header/mobile_logo')) > 3) ? $mobileLogo : $block->getLogoSrc();
+						?>
+						<img class="small-logo" src="<?php echo $mobileLogo ?>"
+						alt="<?php echo $block->getLogoAlt() ?>"
+						<?php echo $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+						<?php echo $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+						/>
+
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-8 col-md-9">
+			<div class="header-wrapper-right">
+			<img src="<?php echo $BaseUrl.'/pub/media/wysiwyg/mcafee.jpg';?>" class="right-security-logo">
+			</div>
+		</div>
+	</div>
+	<?php
+}
+else
+{
+	?>
+	<span data-action="toggle-nav" class="action nav-toggle">
+		<span>
+			<?php /* @escapeNotVerified */ echo __('Toggle Nav') ?>
+		</span>
+	</span>
+
+	<a class="logo" href="<?php echo $block->getUrl(''); ?>" title="<?php /* @escapeNotVerified */ echo $storeName ?>">
+
+		<img class="main-logo" src="<?php /* @escapeNotVerified */ echo $block->getLogoSrc() ?>"
+		alt="<?php /* @escapeNotVerified */ echo $block->getLogoAlt() ?>"
+		<?php echo $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+		<?php echo $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+		/>
+		<?php
+		$mobileLogo = $_themeHelper->getMediaUrl() .'codazon/themeoptions/background/'.$_themeHelper->getConfig('general_section/header/mobile_logo');
+		$mobileLogo = (strlen($_themeHelper->getConfig('general_section/header/mobile_logo')) > 3) ? $mobileLogo : $block->getLogoSrc();
+		?>
+		<img class="small-logo" src="<?php echo $mobileLogo ?>"
+		alt="<?php echo $block->getLogoAlt() ?>"
+		<?php echo $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+		<?php echo $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+		/>
+
+	</a>
+
+	<?php
+}
+if($mobileLogo == $block->getLogoSrc()): ?>
+<script type="text/javascript">
+	require(['jquery'],function($)
+		{
+			var logoSrc = "<?php echo $block->getLogoSrc() ?>";
+			var imageType = logoSrc.substr(-4);
+			var imageName = logoSrc.substr(0, logoSrc.length - 4);
+			imageName += "-small" + imageType;
+			$('.small-logo').attr('src',imageName);
+		});
+</script>
+<?php endif ?>
+
+
+<script type="text/javascript">
+	require(['jquery'],function($)
+		{
+		
+		
+		
+		
+		
+	var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var navbarHeight = $('header').outerHeight();
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+    
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta)
+        return;
+    
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight){
+        // Scroll Down
+        $('.header-wrapper-content.sticky-menu.active').first().css({'top':'-160px'});
+    } else {
+        // Scroll Up
+        if(st + $(window).height() < $(document).height()) {
+            $('.header-wrapper-content.sticky-menu.active').first().css({'top':'0px'});
+        }
+    }
+    
+    lastScrollTop = st;
+}	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+					});
+</script>

@@ -1,0 +1,31 @@
+<!-- ko if: isEnable() == 1 -->
+<form id="yosto-order-attachment"
+      data-bind="event: {submit: uploadFile}, attr: {'data-hasrequired': $t('* Required Fields')}"
+      method="post" enctype="multipart/form-data">
+    <input name="form_key" type="hidden" data-bind="value: formKey()"/>
+    <div data-bind="visible: true, attr: {class: getClassForField()}">
+        <label class="label" for="yosto_order_attachment"><span data-bind="text: getTitle()"></span></label>
+        <div class="control">
+            <input type="file"
+                   name="yosto_order_attachment"
+                   data-bind="event: {change: validateSize},
+                   attr: {
+                   accept: getFileExtensions(),
+                   'aria-required': getClassForInput()
+                   }"
+                   id="yosto_order_attachment"/>
+            <button class="action secondary"
+                    type="submit"
+                    data-bind="i18n: 'Submit'"
+                    disabled="disabled"
+                    id="order-attachment-upload-btn"
+                    name="Upload"></button>
+        </div>
+    </div>
+    <p class="order-attachment-file-extensions"><span data-bind="i18n: 'Accept'"></span>: <span data-bind="text: getFileExtensions()"></span>
+    , <span data-bind="i18n: 'Limited Size'"></span>: <span data-bind="text: getLimitedFileSize()"></span>MB</p>
+    <div class="order-attachment-validate-message"></div>
+    <div class="order-attachment-loading"></div>
+    <div class="order-attachment-upload-result"></div>
+</form>
+<!-- /ko -->

@@ -1,0 +1,830 @@
+<?php
+
+/**
+
+* Copyright © Magento, Inc. All rights reserved.
+
+* See COPYING.txt for license details.
+
+*/
+
+
+
+// @codingStandardsIgnoreFile
+
+?>
+
+<input type="hidden" id="after_five_day_date"  value=""/>
+
+<input type="hidden" id="after_five_day_date_label"  value=""/>
+
+<input type="hidden" id="after_six_day_date"  value=""/>
+
+<input type="hidden" id="after_six_day_date_label" value=""/>
+
+<input type="hidden" id="selectedstore" value="1"/>
+
+
+
+<input type="hidden" id="genderblockshow" value="0"/>
+
+<input type="hidden" id="checkcheckoutcartitem" value="0"/>
+
+<div id="checkout" data-bind="scope:'checkout'" class="checkout-container">
+
+	<div id="checkout-loader" data-role="checkout-loader" class="loading-mask" data-mage-init='{"checkoutLoader": {}}'>
+
+		<div class="loader">
+
+			<img src="<?= /* @escapeNotVerified */ $block->getViewFileUrl('images/loader-1.gif') ?>"
+
+			alt="<?= /* @escapeNotVerified */ __('Loading...') ?>"
+
+			style="position: absolute;">
+
+		</div>
+
+	</div>
+
+	<!-- ko template: getTemplate() --><!-- /ko -->
+
+	<script type="text/x-magento-init">
+
+		{
+
+			"#checkout":
+
+			{
+
+				"Magento_Ui/js/core/app": <?= /* @escapeNotVerified */ $block->getJsLayout() ?>
+
+			}
+
+		}
+
+	</script>
+
+	<script>
+
+		window.checkoutConfig = <?= /* @escapeNotVerified */ $block->getSerializedCheckoutConfig() ?>;
+
+		// Create aliases for customer.js model from customer module
+
+		window.isCustomerLoggedIn = window.checkoutConfig.isCustomerLoggedIn;
+
+		window.customerData = window.checkoutConfig.customerData;
+
+	</script>
+
+	<script>
+
+		require([
+
+				'mage/url',
+
+				'Magento_Ui/js/block-loader'
+
+			], function(url, blockLoader)
+
+			{
+
+				blockLoader("<?= /* @escapeNotVerified */ $block->getViewFileUrl('images/loader-1.gif') ?>");
+
+				return url.setBaseUrl('<?= /* @escapeNotVerified */ $block->getBaseUrl() ?>');
+
+			})
+
+	</script>
+
+</div>
+
+
+
+<div data-mage-init='{"initAllBinding":{}}' >
+
+	&nbsp;
+
+</div>
+
+
+
+<script>
+
+	require(['jquery'],function($)
+
+		{
+
+			$(document).ready(function()
+
+				{
+
+
+
+					$(document).on("click",".store_list_radio",function()
+
+						{
+
+							var SelectRadio = $('input[name=store_list_radio]:checked').attr('id');
+
+							if(SelectRadio !='')
+
+							{
+
+								$("#selectedstore").val('1');
+
+							}
+
+						});
+
+					$(document).on("click","#delivery_date",function()
+
+						{
+
+							var Storevalue = $("#selectedstore").val();
+
+							if(parseInt(Storevalue) <= 0)
+
+							{
+
+								$("#ui-datepicker-div").hide();
+
+								$("#storeerrormsg").text("Please choose any one near store");
+
+
+
+
+
+							}
+
+							else
+
+							{
+
+								$("#storeerrormsg").text("");
+
+
+
+							}
+
+
+
+
+
+						});
+
+					var tradeGroup = $('#genderblockshow').val();
+
+					if(parseInt(tradeGroup) == 0)
+
+					{
+
+						var existCondition = setInterval(function()
+
+							{
+
+								if ($('.opc-progress-bar').length)
+
+								{
+
+									clearInterval(existCondition);
+
+									addclassOtherGroup();
+
+									$('.btn-delivery-methods').trigger('click');
+
+
+
+								}
+
+							}, 300);
+
+
+
+						function addclassOtherGroup()
+
+						{
+
+							var itemCount = $("#checkout_items_count").text();
+
+							if(itemCount > 1)
+
+							{
+
+								var itemCountText = ' <span class="sub-title">('+itemCount+ ' items)</span>';
+
+							}
+
+							else
+
+							{
+
+								var itemCountText = ' <span class="sub-title">('+itemCount+ ' item)</span>';
+
+							}
+
+
+
+							$(".opc-block-summary .title").append(itemCountText);
+
+							$('#shipping').prepend('<div class="step-title-shipping billing_addresses" data-role="title">Delivery Addresses</div><div class="field gender"><div class="gender-select-block" style="float:left;"><ul><li><a id="gender_man" class="gender-man"><span class="icon"></span> <span>Male</span></a></li><li><a id="gender_woman" class="gender-woman"><span class="icon"></span> <span>Female</span></a></li></ul></div><div style="clear:both;"></div></div>');
+
+							$("input[name='custom_attributes[selected_gender]']").hide();
+
+							var fourday = $("#after_five_day_date_label").val();
+
+							var sixday = $("#after_six_day_date_label").val();
+
+							$("#label_carrier_bestway_tablerate").html(sixday);
+
+							$("#label_carrier_matrixrate_6_matrixrate").html(fourday);
+
+							$('#genderblockshow').val(1);
+
+							
+
+							
+
+
+
+
+
+						}
+
+
+
+					}
+
+					
+
+					setTimeout(function(){$('.btn-storepickups-methods').trigger('click');},3000)
+
+					
+
+					$(document).on("click",".btn-storepickups-methods",function()
+
+						{
+
+							$(".checkout-shipping-method .step-title").hide();
+
+							$(".checkout-shipping-method .checkout-top-desc-title .step-title").html('New to our site?');
+
+							$(".checkout-shipping-method .checkout-top-desc-title .step-title").show();
+
+							$(".table-checkout-shipping-method tbody tr:nth-child(1)").hide();
+
+							$(".step-title-shipping ").html('Billing Addresses');
+
+							
+
+							$("#shipping-new-address-form").addClass('pickup');
+
+							$("li#shipping").addClass('pickup1');
+
+							$(".pickup fieldset.street").find('input').val('N/A');
+
+							$("#shipping-new-address-form div.field._required:nth-child(4)").find('input').val('N/A');
+
+							$("#shipping-new-address-form div.field._required:nth-child(6)").find('input').val('N/A');
+
+							$( "<span class='xxs'>We will only call you if we have questions about your order.</span>" ).insertAfter( "#shipping-new-address-form div.field._required:nth-child(9)");
+
+							
+
+							var firstDay = $( ".selector" ).datepicker( "option", "firstDay" );
+
+							var dayNamesMin = $( ".selector" ).datepicker( "option", "dayNamesMin" );
+
+							//$( "#delivery_date" ).datepicker( "option", "firstDay", 1 );
+
+							$( "#delivery_date" ).datepicker( "option",  {"dayNamesMin": [ 'SUN','MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'], "firstDay": 1});
+
+							//$('#delivery_date').datepicker({dayNamesMin: [ 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT','SUN']});
+
+							//$('#delivery_date').datepicker();
+
+							$(".store-pickup-date").dialog();
+
+							$("#ui-datepicker-div").removeClass('xxx');
+
+							$(".ui-dialog").removeClass('yyy');
+
+							
+
+							setInterval(function(){if($('main#maincontent').find('#ui-datepicker-div').length == 0){
+
+									$('#ui-datepicker-div').appendTo('main#maincontent');
+
+								}
+
+								if($('main#maincontent').find('.ui-dialog').length == 0){
+
+									$('.ui-dialog').appendTo('main#maincontent');
+
+								}
+
+								},500)
+
+						});
+
+						
+
+						$(document).on("click",".checkcontainer .radio",function()
+
+						{
+
+							var radioSelected = this.value;
+
+							if(radioSelected =='tablerate_bestway')
+
+							{
+
+								var datevalue = $("#after_six_day_date").val();
+
+								$("#shipping_delivery_date").val(datevalue);
+
+								
+
+							}else{
+
+								var datevalue = $("#after_five_day_date").val();
+
+								$("#shipping_delivery_date").val(datevalue);
+
+								
+
+							}
+
+							
+
+							
+
+						});
+
+						
+
+							$(document).on("click",".btn-delivery-methods",function()
+
+						{
+
+							$(".checkout-shipping-method .step-title").html('Delivery date and time');
+
+							$(".checkout-shipping-method .step-title").show();
+
+							$(".checkout-shipping-method .checkout-top-desc-title .step-title").html('New to our site?');
+
+							$(".checkout-shipping-method .checkout-top-desc-title .step-title").show();
+
+							$(".table-checkout-shipping-method tbody tr:nth-child(1)").hide();
+
+							$(".step-title-shipping ").html('Delivery Addresses');
+
+							var fourday = $("#after_five_day_date_label").val();
+
+							var sixday = $("#after_six_day_date_label").val();
+
+							$("#label_carrier_bestway_tablerate").html(sixday);
+
+							$("#label_carrier_matrixrate_6_matrixrate").html(fourday);
+
+							$("#shipping-new-address-form").removeClass('pickup');
+
+							$("#shipping-new-address-form div.field._required:nth-child(4)").find('input').val('');
+
+							$("#shipping-new-address-form div.field._required:nth-child(6)").find('input').val('');
+
+							$("#shipping-new-address-form fieldset.street").find('input').val('');
+
+							$('.xxs').remove();
+
+							$("li#shipping").removeClass('pickup1');
+
+							$("#ui-datepicker-div").addClass('xxx');
+
+							$(".ui-dialog").addClass('yyy');
+
+						});
+
+						
+
+					
+
+					$(document).on("click","#gender_man",function()
+
+						{
+
+							$("#gender_man").addClass('active');
+
+							$("#gender_woman").removeClass('active');
+
+							$("#gender").val('1');
+
+							$("input[name='custom_attributes[selected_gender]']").val(1);
+
+						});
+
+
+
+					$(document).on("click","#gender_woman",function()
+
+						{
+
+							$("#gender_woman").addClass('active');
+
+							$("#gender_man").removeClass('active');
+
+							$("input[name='custom_attributes[selected_gender]']").val(2);
+
+						});
+
+
+
+
+
+					$(document).on("blur","#customer-email",function()
+
+						{
+
+							var email = $('#customer-email').val();
+
+							var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+							var emailvalid =  regex.test(email);
+
+							if(email !='' && emailvalid)
+
+							{
+
+								$('#customer-email').addClass('custom_checout_valid');
+
+							}
+
+							else
+
+							{
+
+								$('#customer-email').removeClass('custom_checout_valid');
+
+							}
+
+						});
+
+
+
+					$(document).on("blur","input[name='firstname']",function()
+
+						{
+
+							var firstname = $("input[name='firstname']").val();
+
+							if(firstname !='')
+
+							{
+
+								$("input[name='firstname']").addClass('custom_checout_valid');
+
+
+
+							}
+
+							else
+
+							{
+
+								$("input[name='firstname']").removeClass('custom_checout_valid');
+
+							}
+
+						});
+
+
+
+					$(document).on("blur","input[name='lastname']",function()
+
+						{
+
+							var lastname = $("input[name='lastname']").val();
+
+							if(lastname !='')
+
+							{
+
+								$("input[name='lastname']").addClass('custom_checout_valid');
+
+
+
+							}
+
+							else
+
+							{
+
+								$("input[name='lastname']").removeClass('custom_checout_valid');
+
+							}
+
+						});
+
+
+
+					$(document).on("blur","input[name='street[0]']",function()
+
+						{
+
+							var street1 = $("input[name='street[0]']").val();
+
+							if(street1 !='')
+
+							{
+
+								$("input[name='street[0]']").addClass('custom_checout_valid');
+
+
+
+							}
+
+							else
+
+							{
+
+							$("input[name='street[0]']").removeClass('custom_checout_valid');
+
+							}
+
+						});
+
+
+
+					$(document).on("blur","input[name='city']",function()
+
+						{
+
+							var city = $("input[name='city']").val();
+
+							if(city !='')
+
+							{
+
+								$("input[name='city']").addClass('custom_checout_valid');
+
+
+
+							}
+
+							else
+
+							{
+
+								$("input[name='city']").removeClass('custom_checout_valid');
+
+							}
+
+						});
+
+
+
+					$(document).on("blur","input[name='region']",function()
+
+						{
+
+							var region = $("input[name='region']").val();
+
+							if(region !='')
+
+							{
+
+								$("input[name='region']").addClass('custom_checout_valid');
+
+
+
+							}
+
+							else
+
+							{
+
+								$("input[name='region']").removeClass('custom_checout_valid');
+
+							}
+
+						});
+
+
+
+					$(document).on("blur","input[name='postcode']",function()
+
+						{
+
+							var postcode = $("input[name='postcode']").val();
+
+							if(postcode !='')
+
+							{
+
+								$("input[name='postcode']").addClass('custom_checout_valid');
+
+
+
+							}
+
+							else
+
+							{
+
+								$("input[name='postcode']").removeClass('custom_checout_valid');
+
+							}
+
+						});
+
+					$(document).on("blur","input[name='telephone']",function()
+
+						{
+
+							var telephone = $("input[name='telephone']").val();
+
+							if(telephone !='')
+
+							{
+
+								$("input[name='telephone']").addClass('custom_checout_valid');
+
+
+
+							}
+
+							else
+
+							{
+
+								$("input[name='telephone']").removeClass('custom_checout_valid');
+
+							}
+
+						});
+
+					$(document).on("focus","#discount-code",function()
+
+						{
+
+							$('#redeem_button').attr('style','border: 1px solid #124c62 !important;background: #124c62 !important;');
+
+						});
+
+					$(document).on("focusout","#discount-code",function()
+
+						{
+
+							var coupon_code = $('#discount-code').val();
+
+							if(coupon_code == "")
+
+							{
+
+								$('#redeem_button').attr('style','');
+
+							}
+
+						});
+
+					
+
+					var fivedaydate = addWeekdays(new Date(),4);
+
+					var fivedateLabel = createdatelabel(fivedaydate);
+
+					$('#after_five_day_date_label').val(fivedateLabel);
+
+					var DateFormate = changedateformat(fivedaydate);
+
+					$('#after_five_day_date').val(DateFormate);
+
+					
+
+					
+
+					var Sixdaydate = addWeekdays(new Date(), 6);
+
+					var SixdaydateLabel = createdatelabel(Sixdaydate);
+
+					$('#after_six_day_date_label').val(SixdaydateLabel);
+
+					var SixDateFormate = changedateformat(Sixdaydate);
+
+					$('#after_six_day_date').val(SixDateFormate);
+
+					
+
+					function changedateformat(selecteddaydate)
+
+					{
+
+						var Currdate = selecteddaydate.getDate();
+
+						var CurrMonth = selecteddaydate.getMonth()+1;
+
+						if(Currdate<10)
+
+						{
+
+							Currdate='0'+Currdate;
+
+						}
+
+						if(CurrMonth<10)
+
+						{
+
+							CurrMonth='0'+CurrMonth;
+
+						}
+
+						
+
+						return selecteddaydate.getFullYear() + "-" + CurrMonth + "-" + Currdate;
+
+					}
+
+					
+
+					function addWeekdays(date, days)
+
+					{
+
+						date.setDate(date.getDate());
+
+						var counter = 0;
+
+						if(days > 0 )
+
+						{
+
+							while (counter < days)
+
+							{
+
+								date.setDate(date.getDate() + 1 ); // Add a day to get the date tomorrow
+
+								var check = date.getDay(); // turns the date into a number (0 to 6)
+
+								if (check == 0 || check == 6)
+
+								{
+
+									// Do nothing it's the weekend (0=Sun & 6=Sat)
+
+								}
+
+								else
+
+								{
+
+									counter++;  // It's a weekday so increase the counter
+
+								}
+
+							}
+
+						}
+
+						return date;
+
+					}
+
+					function createdatelabel(newdate)
+
+					{
+
+						var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE","JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+
+						var days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+
+						var d = new Date(newdate);
+
+						
+
+						var dayName = days[newdate.getDay()];
+
+						var MonthName = monthNames[newdate.getMonth()];
+
+						var Datelabel = 'ON/OR BEFORE '+dayName+' '+newdate.getDate()+' '+MonthName+' '+newdate.getFullYear();					
+
+						return Datelabel;
+
+					}
+
+       	
+
+					
+
+				});
+
+		});
+
+
+
+</script>
+
+
+
+
+

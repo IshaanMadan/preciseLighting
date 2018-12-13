@@ -1,0 +1,97 @@
+/*
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+@import 'imports/_filters.less';
+@import 'imports/_list_review.less';
+@import "imports/_review_form.less";
+@import 'imports/_rating.less';
+
+& when (@media-common = true) {
+    #mageworkshop {
+        .mageworkshop-option-item {
+            display: inline-block;
+            cursor: pointer;
+
+            img {
+                border: 1px solid rgb(218, 218, 218);
+            }
+
+            &.selected img,
+            &:hover img {
+                border-color: red;
+            }
+        }
+
+        .field-block {
+            display: block;
+            padding-top: 10px;
+
+            ul {
+                margin-bottom: 0;
+
+                li {
+                    list-style-type: none;
+                }
+            }
+            .dynamic-fields-required:after {
+                content: '*';
+                color: @color-red10;
+                font-size: 1.2rem;
+                margin: 0 0 0 5px;
+            }
+            span.note {
+                font-style: italic;
+            }
+        }
+
+        hr.enableHorizontalLine {
+            width: 100%;
+            float: left;
+        }
+
+        hr.disableHorizontalLine {
+            display: none;
+        }
+    }
+
+    .review-items .additional-review-attributes .items li {
+        &.swatch {
+            align-items: center;
+        }
+
+        > * {
+            display: inline-flex;
+            vertical-align: top;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        img {
+            line-height: initial;
+        }
+    }
+
+    .scrollToTop {
+        width: 100px;
+        height: 130px;
+        padding: 10px;
+        text-align: center;
+        background: whiteSmoke;
+        font-weight: bold;
+        color: #444;
+        text-decoration: none;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        display: none;
+        background: url(../MageWorkshop_DetailedReview/images/up.png) no-repeat 50% 50%;
+    }
+    .scrollToTop:hover {
+        text-decoration: none;
+    }
+}
+

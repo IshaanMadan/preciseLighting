@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_place_after">
+        <observer name="yosto_opc_order_place_after"
+                  instance="Yosto\Opc\Observer\OrderPlaceAfter"/>
+    </event>
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="yosto_opc_service_quote_submit_before"
+                  instance="Yosto\Opc\Observer\SalesModelServiceQuoteSubmitBefore" />
+    </event>
+</config>

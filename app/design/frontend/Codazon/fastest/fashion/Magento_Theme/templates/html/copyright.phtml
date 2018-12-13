@@ -1,0 +1,28 @@
+<?php
+/**
+* Copyright © 2015 Magento. All rights reserved.
+* See COPYING.txt for license details.
+*/
+?>
+<small class="copyright">    
+	<span class="f-left">
+		<?php /* @escapeNotVerified */ echo $block->getCopyright() ?>		
+	</span>						
+</small>
+<script>// <![CDATA[
+	require([
+			'jquery',
+			'domReady!'
+		], function ($) {
+			$('body').on('click', function(e) {
+					if (e.target.id == 'quickshop' || $(e.target).parents('#quickshop').length) {
+						console.log('inner click');
+					} else {
+						if ($('body').hasClass('cdz-qs-view')) {
+							$('.modal-header .action-close').click();
+						}
+					}
+				});
+		});
+	// ]]>
+</script>

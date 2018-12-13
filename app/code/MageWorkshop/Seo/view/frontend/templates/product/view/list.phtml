@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+    $hideBy = $this->helper(\MageWorkshop\Seo\Helper\Data::class)->getHideStyle();
+?>
+<?php if ($hideBy === \MageWorkshop\Seo\Model\Config\Source\HideBlockBy::HIDE_BY_JS): ?>
+    <script type="text/x-magento-init">
+        {
+            "#customer-reviews-seo": {
+                "MageWorkshop_Seo": {}
+            }
+        }
+    </script>
+<?php endif; ?>
+<div id="customer-reviews-seo" <?php echo $hideBy === \MageWorkshop\Seo\Model\Config\Source\HideBlockBy::HIDE_BY_CSS ? 'style="display:none"' : ''; ?>>
+    <?php echo $this->getChildHtml('product_additional_data'); ?>
+</div>

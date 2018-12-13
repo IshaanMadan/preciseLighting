@@ -1,0 +1,18 @@
+{
+    "name": "yosto/module-opc-linked-product",
+    "description": "Show linked products on checkout page for Magento2",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+    },
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Yosto\\OpcLinkedProduct\\": ""
+        }
+    }
+}

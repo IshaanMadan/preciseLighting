@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block MageWorkshop\CustomerPermissions\Block\Check\Verified */
+if ($block->customerHasData()): ?>
+    <p><?php /* @escapeNotVerified */ echo __('Sorry, but only verified buyers can post reviews.'); ?></p>
+    <script type="text/javascript">
+        require(['jquery'], function($) {
+            'use strict';
+            $(function($) {
+                if ("<?php /* @escapeNotVerified */ echo (string) $block->customerHasData()?>") {
+                    $('#review-form').show();
+                }
+            });
+        });
+    </script>
+<?php else: ?>
+
+        <form method="post" id="verify-buyer-form" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>"
+              data-mage-init='{"validation":{}}'>
+            <fieldset class="fieldset"> 
+                <p><?php /* @escapeNotVerified */ echo __('Only verified buyers can post reviews, please log in or enter your email so wee could verify you.'); ?></p>
+                <input id="verify-email" title="<?php /* @escapeNotVerified */ echo __('Your email'); ?>" name="verify-email" type="text" data-validate="{required:true, 'validate-email':true}" />
+            </fieldset>
+            <button class="button" type="submit" id="verify-button"><?php /* @escapeNotVerified */ echo __('Verify Me')?></button>
+                <script type="text/x-magento-init">
+                {
+                    "#verify-buyer-form": {
+                        "verifyBuyer": {
+                            "submitUrl": "<?php /* @escapeNotVerified */ echo $block->getPermissionsCheckUrl(); ?>",
+                            "emailElementId": "#verify-email",
+                            "resultBlock": "#permissions-block",
+                            "reviewFormId": "#review-form",
+                            "emailFormId": "verify-buyer-form",
+                            "verifyButton": "#verify-button"
+                        }
+                    }
+                }
+            </script>
+        </form>
+
+<?php endif; ?>

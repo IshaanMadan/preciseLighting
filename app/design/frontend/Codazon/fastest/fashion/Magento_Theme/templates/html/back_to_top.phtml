@@ -1,0 +1,17 @@
+<div id="back-top" style="display: none;"><a title="<?php echo __('Top')?>" href="#top"><?php echo __('Top')?></a></div>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$requestInterface = $objectManager->get('Magento\Framework\App\RequestInterface');
+$actionName     = $requestInterface->getFullActionName();
+if($actionName == 'catalog_category_view' || $actionName == 'catalog_product_view' || $actionName == 'contact_index_index' || $actionName == 'checkout_index_index')
+{
+	?>
+	<style>
+	.bottom-container-wrapper
+	{
+		padding-top: 0px !important;
+	}
+	</style>
+	<?php
+}
+?>

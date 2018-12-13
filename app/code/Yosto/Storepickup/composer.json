@@ -1,0 +1,19 @@
+{
+  "name": "yosto/module-store-pickup",
+  "description": "Add new shipping method to the system Store Pickup",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "require": {
+  },
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Yosto\\Storepickup\\": ""
+        }
+    }
+
+}

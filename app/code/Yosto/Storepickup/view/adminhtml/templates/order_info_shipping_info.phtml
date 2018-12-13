@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+
+?>
+<div id="pickup-date">
+    <strong><?php echo __('Pickup Date') ?>:</strong>
+    <span class="price"><?=$block->getPickupDate() ?></span>
+</div>
+<div id="store-location">
+    <strong><?php echo __('Store') ?>:</strong>
+    <span class="price"><?=$block->getStoreTitle() ?></span>
+</div>
+<script type="text/javascript">
+    require(
+        ['jquery'],
+        function($) {
+            var orderShippingMethodDiv = $('.order-shipping-method');
+            var element = $('#pickup-date').detach();
+            orderShippingMethodDiv.append(element);
+            element = $('#store-location').detach();
+            orderShippingMethodDiv.append(element);
+        }
+    );
+</script>

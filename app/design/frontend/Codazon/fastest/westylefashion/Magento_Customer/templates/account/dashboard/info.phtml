@@ -1,0 +1,113 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
+?>
+
+
+<div class="account-dashboard">
+	<div class="welcome-title">
+	<?php
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerRepository = $objectManager->create(\Magento\Customer\Api\CustomerRepositoryInterface::class);
+$customer = $customerRepository->getById({CUSTOMER_ID});
+if($customer->getId()){
+
+
+}
+	?>
+    	<?= $block->escapeHtml(__('Welcome ')) ?> <?=$customer->getFirstname() ?>
+    </div>
+    <div class="dashboard-content">
+    	<div class="row">
+        	<div class="col-md-6 col-sm-12 col-xs-24">
+            	<div class="dashboard-block">
+                	<a href="/sales/order/history/">
+	                    <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                        <span class="title">My Orders</span>
+                        <span class="desc">Track recent orders and view order history</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-24">
+            	<div class="dashboard-block">
+                	<a href="/customer/address/">
+	                    <span class="icon"><i class="fa fa-map-marker"></i></span>
+                        <span class="title">My Addresses</span>
+                        <span class="desc">Add / edit billing and delivery addresses</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-24">
+            	<div class="dashboard-block">
+                	<a href="/vault/cards/listaction/">
+	                    <span class="icon"><i class="fa fa-credit-card"></i></span>
+                        <span class="title">My Payments</span>
+                        <span class="desc">Add / edit secured payment information</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-24">
+            	<div class="dashboard-block">
+                	<a href="/customer/account/edit/">
+	                    <span class="icon"><i class="fa fa-gear"></i></span>
+                        <span class="title">Account Settings</span>
+                        <span class="desc">Edit name, email address and password</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="block block-dashboard-info">
+    <div class="block-title"><strong><?= $block->escapeHtml(__('Account Information')) ?></strong></div>
+    <div class="block-content">
+        <div class="box box-information">
+            <strong class="box-title">
+                <span><?= $block->escapeHtml(__('Contact Information')) ?></span>
+            </strong>
+            <div class="box-content">
+                <p>
+                    <?= $block->escapeHtml($block->getName()) ?><br>
+                    <?= $block->escapeHtml($block->getCustomer()->getEmail()) ?><br>
+                </p>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/account/edit')) ?>">
+                    <span><?= $block->escapeHtml(__('Edit')) ?></span>
+                </a>
+                <a href="<?= $block->escapeUrl($block->getChangePasswordUrl()) ?>" class="action change-password">
+                    <?= $block->escapeHtml(__('Change Password')) ?>
+                </a>
+            </div>
+        </div>
+        <?php if ($block->isNewsletterEnabled()): ?>
+            <div class="box box-newsletter">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Newsletters')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <p>
+                        <?php if ($block->getIsSubscribed()): ?>
+                            <?= $block->escapeHtml(__('You are subscribed to "General Subscription".')) ?>
+                        <?php else: ?>
+                            <?= $block->escapeHtml(__('You aren\'t subscribed to our newsletter.')) ?>
+                        <?php endif; ?>
+                    </p>
+                    <?php /* Extensions placeholder */ ?>
+                    <?= $block->getChildHtml('customer.account.dashboard.info.extra') ?>
+                </div>
+                <div class="box-actions">
+                    <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('newsletter/manage')) ?>"><span><?= $block->escapeHtml(__('Edit')) ?></span></a>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

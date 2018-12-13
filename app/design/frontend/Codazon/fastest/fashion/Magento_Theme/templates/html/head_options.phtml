@@ -1,0 +1,55 @@
+<?php
+	$_themeHelper = $this->helper('Codazon\ThemeOptions\Helper\Data');
+	$_mobileHelper = $this->helper('Codazon\ThemeOptions\Helper\Mobile');
+	$_fontList = $_themeHelper->getConfig('variables/font/f_google_font');
+	$_fontWeights = ':200,200italic,300,300italic,400,400italic,500,500italic,600italic,600italic,700,700italic,800,800italic,900,900italic';	
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$baseUrl = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+?>
+<?php 
+	$fontArr = array();
+	if ($_fontList){
+		if(is_array($_fontList)){
+			$fontArr = $_fontList;
+		}
+		else{
+			$fontArr = explode(',',$_fontList);		
+		}
+	}	
+	// font weight
+	$fontWeightOption = str_replace(' ','', $_themeHelper->getConfig('variables/font/f_google_font_weight'));
+	if ($fontWeightOption)
+		$_fontWeights = ':'.$fontWeightOption;	
+		
+    if($block->getRequest()->isSecure())
+        $google_font_link = "https://fonts.googleapis.com/css";
+    else
+        $google_font_link = "http://fonts.googleapis.com/css";
+   
+	if($fontArr){
+		foreach($fontArr as $font){
+	   		$font = trim($font);
+	  		echo  "<link href='".$google_font_link."?family=".str_replace(' ','+',$font)."$_fontWeights&amp;subset=latin,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese,latin-ext' rel='stylesheet' type='text/css' />";
+		}
+	}
+$addtocartlabel = $this->helper('Codazon\ThemeOptions\Helper\Data')->getConfig('general_section/product_view/add_to_cart_label');	
+$addedcartlabel = $this->helper('Codazon\ThemeOptions\Helper\Data')->getConfig('general_section/product_view/added_to_cart_label');	
+?>
+<input type="hidden" id="added_cart_label" value="<?php echo $addedcartlabel; ?>"/>
+<input type="hidden" id="add_to_cart_label" value="<?php echo $addtocartlabel; ?>"/>
+<script type="text/javascript">
+	var ThemeOptions = {
+		box_wide: <?php echo $_themeHelper->getConfig('general_section/layout/box_wide') ?>,
+		rtl_layout: <?php echo $_themeHelper->getConfig('general_section/layout/enable_rtl') ?>,
+		sticky_header: <?php echo $_themeHelper->getConfig('general_section/header/sticky_header') ?>		
+	}; 
+	if(navigator.userAgent.match(/iPhone|iPod|iPhone Simulator|iPod Simulator/i) !== null){
+		document.addEventListener("DOMContentLoaded", function(event) { 
+			document.body.classList.add('iMenu');
+		});
+	}
+</script>
+
+<link  rel="stylesheet" type="text/css"  media="all" href="<?php echo $baseUrl; ?>pub/media/theme/custom_development.css" />
+<meta name="google-site-verification" content="7gsJk_4wi9dqZkVV2pcw7Jhuvbt8grELGGYRLSjC8AA" />

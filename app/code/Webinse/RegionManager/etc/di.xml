@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Main config of module
+ *
+ * @category    Webinse
+ * @package     Webinse_RegionManager
+ * @author      Webinse Team <info@webinse.com>
+ * @copyright   2018 Webinse Ltd. (https://www.webinse.com)
+ * @license     http://opensource.org/licenses/OSL-3.0 The Open Software License 3.0
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webinse\RegionManager\Api\Data\StatesInterface" type="Webinse\RegionManager\Model\States" />
+    <preference for="Webinse\RegionManager\Api\Data\CitiesInterface" type="Webinse\RegionManager\Model\Cities" />
+    <preference for="Webinse\RegionManager\Api\Data\ZipInterface" type="Webinse\RegionManager\Model\Zip" />
+
+    <virtualType name="UiGridGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="UiGridGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webinse\RegionManager\Model\ResourceModel\States\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">UiGridGridFilterPool</argument>
+        </arguments>
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webinse\RegionManager\Model\ResourceModel\Cities\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">UiGridGridFilterPool</argument>
+        </arguments>
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webinse\RegionManager\Model\ResourceModel\Zip\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">UiGridGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Webinse\RegionManager\Model\ResourceModel\States\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">webinse_states</argument>
+            <argument name="resourceModel" xsi:type="string">Webinse\RegionManager\Model\ResourceModel\States</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Webinse\RegionManager\Model\ResourceModel\Cities\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">webinse_cities</argument>
+            <argument name="resourceModel" xsi:type="string">Webinse\RegionManager\Model\ResourceModel\Cities</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Webinse\RegionManager\Model\ResourceModel\Zip\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">webinse_zip</argument>
+            <argument name="resourceModel" xsi:type="string">Webinse\RegionManager\Model\ResourceModel\Zip</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="webinse_regionmanager_states_listing_data_source" xsi:type="string">Webinse\RegionManager\Model\ResourceModel\States\Grid\Collection</item>
+            </argument>
+        </arguments>
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="webinse_regionmanager_cities_listing_data_source" xsi:type="string">Webinse\RegionManager\Model\ResourceModel\Cities\Grid\Collection</item>
+            </argument>
+        </arguments>
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="webinse_regionmanager_zip_listing_data_source" xsi:type="string">Webinse\RegionManager\Model\ResourceModel\Zip\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Customer\Model\Address\AbstractAddress">
+        <plugin name="Custom_address" type="Webinse\RegionManager\Plugin\CustomAbstractAddress" sortOrder="1" />
+    </type>
+</config>

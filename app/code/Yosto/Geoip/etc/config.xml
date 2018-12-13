@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <geoip>
+            <general>
+                <enable>1</enable>
+                <database_path>/vendor/yosto/geoip/</database_path>
+                <filename>GeoLite2-City.mmdb</filename>
+            </general>
+            <testing>
+                <enable>0</enable>
+            </testing>
+        </geoip>
+    </default>
+</config>

@@ -1,0 +1,63 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xsearch
+ */
+?>
+<?php
+/** @var \Amasty\Xsearch\Block\Search\Product $block */
+    $productCollection = $block->getLoadedProductCollection();
+    $helper = $this->helper('Magento\Catalog\Helper\Output');
+    $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+    $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+?>
+
+<?php if ($productCollection->getSize()) : ?>
+    <div class="amsearch-products">
+        <p class="amasty-xsearch-block-header">
+            <?= __($block->getTitle())?>
+        </p>
+        <?php foreach ($productCollection as $product) : ?>
+            <?php $productImage = $block->getImage($product, 'amasty_xsearch_page_list');?>
+            <div class="amsearch-item product-item" >
+                
+                <div class="amasty-xsearch-autocomplete-information">
+                    <div class="information-container">
+                        <div class="product details product-item-details">
+                            <strong class="product name product-item-name">
+                                <a class="product-item-link"
+                                   href="<?= /* @escapeNotVerified */ $product->getProductUrl() ?>"
+                                   title="<?= /* @escapeNotVerified */ $block->stripTags($block->getName($product)); ?>"
+                                >
+                                    <?= /* @escapeNotVerified */ $block->getName($product); ?>
+                                </a>
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+        <?php if ($productCollection->getSize() > $block->getLimit()) : ?>
+            <div class="amasty-more-results">
+                <a href="<?= /* @escapeNotVerified */ $block->getResultUrl() ?>"
+                   title="<?= __('More products')?>">
+                    <?= __('More products')?>
+                </a>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <script>
+        require([
+            'jquery',
+            'mage/mage',
+            'Magento_Catalog/js/catalog-add-to-cart'
+        ], function ($) {
+            'use strict';
+            $('.amasty-xsearch-form').catalogAddToCart({});
+        });
+    </script>
+<?php endif; ?>
+

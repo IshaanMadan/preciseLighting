@@ -1,0 +1,47 @@
+<?php
+    $categories = $this->getCategoryCollection();
+    $categoryHelper = $this->getCategoryHelper();
+	$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+	$storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface'); 
+	$currentStore = $storeManager->getStore();
+?>
+<div class="widget block block-static-block cwiw" id="catewithimg">
+    <div class="block-content">
+        <div class="content-heading">
+            <h2 class="title"><?php echo $this->getMainTitle(); ?></h2>
+        </div>
+        <div class="container">
+            <div class="row">
+            <?php
+            foreach($categories as $category):
+                $cat = $this->getCategorymodel($category->getId());
+				$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+                $image = $mediaUrl.'catalog/category/'.$cat->getThumbnail();
+            ?>
+                <?php if($image != null): ?>
+                    <div class="col-md-6 col-sm-6">
+                        <a class="category_name" href="<?php echo $cat->getUrl(); ?>">
+                           <img src="<?php echo $image; ?>" class="img-responsive category_image" width="250" height="250" alt="<?php echo $cat->getName(); ?>" />
+                           <span><?php echo $cat->getName(); ?></span>
+                        </a>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php echo $this->getLayout()->createBlock("Magento\Catalog\Block\Product\Widget\NewWidget")->setDisplayType("all_products")->setProductsCount("4")->setTemplate("product/widget/new/content/new_grid.phtml")->toHtml(); ?>
+
+<script type="text/javascript">
+    require(['jquery'],function($){
+
+        $(document).ready(function(){
+
+           $(document.body).addClass('category-listing');
+
+        });
+
+    });
+</script>

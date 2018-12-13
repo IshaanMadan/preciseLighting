@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mview/etc/mview.xsd">
+    <view id="mageworkshop_detailedreview_eav" class="MageWorkshop\DetailedReview\Model\Indexer\Eav" group="indexer">
+        <subscriptions>
+            <!-- There is no need to subscribe on each of the EAV tables because UPDATED_AT is modified on save -->
+            <table name="eav_attribute" entity_column="attribute_id" />
+        </subscriptions>
+    </view>
+    <view id="mageworkshop_detailedreview_flat" class="MageWorkshop\DetailedReview\Model\Indexer\Flat" group="indexer">
+        <subscriptions>
+            <!-- There is no need to subscribe on each of the EAV tables because UPDATED_AT is modified on save -->
+            <table name="mageworkshop_detailedreview_details_entity" entity_column="eav_entity_id" />
+        </subscriptions>
+    </view>
+</config>

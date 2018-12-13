@@ -1,0 +1,20 @@
+<div id="pickup-date">
+    <strong><?php echo __('Pick up Date') ?></strong>
+    <span class="price"><?=$block->getPickupDate() ?></span>
+</div>
+<div id="store-location">
+    <strong><?php echo __('Store') ?>:</strong>
+    <span class="price"><?php echo $block->getStoreTitle() ?></span>
+</div>
+<script type="text/javascript">
+    require(
+        ['jquery'],
+        function($) {
+            var boxOrderShippingMethod = $('.box-order-shipping-method');
+            var element = $('#pickup-date').detach();
+            boxOrderShippingMethod.append(element);
+            element = $('#store-location').detach();
+            boxOrderShippingMethod.append(element);
+        }
+    );
+</script>

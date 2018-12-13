@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+/** @var \MageWorkshop\DetailedReview\Block\Review\Product\View\Rating\ReviewRating $block */
+?>
+<div class="review-average-info"
+     data-mage-init='{"mageWorkshop_detailedReview_reviewRating": {}}'
+>
+    <div class="rating-block-content">
+        <div class="reviews-average-rating"><?php /* @escapeNotVerified */ echo $block->getAverageRating(); ?></div>
+        <p class="reviews-average-rating-label"><?php /* @escapeNotVerified */ echo __('Average rating'); ?></p>
+    </div>
+    <?php /* @escapeNotVerified */ echo $block->getReviewsSummaryHtml($block->getProduct(), false, true); ?>
+</div>

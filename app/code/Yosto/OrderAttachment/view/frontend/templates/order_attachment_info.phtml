@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright © 2018 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+?>
+<?php
+    $fileName = '';
+    if ($block->getYostoOrderAttachment()) {
+        $path = $block->getYostoOrderAttachment();
+        $fileName = substr($path, strripos($path,"/")+1);
+    }
+?>
+<div id="yosto-order-attachment" class="box">
+    <strong><?php echo __('Order Attachment') ?>:</strong>
+    <br/>
+    <?php
+    $_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+    $storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface');
+    $currentStore = $storeManager->getStore();
+    $mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    ?>
+    <a id="yosto-order-attachment-file" class="box-content" href="<?php echo $mediaUrl . $block->getYostoOrderAttachment();?>"><?php echo $fileName;?> </a>
+    <?php if ($fileName == ''): ?>
+        <span><i><?php echo __('No uploaded file') ?></i></span>
+    <?php endif; ?>
+</div>
+<script type="text/javascript">
+    require(['jquery'], function($) {
+            var boxOrderShipping = $('.block-order-details-view .block-content');
+            var dateElm = $('#yosto-order-attachment').detach();
+            boxOrderShipping.append(dateElm);
+        }
+    );
+</script>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <yosto_opc_linked_product>
+            <general>
+                <enable>1</enable>
+                <title>We found products you might like!</title>
+                <number_of_items>5</number_of_items>
+                <enable_for_success_page>0</enable_for_success_page>
+                <link_type>1</link_type>
+            </general>
+        </yosto_opc_linked_product>
+    </default>
+</config>

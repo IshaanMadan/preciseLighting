@@ -1,0 +1,357 @@
+<?php
+
+/**
+
+* Copyright © Magento, Inc. All rights reserved.
+
+* See COPYING.txt for license details.
+
+*/
+
+
+
+// @codingStandardsIgnoreFile
+
+
+
+/* @var \Magento\Wishlist\Block\Share\Email\Items $block */
+
+?>
+
+<?php $l = $block->getWishlistItemsCount();
+
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cart = $objectManager->get('\Magento\Checkout\Model\Cart');  
+ $subTotal = (int)$cart->getQuote()->getSubtotal(); 
+$grandTotalAmount = str_replace(",","",$cart->getQuote()->getGrandTotal());
+$grandTotal = number_format($cart->getQuote()->getGrandTotal(),0);
+$Discount = number_format($cart->getQuote()->getDiscountAmount(),0);
+$shipping_charge = "";
+$shipping_amunt = 0;
+
+
+ if($subTotal <= 1000){
+	$shipping_charge ='₦2,500';
+	$grandTotal = $grandTotalAmount + 2500;
+	$shipping_amunt =2500;
+ }else if($subTotal > 1000 && $subTotal < 50000){
+	$shipping_charge ='₦4,500';
+	$grandTotal = $grandTotalAmount + 4500;
+	$shipping_amunt = 4500;
+ }else{
+	$shipping_charge ='FREE';
+	$shipping_amunt = 0;
+ }
+ 
+ 
+ if($Discount > 0){
+	$grandTotal = $grandTotal - $Discount;
+ }
+?>
+<?php echo $l;?>
+
+<div class="cart_btm_left_container">
+	<?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('precise_cart_return_payment')->toHtml();?>
+	<div class="clear_both"></div>
+	<?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('precise_trust_pilot_secure')->toHtml();?>
+	<!-- 14 return policy -->
+
+	<!--  <div class="cart_btm_left return_policy">
+
+	<h4 class="cart_btm_title">7 Days Returns</h4>
+
+	<p>If you change your mind</p>
+
+	<img src="<?php echo $this->getViewFileUrl('images/icon_percent.png'); ?>" class="img-responsive" alt="14 days returns" />
+
+	<img src="<?php echo $this->getViewFileUrl('images/trust_pilot.png'); ?>" class="img-responsive" alt="trust pilot" />
+
+	</div>-->
+
+	<!-- 14 return policy -->
+
+	<!-- secure payment -->
+
+	<!-- <div class="cart_btm_left secure_payment">
+
+	<h4 class="cart_btm_title">Secure Payments</h4>
+
+	<p>Personal details are protected</p>
+
+	<img src="<?php echo $this->getViewFileUrl('images/icon_payment.png'); ?>" class="img-responsive" alt="14 days returns" />
+
+	<img src="<?php echo $this->getViewFileUrl('images/icon_secure.png'); ?>" class="img-responsive" alt="trust pilot" />
+
+	</div>-->
+
+</div>
+
+<div class="clear_both"></div>
+<input type="hidden" value="1" id="checkdivexits"/>
+<input type="hidden" value="0" id="shipping_charge_row"/>
+<input type="hidden" value="<?php echo $Discount; ?>" id="order_discount"/>
+<input type="hidden" value="<?php echo $shipping_amunt; ?>" id="order_shipping"/>
+<input type="hidden" value="<?php echo str_replace(",","",$grandTotal); ?>" id="order_total"/>
+<input type="hidden" value="<?php echo str_replace(",","",$subTotal); ?>" id="subTotalAmount"/>
+
+<script>
+	require([
+			'jquery',
+			'domReady!'
+		], function ($) {
+			
+			
+			setInterval(function() {
+				var exits = $('#checkdivexits').val();
+				var shipping_charge_row = $('#shipping_charge_row').val();
+				
+					if(parseInt(exits) > 0 && parseInt(exits) < 2)
+					{
+						if($('#cart-totals').length){
+							$('.cart-summary').prepend('<p class="delivery_option">Delivery Option</p><dl class="items methods"> <dd class="item-options"><div class="field choice item"><input type="radio" checked class="radio" onclick="reloadShippingMethods(this.id);" value="storepickup_storepickup" id="static_s_method_storepickup_storepickup" name="ko_unique"><label class="label" for="static_s_method_storepickup_storepickup">Home Delivery</label></div></dd><dd class="item-options"><div class="field choice item"><input type="radio" class="radio"  value="tablerate_bestway" id="static_s_method_tablerate_bestway" onclick="reloadShippingMethods(this.id);" name="ko_unique"><label class="label"  for="static_s_method_tablerate_bestway">Store Collection</label></div></dd></dl>');
+							
+							if($('#static_s_method_tablerate_bestway').attr('checked')){
+								var order_shipping = $('#order_shipping').val();
+								var shipping_charge_row_str = order_shipping.toString();
+								if(shipping_charge_row_str.length > 3){ 
+									var Str1 = shipping_charge_row_str.substring(0, shipping_charge_row_str.length - 3);
+									var Str2 = shipping_charge_row_str.substring(shipping_charge_row_str.length,shipping_charge_row_str.length - 3);
+									var  shipping_charge_row_str = Str1+","+Str2;
+								}else{
+									
+									if(order_shipping == 0){
+										var shipping_charge_row_str = 'FREE';
+									}else{
+										var shipping_charge_row_str = '₦'+shipping_charge_row_str;
+									}
+									
+								}
+							}else{
+									var shipping_charge_row_str = 'FREE';
+							}
+							
+							if($('#shipping-changes-data').length <= 0){
+								$('#cart-totals .table-wrapper table tbody .totals.sub').closest('tr').after('<tr id="shipping-changes-data" class="totals sub"><th class="mark del-charge" scope="row">Delivery Charge</th><td class="amount"><span class="price" id="shipping_price_cart" data-th="Subtotal"><?php echo $shipping_charge;?></span></td></tr>');
+								$('#shipping_charge_row').val(1);
+							}else{
+								$('#shipping-changes-data').html('<th class="mark del-charge" scope="row">Delivery Charge</th><td class="amount"><span class="price" id="shipping_price_cart" data-th="Subtotal"><?php echo $shipping_charge;?></span></td>');	
+							}
+							$('#checkdivexits').val('2');
+							
+							$('#discount-coupon-form').before('<div id="addtional-cart-total-block" class="table-wrapper"><table class="data table1 totals"><tbody></tbody><tr class="grand totals"><th class="mark total-amt" scope="row"><strong>Order Total</strong></th><td class="amount" data-th="Total"><strong><span class="price" id="grandtotal_price_cart">₦<?php echo $grandTotal;?></span></strong></td></tr></table></div>');
+							
+							$('#cart-totals th:first').html('Sub-Total');
+							$('#storepickup_storepickup').attr('checked','checked');
+							clearInterval();
+							
+						}
+					}
+					
+				},3000);
+				
+				//$('#block-shipping').show();
+				
+				setInterval(function() {
+					var exits = $('#checkdivexits').val();
+					var shipping_charge_row = $('#shipping_charge_row').val();
+					if(parseInt(exits) > 0 && parseInt(exits) < 2)
+					{
+						$('.cart-summary').prepend('<p class="delivery_option">Delivery Option</p><dl class="items methods"> <dd class="item-options"><div class="field choice item"><input type="radio" checked class="radio" onclick="reloadShippingMethods(this.id);" value="storepickup_storepickup" id="static_s_method_storepickup_storepickup" name="ko_unique"><label class="label" for="static_s_method_storepickup_storepickup">Home Delivery</label></div></dd><dd class="item-options"><div class="field choice item"><input type="radio" class="radio"  value="tablerate_bestway" id="static_s_method_tablerate_bestway" onclick="reloadShippingMethods(this.id);" name="ko_unique"><label class="label"  for="static_s_method_tablerate_bestway">Store Collection</label></div></dd></dl>');
+						
+						
+							if($('#static_s_method_tablerate_bestway').attr('checked')){
+								var order_shipping = $('#order_shipping').val();
+								var shipping_charge_row_str = order_shipping.toString();
+								if(shipping_charge_row_str.length > 3){ 
+									var Str1 = shipping_charge_row_str.substring(0, shipping_charge_row_str.length - 3);
+									var Str2 = shipping_charge_row_str.substring(shipping_charge_row_str.length,shipping_charge_row_str.length - 3);
+									var  shipping_charge_row_str = Str1+","+Str2;
+								}else{
+									
+									if(order_shipping == 0){
+										var shipping_charge_row_str = 'FREE';
+									}else{
+										var shipping_charge_row_str = '₦'+shipping_charge_row_str;
+									}
+									
+								}
+								
+							}else{
+									var shipping_charge_row_str = 'FREE';
+							}
+						
+						if($('#shipping-changes-data').length <= 0){
+								$('#cart-totals .table-wrapper table tbody .totals.sub').closest('tr').after('<tr id="shipping-changes-data" class="totals sub"><th class="mark del-charge" scope="row">Delivery Charge</th><td class="amount"><span class="price" id="shipping_price_cart" data-th="Subtotal"><?php echo $shipping_charge;?></span></td></tr>');
+								$('#shipping_charge_row').val(1);
+						}else{	
+							$('#shipping-changes-data').html('<th class="mark del-charge" scope="row">Delivery Charge</th><td class="amount"><span class="price" id="shipping_price_cart" data-th="Subtotal">'+shipping_charge_row_str+'</span></td>');	
+						}
+						if($('#cart-totals').length){
+							
+							$('#checkdivexits').val('2');
+							
+							$('#discount-coupon-form').before('<div id="addtional-cart-total-block" class="table-wrapper"><table class="data table1 totals"><tbody></tbody><tr class="grand totals"><th class="mark total-amt" scope="row"><strong>Order Total</strong></th><td class="amount" data-th="Total"><strong><span class="price" id="grandtotal_price_cart">₦<?php $grandTotal;?></span></strong></td></tr></table></div>');
+							$('#cart-totals th:first').html('Sub-Total');
+							$('#s_method_tablerate_bestway').click(); 
+							$('#storepickup_storepickup').attr('checked','checked');
+							clearInterval();
+						}
+					}
+					
+					//$('#cart-totals th:first').html('Sub-Total');
+					//Table rate Shipping Shipping  $('#s_method_tablerate_bestway').click(); 
+					//Free Shipping  $('#s_method_storepickup_storepickup').click(); 
+					//clearInterval();
+				},4000);	
+				
+				$('#coupon_code').focus(function() {
+					$('#redeem_button').attr('style','border: 1px solid #124c62 !important;background: #124c62 !important;');
+				});
+				$('#coupon_code').focusout(function(){
+					var coupon_code = $('#coupon_code').val();
+					if(coupon_code == ""){ $('#redeem_button').attr('style',''); }
+				});
+				$('#cart-totals th:first').html('Sub-Total');
+				
+				setInterval(function() {
+					var exits = $('#checkdivexits').val();
+					if(parseInt(exits) > 0)
+					{
+						
+							var order_discount = $('#order_discount').val();
+							var order_shipping = $('#order_shipping').val();
+							var order_total = $('#order_total').val();
+							var shipping_charge_row = $('#shipping_charge_row').val();
+							$('#cart-totals th:first').html('Sub-Total');
+							
+							if($('#static_s_method_tablerate_bestway').attr('checked')){
+								
+								$('#cart-totals th:first').html('Sub-Total');
+								//$('#cart-totals > td > .price').html('FREE');
+								//$('#shipping_price_cart').innerHTML = 'FREE';
+								
+								var grandTotalAmountUpdated = parseInt(order_total) - parseInt(order_shipping);
+								var grandTotalAmountString = grandTotalAmountUpdated.toString();
+								if(grandTotalAmountString.length > 3){ 
+									var Str1 = grandTotalAmountString.substring(0, grandTotalAmountString.length - 3);
+									var Str2 = grandTotalAmountString.substring(grandTotalAmountString.length,grandTotalAmountString.length - 3);
+									grandTotalAmountUpdated = Str1+","+Str2;
+								}
+								$('#grandtotal_price_cart').html('₦'+grandTotalAmountUpdated);
+								$('#s_method_storepickup_storepickup').click();
+								//document.getElementById('grandtotal_price_cart').innerHTML = '₦'+grandTotalAmountUpdated;
+								
+								
+								
+								
+								if($('#shipping-changes-data').length <= 0){
+									$('#cart-totals .table-wrapper table tbody .totals.sub').closest('tr').after('<tr id="shipping-changes-data" class="totals sub"><th class="mark del-charge" scope="row">Delivery Charge</th><td class="amount"><span class="price" id="shipping_price_cart" data-th="Delivery Charges">FREE</span></td></tr>');
+									$('#shipping_charge_row').val(1);
+								}else{
+									$('#shipping-changes-data').html('<th class="mark del-charge" scope="row">Delivery Charge</th><td class="amount"><span class="price" id="shipping_price_cart" data-th="Subtotal">FREE</span></td>');	
+								}
+								
+							}else{
+								
+									$('#cart-totals th:first').html('Sub-Total');
+									$('#cart-totals > td > .price').html('₦'+order_shipping);
+									var grandTotalAmountUpdated = parseInt(order_total);
+									var grandTotalAmountString = grandTotalAmountUpdated.toString();
+									if(grandTotalAmountString.length > 3){ 
+										var Str1 = grandTotalAmountString.substring(0, grandTotalAmountString.length - 3);
+										var Str2 = grandTotalAmountString.substring(grandTotalAmountString.length,grandTotalAmountString.length - 3);
+										grandTotalAmountUpdated = Str1+","+Str2;
+									}
+									$('#grandtotal_price_cart').html('₦'+grandTotalAmountUpdated);
+									 $('#s_method_tablerate_bestway').click(); 
+									 
+									var shipping_charge_row_str = order_shipping.toString();
+									if(shipping_charge_row_str.length > 3){ 
+										var Str1 = shipping_charge_row_str.substring(0, shipping_charge_row_str.length - 3);
+										var Str2 = shipping_charge_row_str.substring(shipping_charge_row_str.length,shipping_charge_row_str.length - 3);
+										var shipping_charge_row_str = '₦'+Str1+","+Str2;
+									}else{
+										
+										if(order_shipping == 0){
+											var shipping_charge_row_str = 'FREE';
+										}else{
+											var shipping_charge_row_str = '₦'+shipping_charge_row_str;
+										}
+										
+									}
+									 if($('#shipping-changes-data').length <= 0){
+										$('#cart-totals .table-wrapper table tbody .totals.sub').closest('tr').after('<tr id="shipping-changes-data" class="totals sub"><th class="mark del-charge" scope="row">Delivery Charge</th><td class="amount"><span class="price" id="shipping_price_cart" data-th="Subtotal">'+shipping_charge_row_str+'</span></td></tr>');
+										$('#shipping_charge_row').val(1);
+									}else{
+										$('#shipping-changes-data').html('<th class="mark del-charge" scope="row">Delivery Charge</th><td class="amount"><span class="price" id="shipping_price_cart" data-th="Subtotal">'+shipping_charge_row_str+'</span></td>');	
+									}
+							}
+							
+									
+							
+							
+							
+							//$('#cart-totals .table-wrapper table tbody .totals.sub').closest('tr').after('<tr class="totals sub"><th class="mark del-charge" scope="row">Delivery Charge</th><td class="amount"><span class="price" id="shipping_price_cart" data-th="Shiiping Charge"><?php echo $shipping_charge;?></span></td></tr>');
+							clearInterval();
+							//alert(shippingId);
+							//alert(order_shipping+" "+order_discount+" "+order_total);
+							/*if(shippingId == "static_s_method_storepickup_storepickup"){
+								document.getElementById('shipping_price_cart').innerHTML = 'FREE';
+								var grandTotalAmountUpdated = parseInt(order_total) - parseInt(order_shipping);
+								//$('#grandtotal_price_cart').html('₦'+grandTotalAmountUpdated);
+								document.getElementById('grandtotal_price_cart').innerHTML = '₦'+grandTotalAmountUpdated;
+							}else{
+								//$('#shipping_price_cart').html('₦'+order_shipping);
+								document.getElementById('shipping_price_cart').innerHTML = '₦'+order_shipping;
+								
+								var grandTotalAmountUpdated = parseInt(order_total);
+								//$('#grandtotal_price_cart').html('₦'+grandTotalAmountUpdated);
+								document.getElementById('grandtotal_price_cart').innerHTML = '₦'+grandTotalAmountUpdated;
+							}*/
+					}
+					
+				},2000);
+				
+				/*$('#static_s_method_tablerate_bestway').click(function(){ alert("Yes 1");
+					$('#s_method_tablerate_bestway').click(); 
+					reloadShippingMethods(this.id);
+				});	
+				
+				$('#static_s_method_storepickup_storepickup').click(function(){ alert("Yes 2");
+					$('#s_method_storepickup_storepickup').click();
+					reloadShippingMethods(this.id);
+				});*/
+		});
+		
+function reloadShippingMethods(shippingId){
+	// Free Shipping static_s_method_storepickup_storepickup
+	//static_s_method_tablerate_bestway   Paid Shipping
+	//alert(shippingId);  
+	/*var order_discount = document.getElementById('order_discount').value;
+	var order_shipping = document.getElementById('order_shipping').value;
+	var order_total = document.getElementById('order_total').value;
+	alert(shippingId);alert(order_shipping+" "+order_discount+" "+order_total);
+	if(shippingId == "static_s_method_storepickup_storepickup"){
+		document.getElementById('shipping_price_cart').innerHTML = 'FREE';
+		var grandTotalAmountUpdated = parseInt(order_total) - parseInt(order_shipping);
+		//$('#grandtotal_price_cart').html('₦'+grandTotalAmountUpdated);
+		document.getElementById('grandtotal_price_cart').innerHTML = '₦'+grandTotalAmountUpdated;
+	}else{
+		//$('#shipping_price_cart').html('₦'+order_shipping);
+		document.getElementById('shipping_price_cart').innerHTML = '₦'+order_shipping;
+		
+		var grandTotalAmountUpdated = parseInt(order_total);
+		//$('#grandtotal_price_cart').html('₦'+grandTotalAmountUpdated);
+		document.getElementById('grandtotal_price_cart').innerHTML = '₦'+grandTotalAmountUpdated;
+	}*/
+	//shipping_price_cart grandtotal_price_cart
+	
+	//var order_total = $('#order_total').val();
+	//var order_total = $('#order_total').val();
+	
+}	
+</script>
+<style>
+.checkout-cart-index .totals.shipping.excl{display:none;}
+</style>

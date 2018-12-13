@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <update handle="sales_order_item_renderers"/>
+    <update handle="sales_order_item_price"/>
+    <head>
+        <css src="Yosto_OpcSuccess::css/checkout-success.css"/>
+    </head>
+    <body>
+        <container name="yosto.opc.order.success.additional.info">
+            <block class="Yosto\OpcSuccess\Block\SuccessPage"
+                   name="yosto.opc.success" template="Magento_Theme::template.phtml"
+                   ifconfig="yosto_opc_success_page/general/enabled" cacheable="false">
+                <block class="Magento\Sales\Block\Order\View" name="sales.order.view" cacheable="false"
+                       ifconfig="yosto_opc_success_page/general/detailed_info">
+                    <block class="Magento\Sales\Block\Order\Items" name="order_items" template="order/items.phtml">
+                        <block class="Magento\Framework\View\Element\RendererList" name="sales.order.items.renderers"
+                               as="renderer.list"/>
+                        <block class="Magento\Sales\Block\Order\Totals" name="order_totals"
+                               template="order/totals.phtml">
+                            <arguments>
+                                <argument name="label_properties" xsi:type="string">colspan="4" class="mark"</argument>
+                                <argument name="value_properties" xsi:type="string">class="amount"</argument>
+                            </arguments>
+                            <block class="Yosto\Opc\Block\Order\Totals" name="yosto.opc.success.gw" />
+                            <block class="Magento\Tax\Block\Sales\Order\Tax" name="tax" template="order/tax.phtml"/>
+                        </block>
+                    </block>
+                </block>
+                <block class="Magento\Sales\Block\Order\Info" as="info" name="sales.order.info" after="sales.order.view"
+                       ifconfig="yosto_opc_success_page/general/detailed_info"/>
+            </block>
+
+        </container>
+        <move element="yosto.opc.order.success.additional.info" destination="content" before="checkout.success"/>
+    </body>
+</page>

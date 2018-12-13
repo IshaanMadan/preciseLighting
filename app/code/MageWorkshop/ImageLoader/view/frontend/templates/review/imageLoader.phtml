@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright (c) 2018 MageWorkshop. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Image block for review items
+ * @var \MageWorkshop\ImageLoader\Block\Review\ImageUploader $block
+ */
+?>
+<?php if (count($imageAttributeValue = $block->getImageAttributeValue())): ?>
+    <?php foreach($imageAttributeValue as $attributeFrontendLabel => $images): ?>
+        <label class="review-image-attribute-label">
+            <?php /* @escapeNotVerified */ echo __($attributeFrontendLabel); ?>:
+        </label>
+        <div class="attribute-value owl-carousel"
+            data-mage-init='{"mageWorkshop_imageLoader_listReviewsCarousel": {
+                "showImages": "<?php /* @escapeNotVerified */ echo $block->getImageLoaderHelper()->getNumberOfImagesToShow(); ?>",
+                "imageWidth": "<?php /* @escapeNotVerified */ echo $block->getImageLoaderHelper()->getImageWidth(); ?>",
+                "imageHeight": "<?php /* @escapeNotVerified */ echo $block->getImageLoaderHelper()->getImageHeight(); ?>"
+            }}'
+        >
+            <?php /** @var array $images */
+            foreach ($images as $image): ?>
+                <a href="<?php /* @escapeNotVerified */ echo $image['src']; ?>"
+                   data-fancybox="images"
+                   data-caption="<?php /* @escapeNotVerified */ echo $attributeFrontendLabel; ?>"
+                >
+                    <img src="<?php /* @escapeNotVerified */ echo $image['src']; ?>"
+                         alt="<?php /* @escapeNotVerified */ echo $attributeFrontendLabel; ?>"
+                         title="<?php /* @escapeNotVerified */ echo $attributeFrontendLabel; ?>"
+                    />
+                </a>
+            <?php endforeach; ?>
+        </div>
+    <?php endforeach; ?>
+    <script type="text/javascript">
+        require(['jquery'], function ($) {
+            $('.attribute-value.owl-carousel').trigger('contentUpdated');
+        })
+    </script>
+<?php endif; ?>

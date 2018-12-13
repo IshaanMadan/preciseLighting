@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Magenest. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * Magenest_QuickBooksDesktop extension
+ * NOTICE OF LICENSE
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magenest" translate="label" sortOrder="200">
+            <label>Magenest</label>
+        </tab>
+        <section id="qbdesktop" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>QuickBooks Desktop</label>
+            <tab>magenest</tab>
+            <resource>Magenest_QuickBooksOnline::config_qbdesktop</resource>
+            <group id="qbd_setting" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Export QWC Files</label>
+                <field id="company" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1"	showInStore="1">
+                    <frontend_model>Magenest\QuickBooksDesktop\Block\System\Config\Connection</frontend_model>
+                </field>
+                <field id="option" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1"	showInStore="1">
+                    <label>Option</label>
+                    <source_model>Magenest\QuickBooksDesktop\Model\Config\Source\Option</source_model>
+                </field>
+                <field id="customer_receive" translate="label" type="text" sortOrder="6" showInDefault="1" showInStore="1"  >
+                    <label>Customer Receive</label>
+                    <depends>
+                        <field id="option">2</field>
+                    </depends>
+                </field>
+                <field id="selected" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"	showInStore="1">
+                    <label>Select Type</label>
+                    <source_model>Magenest\QuickBooksDesktop\Model\Config\Source\Qwc</source_model>
+                    <comment><![CDATA[
+                        <ol>
+                            <li>Query Company: Setup the working environment between the company in Quickbook Desktop and Magento</li>
+                            <li>Default: Synchronization all queues in Magento</li>
+                        </ol>
+                    ]]></comment>
+                </field>
+                <field id="vendor" translate="label" type="text" sortOrder="6" showInDefault="1" showInStore="1"  >
+                    <label>Vendor Sales Tax Agency Name</label>
+                </field>
+                <field id="add_vendor" type="button" sortOrder="7" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Magenest\QuickBooksDesktop\Block\System\Config\Form\Field\Export\Vendor</frontend_model>
+                </field>
+                <field id="base_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInStore="1"  >
+                    <label>Base Url</label>
+                    <comment><![CDATA[Any of the fields allow fully qualified URLs that end with '/' (slash) e.g. https://example.com/
+                    ]]></comment>
+                </field>
+                <field id="user_name" translate="label" type="select" sortOrder="30" showInDefault="1" showInStore="1"  >
+                    <label>User Name</label>
+                    <source_model>Magenest\QuickBooksDesktop\Model\Config\Source\Templates</source_model>
+                </field>
+                <field id="scheduler" translate="label" type="text" sortOrder="60" showInDefault="1" showInStore="1"  >
+                    <label>Scheduler</label>
+                    <tooltip><![CDATA[Public send request in minutes. If field is empty default value 100 will be saved.]]>
+                    </tooltip>
+                    <validate>validate-digits validate-digits-range digits-range-1-10000</validate>
+                </field>
+                <field id="export_button_version4" type="button" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Magenest\QuickBooksDesktop\Block\System\Config\Form\Field\Export\QWC</frontend_model>
+                    <depends>
+                        <field id="caching_application">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="account_setting" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Account Type Setting</label>
+                <comment>Setting account name using when sync Product to QuickBooks</comment>
+                <field id="income" translate="label" type="text" sortOrder="20" showInDefault="1" showInStore="1"  >
+                    <label>Income Account</label>
+                </field>
+                <field id="expense" translate="label" type="text" sortOrder="30" showInDefault="1" showInStore="1"  >
+                    <label>Expense Account</label>
+                </field>
+                <field id="asset" translate="label" type="text" sortOrder="40" showInDefault="1" showInStore="1"  >
+                    <label>Asset Account</label>
+                </field>
+                <field id="cogs" translate="label" type="text" sortOrder="50" showInDefault="1" showInStore="1"  >
+                    <label>Cost of Goods Sold Account</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

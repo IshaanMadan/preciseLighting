@@ -1,0 +1,19 @@
+div.checkout-success, div#registration {
+    text-align: center;
+    background-color: whitesmoke;
+    margin-bottom: 10px;
+    padding: 10px 0
+}
+div.checkout-success .actions-toolbar .primary {
+    float: none;
+    margin: 0;
+}
+div.checkout-success .actions-toolbar .primary .action {
+    width: auto;
+}
+div.checkout-success .actions-toolbar {
+    text-align: center;
+}
+.order-details-items.ordered .actions-toolbar {
+    display: none;
+}

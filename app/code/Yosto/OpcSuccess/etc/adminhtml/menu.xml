@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Backend/etc/menu.xsd">
+    <menu>
+        <add id="Yosto_OpcSuccess::checkout_success"
+             title="Checkout Success Page"
+             module="Yosto_OpcSuccess"
+             sortOrder="60"
+             parent="Yosto_Opc::configuration"
+             resource="Yosto_Opc::checkout_success"
+             action="adminhtml/system_config/edit/section/yosto_opc_success_page"/>
+    </menu>
+</config>

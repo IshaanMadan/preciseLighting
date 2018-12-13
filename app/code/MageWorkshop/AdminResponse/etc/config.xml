@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2018 MageWorkshop. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mageworkshop_detailedreview>
+            <admin_response>
+                <title>Customer Support</title>
+                <show_tooltip>1</show_tooltip>
+                <tooltip_text>Our customer support team is always ready to help you. Please, contact us directly if you have any questions.</tooltip_text>
+            </admin_response>
+        </mageworkshop_detailedreview>
+    </default>
+</config>

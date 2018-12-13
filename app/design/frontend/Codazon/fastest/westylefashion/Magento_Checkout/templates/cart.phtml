@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+
+<?php
+
+/**
+ * Shopping cart template
+ *
+ * @var $block \Magento\Checkout\Block\Cart
+ */
+
+if ($block->getItemsCount() == 1) {
+  echo "<h1>MY SHOPPING BASKET <span class='shopping-items'>(";
+    echo $block->getItemsCount() . " ITEM)<span></h1>";
+    echo $block->getChildHtml('with-items');
+}else if ($block->getItemsCount() > 1) {
+  echo "<h1>MY SHOPPING BASKET <span class='shopping-items'>(";
+    echo $block->getItemsCount() . " ITEMS)<span></h1>";
+    echo $block->getChildHtml('with-items');
+} else {
+    echo $block->getChildHtml('no-items');
+}
+?>
+
+<!-- secure payment -->
+
+<!-- <div class="saved_later_wrap">
+	<div class="block_title">
+		<h4>Saved for later</h4>
+	</div>
+	<div class="block_content">
+		<strong>There are currently no saved items here.</strong>
+		<p>Price and availability are subject to changes. The “Save for Later” is a temporary place to store a list of your items and reflects each item’s most recent price. Move back to basket if you want it for the current price.</p>
+	</div>
+</div> -->

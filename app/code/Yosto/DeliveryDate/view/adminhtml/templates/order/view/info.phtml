@@ -1,0 +1,32 @@
+
+<?php include($this->getTemplateFile('Magento_Sales::order/view/info.phtml')); ?>
+<?php
+
+
+$deliveryDate = $_order->getData('delivery_date');
+
+
+?>
+
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?php /* @escapeNotVerified */ echo __('Delivery Information') ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary">
+                    <tr>
+                        <th><?php /* @escapeNotVerified */ echo __('Delivery Date') ?></th>
+                        <td><?php /* @escapeNotVerified */ echo $deliveryDate ?></td>
+                    </tr>
+
+                    <tr>
+                        <th><?php /* @escapeNotVerified */ echo __('Delivery Comments') ?></th>
+                        <td><?php /* @escapeNotVerified */ echo $_order->getData('delivery_comment')?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

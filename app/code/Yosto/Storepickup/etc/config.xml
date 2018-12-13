@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 x-mage2(Yosto). All rights reserved.
+ * See README.md for details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <storepickup>
+            	<active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <price>0</price>
+                <model>Yosto\Storepickup\Model\Carrier\Storepickup</model>
+                <name>Fixed</name>
+                <title>Store Pick Up</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>	
+                <format>yy-mm-dd</format>
+                <disabled>-1</disabled>
+                <hourMin>8</hourMin>
+                <hourMax>22</hourMax>
+                <zoom_level>15</zoom_level>
+                <default_lat>37.443077</default_lat>
+                <default_long>-122.148056</default_long>
+            </storepickup>
+        </carriers>
+    </default>
+</config>
